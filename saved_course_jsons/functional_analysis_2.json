@@ -1,0 +1,1127 @@
+[
+    {
+        "type": "theorem",
+        "id": "Theorem 1.1",
+        "name": "Riesz representation theorem",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "Let $X$ be a Hilbert space. Then for any $T \\\\in X^*$ there exists a unique element $x_T \\\\in X$ so that\\n\\n$T(y) = \\\\langle y, x_T \\\\rangle$ for all $y \\\\in X$.\\n\\nFurthermore, this $x_T$ satisfies $\\\\|x_T\\\\| = \\\\|T\\\\|$.\\n\\nIf $X$ is a real vector space then the map $T \\\\mapsto x_T$ is linear, and hence provides an isometric isomorphism between $X$ and $X^*$. If $F = \\\\mathbb{C}$ then $T \\\\mapsto x_T$ is still additive, but not linear since $x_{\\\\lambda T} = \\\\overline{\\\\lambda}x_T$.\\n\\nIf $X$ and $Y$ are two Hilbert spaces then we can associate to each $T : X \\\\to Y$ its adjoint operator $T^* : Y \\\\to X$ where $T^*y$ is defined as the unique element $x_\\\\ell$ (given by Riesz) which represents the bounded linear functional $\\\\ell : x \\\\mapsto \\\\langle Tx, y\\\\rangle$. This adjoint operator $T^* : Y \\\\to X$ is hence the unique operator for which\\n\\n$\\\\langle Tx, y\\\\rangle_Y = \\\\langle x, T^*y\\\\rangle_X$ for all $x \\\\in X, y \\\\in Y$.\\n\\nYou have seen in B4.1 that the adjoint operator has some useful properties, including the fact that\\n\\n$\\\\bullet$ $T^* \\\\in B(Y, X)$ with $\\\\|T^*\\\\| = \\\\|T\\\\|$ and $T^{**} = T$\\n\\n$\\\\bullet$ $(ST)^* = T^*S^*$\\n\\n$\\\\bullet$ $T$ is invertible if and only if $T^*$ is invertible\\n\\n$\\\\bullet$ the kernel and image of an operator and its adjoint are related by\\n\\n$\\\\ker(T) = (\\\\operatorname{Im}T^*)^\\\\perp$ and $(\\\\ker T)^\\\\perp = \\\\operatorname{Im}(T^*)$",
+        "proof": "",
+        "preconditions": [
+            "Hilbert space",
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 1.2",
+        "name": "Heine-Borel",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "Let $X$ be a normed space.\\n\\n(i) If $\\\\dim(X) < \\\\infty$ then every bounded closed subset of $X$ is compact.\\n\\n(ii) If the closed unit ball $\\\\overline{B}_X$ is compact then $\\\\dim(X) < \\\\infty$.",
+        "proof": "",
+        "preconditions": [
+            "normed space",
+            "bounded subset",
+            "closed subset",
+            "compact subset"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.3",
+        "name": "Special Operators",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "Let $X$ and $Y$ be inner product spaces.\\n\\nWe say that an operator $T \\\\in B(X, Y)$ is isometric if $\\\\|Tx\\\\| = \\\\|x\\\\|$ for every $x \\\\in X$\\n\\nand we say that $T \\\\in B(X, Y)$ is unitary if it is both isometric and surjective.\\n\\nOn the other hand, we say that an operator $S \\\\in B(X)$ from a Hilbert space to itself is normal if $S^*S = SS^*$ and $S$ is called selfadjoint if $S^* = S$.",
+        "proof": "",
+        "preconditions": [
+            "inner product space",
+            "bounded linear operator",
+            "isometric operator",
+            "unitary operator",
+            "Hilbert space",
+            "normal operator",
+            "self-adjoint operator"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 1.4",
+        "name": "Isometric and Unitary Characterization",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "Let $T, U : X \\\\to Y$ be bounded linear operators between Hilbert spaces.\\n\\n(i) The following are equivalent:\\n\\n(a) $T$ is isometric.\\n(b) $\\\\langle Tx, Ty\\\\rangle = \\\\langle x, y\\\\rangle$ for all $x, y \\\\in X$.\\n(c) $T^*T = I_X$.\\n\\n(ii) The following are equivalent:\\n\\n(a) $U$ is unitary.\\n(b) $U^*U = I_X$ and $UU^* = I_Y$.\\n(c) Both $U$ and $U^*$ are isometric.",
+        "proof": "Exercise.",
+        "preconditions": [
+            "Hilbert space",
+            "bounded linear operator",
+            "isometric operator",
+            "unitary operator"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 1.5",
+        "name": "Normal Operator Characterization",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "An operator $T \\\\in B(X)$ on a Hilbert space $X$ is normal if and only if $\\\\|Tx\\\\| = \\\\|T^*x\\\\|$ for every $x \\\\in X$.",
+        "proof": "If $T$ is normal then we have for every $x$\\n\\n$\\\\|Tx\\\\|^2 = \\\\langle Tx, Tx\\\\rangle = \\\\langle x, T^*Tx\\\\rangle = \\\\langle x, TT^*x\\\\rangle = \\\\langle T^*x, T^*x\\\\rangle = \\\\|T^*x\\\\|^2$.\\n\\nConversely if $\\\\langle Tx, Tx\\\\rangle = \\\\langle T^*x, T^*x\\\\rangle$ for all $x$ then we get by polarisation that\\n\\n$\\\\langle Tx, Ty\\\\rangle = \\\\langle T^*x, T^*y\\\\rangle$ for all $x, y \\\\in X$. Hence for every $x \\\\in X$ we have\\n\\n$\\\\langle T^*Tx, y\\\\rangle = \\\\langle Tx, Ty\\\\rangle = \\\\langle T^*x, T^*y\\\\rangle = \\\\langle T^{**}T^*x, y\\\\rangle = \\\\langle TT^*x, y\\\\rangle$ for all $y \\\\in X$\\n\\nwhich implies that $T^*Tx = TT^*x$.",
+        "preconditions": [
+            "Hilbert space",
+            "bounded linear operator",
+            "normal operator"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 1.6",
+        "name": "Operator Norm Characterization",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "Let $X$ be a Hilbert space.\\n\\n(i) If $T \\\\in B(X)$, then\\n\\n$\\\\|T \\\\|_{B(X)} = \\\\sup\\\\{|\\\\langle T x, y\\\\rangle| : \\\\|x\\\\| = \\\\|y\\\\| = 1\\\\}$.\\n\\n(ii) If $T \\\\in B(X)$ and $T$ is self-adjoint, then\\n\\n$\\\\|T \\\\|_{B(X)} = \\\\sup\\\\{|\\\\langle T x, x\\\\rangle| : \\\\|x\\\\| = 1\\\\}$.",
+        "proof": "The first assertion follows from the definition of the operator norm and (1.1).\\n\\nTo prove (ii) we set $K = \\\\sup\\\\{|\\\\langle T x, x\\\\rangle| : \\\\|x\\\\| = 1\\\\}$ and note that by Cauchy-Schwarz we always have $K \\\\leq \\\\|T\\\\|$. We hence only need to show that if $T$ is selfadjoint then $K \\\\geq \\\\|T\\\\| - \\\\varepsilon$ for all $\\\\varepsilon > 0$ and hence also $K \\\\geq \\\\|T\\\\|$.\\n\\nGiven $\\\\varepsilon > 0$ we can use (i) to find $x, y$ with $\\\\|x\\\\| = \\\\|y\\\\| = 1$ so that $|\\\\langle T x, y\\\\rangle| > \\\\|T\\\\| - \\\\varepsilon$. Replacing $y$ by $ay$ for some scalar $a$ with $|a| = 1$, we may assume that $|\\\\langle T x, y\\\\rangle| = \\\\langle T x, y\\\\rangle$. This implies that\\n\\n$\\\\|T\\\\| - \\\\varepsilon \\\\leq \\\\langle T x, y\\\\rangle = \\\\text{Re } \\\\langle T x, y\\\\rangle = \\\\frac{1}{4}\\\\left[\\\\langle T (x + y), x + y\\\\rangle - \\\\langle T (x - y), x - y\\\\rangle\\\\right]$\\n\\n$\\\\leq \\\\frac{1}{4} K(\\\\|x + y\\\\|^2 + \\\\|x - y\\\\|^2) = \\\\frac{1}{4} K(2\\\\|x\\\\|^2 + 2\\\\|y\\\\|^2) = K$,\\n\\nas desired, where the penultimate step uses the parallelogram identity.",
+        "preconditions": [
+            "Hilbert space",
+            "bounded linear operator",
+            "self-adjoint operator"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 1.7",
+        "name": "Adjoint Operator Norm",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Lemma 1.6"
+        ],
+        "statement": "Let $X$ be a Hilbert space and $A \\\\in B(X)$. Then\\n\\n$\\\\|A^*A\\\\|_{B(X)} = \\\\|A\\\\|^2_{B(X)}$.\\n\\nIn particular, if $A$ is self-adjoint, then $\\\\|A^2\\\\|_{B(X)} = \\\\|A\\\\|^2_{B(X)}$.",
+        "proof": "As $A^*A$ is self-adjoint for any $A \\\\in B(X)$, and $\\\\langle A^*Ax, x\\\\rangle = \\\\langle Ax, Ax\\\\rangle = \\\\|Ax\\\\|^2$ for every $x$, we can apply Lemma 1.6(ii) to deduce the result.",
+        "preconditions": [
+            "Hilbert space",
+            "bounded linear operator",
+            "self-adjoint operator"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.8",
+        "name": "Orthonormal Basis",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "A subset $S$ of a Hilbert space $X$ is called an orthonormal set if $\\\\|x\\\\| = 1$ for all $x \\\\in S$ and $\\\\langle x, y\\\\rangle = 0$ for all $x, y \\\\in S$ with $x \\\\neq y$.\\n\\n$S$ is called an orthonormal basis (or on-basis for short) for $X$ if $S$ is an orthonormal set and its closed linear span is $X$.",
+        "proof": "",
+        "preconditions": [
+            "Hilbert space",
+            "orthonormal set",
+            "orthonormal basis"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 1.9",
+        "name": "Pythagorean theorem",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "Let $X$ be a Hilbert space and let $S = \\\\{x_1, x_2, \\\\ldots, x_m\\\\}$ be a finite orthonormal set in $X$. Then\\n\\n$\\\\|x\\\\|^2 = \\\\sum_{n=1}^{m} |\\\\langle x, x_n\\\\rangle|^2 + \\\\left\\\\|x - \\\\sum_{n=1}^{m} \\\\langle x, x_n\\\\rangle x_n\\\\right\\\\|^2$\\n\\nfor every $x \\\\in X$.",
+        "proof": "The proof of this is a direct computation and is omitted.",
+        "preconditions": [
+            "Hilbert space",
+            "orthonormal set"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 1.10",
+        "name": "Bessel's inequality",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Theorem 1.9"
+        ],
+        "statement": "Let $X$ be a Hilbert space and let $S = \\\\{x_1, x_2, \\\\ldots\\\\}$ be an orthonormal sequence in $X$. Then\\n\\n$\\\\sum_{n=1}^{\\\\infty} |\\\\langle x, x_n\\\\rangle|^2 \\\\leq \\\\|x\\\\|^2$ for every $x \\\\in X$.",
+        "proof": "",
+        "preconditions": [
+            "Hilbert space",
+            "orthonormal set"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 1.11",
+        "name": "Orthonormal Sequence Span",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "Let $X$ be a Hilbert space and let $S = \\\\{x_1, x_2, \\\\ldots\\\\}$ be an orthonormal sequence in $X$. Then the closed linear span of $S$ consists of all vectors of the form $x = \\\\sum_{n=1}^{\\\\infty} a_n x_n$ for sequences of scalar $(a_1, a_2, \\\\ldots) \\\\in \\\\ell^2(F)$. Here the sum converges in the sense of the Hilbert space norm, the element $x \\\\in X$ and the sequence $(a_j) \\\\in \\\\ell^2$ are related by $a_n = \\\\langle x, x_n \\\\rangle$, and Parseval's Identity holds, i.e. $\\\\|x\\\\|^2 = \\\\sum_{n=1}^{\\\\infty} |a_n|^2$.",
+        "proof": "We first show that the series in $(1.6)$ converges in $X$ for any $(a_k) \\\\in \\\\ell^2$. To see this we note that the partial sums $S_k := \\\\sum_{n\\\\leq k} a_n x_n$ form a Cauchy sequence since the orthogonality of the $x_i$ means that for $m \\\\geq k \\\\geq N$\\n\\n$\\\\|S_k - S_m\\\\|^2 = \\\\sum_{k+1\\\\leq n\\\\leq m} |a_n|^2\\\\|x_n\\\\|^2 \\\\leq \\\\sum_{n\\\\geq N+1} |a_n|^2 \\\\to 0$\\n\\nas $N \\\\to \\\\infty$. As $X$ is Banach the series hence converges.\\n\\nAs the closed linear span $Y$ of $S$ is by definition closed and as it contains $\\\\text{span}(S)$ and hence each of the partial sums $S_k$, we additionally know that $x := \\\\sum_{n=1}^{\\\\infty} a_n x_n = \\\\lim_{k\\\\to\\\\infty} S_k$ is in $Y$. Also as $S$ is on, we know that $a_n = \\\\langle S_k, x_n \\\\rangle$ for every $k \\\\geq n$ and thus obtain the claimed relation $(1.7)$ in the limit $k \\\\to \\\\infty$. Similarly, as $\\\\|x - S_k\\\\| \\\\to 0$ we obtain Parseval's identity from the Pythagorean theorem.\\n\\nFinally, we need to show that element $x$ of the closed linear span $Y$ can indeed be written in the form $(1.6)$. To see this we set $a_n := \\\\langle x, x_n \\\\rangle$ use that Bessel's inequality implies that $(a_n) \\\\in \\\\ell^2$. By the previous part of the proof the series $\\\\sum_{n=1}^{\\\\infty} a_n x_n$ thus converges and $\\\\tilde{x} = \\\\sum_{n=1}^{\\\\infty} a_n x_n$ is an element of $Y$. We now observe that $x - \\\\tilde{x}$ is orthogonal to all $x_n$ and deduce that $x - \\\\tilde{x} \\\\in (\\\\text{span}S)^{\\\\perp} = Y^{\\\\perp}$ since the closed linear span agrees with the closure of the span and since we always have $A^{\\\\perp} = (\\\\bar{A})^{\\\\perp}$. But this means that $x - \\\\tilde{x} \\\\in Y \\\\cap Y^{\\\\perp} = \\\\{0\\\\}$, so $x = \\\\tilde{x}$ has indeed the desired form.",
+        "preconditions": [
+            "Hilbert space",
+            "orthonormal set"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 1.12",
+        "name": "Countable Basis Representation",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Theorem 1.11"
+        ],
+        "statement": "If $\\\\{e_1, e_2, \\\\ldots, ..\\\\}$ is a countable on-basis of a Hilbert space $X$ then $x = \\\\sum \\\\langle x, e_j \\\\rangle e_j$ for every $x \\\\in X$.",
+        "proof": "This follows directly from Theorem 1.11, which states that for an orthonormal sequence, every element in its closed linear span can be written as $x = \\\\sum_{n=1}^{\\\\infty} a_n x_n$ where $a_n = \\\\langle x, x_n \\\\rangle$. Since $\\\\{e_1, e_2, \\\\ldots\\\\}$ is an on-basis, its closed linear span is the entire space $X$, so the representation holds for every $x \\\\in X$.",
+        "preconditions": [
+            "Hilbert space",
+            "orthonormal basis"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 1.13",
+        "name": "Orthonormal Basis Existence",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "Every Hilbert space contains an orthonormal basis.",
+        "proof": "We will only give a proof in the case when $X$ is separable, i.e., contains a countable dense subset $S$. The proof in the more general case draws on more sophisticated arguments such as Zorn's lemma.\\n\\nWe label the elements of $S$ as $y_1, y_2, \\\\ldots$. Applying a slight modification of the Gram-Schmidt process, where we simply drop elements whenever they are linearly dependent to the previous elements and continue the process for all $n$, we obtain an orthonormal set $B = \\\\{x_1, x_2, \\\\ldots\\\\}$ such that, for every $n$, the span of $\\\\{x_1, \\\\ldots, x_n\\\\}$ contains $y_1, \\\\ldots, y_n$. As $\\\\bar{S} = X$, this implies that $X = \\\\text{span } B$.",
+        "preconditions": [
+            "Hilbert space"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.14",
+        "name": "Compact Operators",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "Let $X, Y$ be normed spaces, $T \\\\in B(X, Y)$. Then $T$ is called compact if the image of the closed unit ball is precompact, i.e. if $T(\\\\bar{B}_X)$ is compact.",
+        "proof": "",
+        "preconditions": [
+            "normed space",
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 1.15",
+        "name": "Compact Operators Properties",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "Let $T \\\\in B(X, Y)$ and $S \\\\in B(Y, Z)$ for $X, Y, Z$ normed spaces. Then\\n\\n(i) $T$ is compact if and only if every bounded sequence $(x_n)$ in $X$ has a subsequence $x_{n_j}$ which is so that $T x_{n_j}$ converges (in $Y$).\\n\\n(ii) If $\\\\dim(TX) < \\\\infty$ then $T$ is compact.\\n\\n(iii) If either $S$ or $T$ is compact then also $S \\\\circ T$ is compact.\\n\\n(iv) If $Y$ is Banach and $(T_n) \\\\subset B(X, Y)$ is a sequence of compact operators which converges, $T_n \\\\to T$, in the sense of $B(X, Y)$ then also $T$ is compact.",
+        "proof": "",
+        "preconditions": [
+            "normed space",
+            "bounded linear operator",
+            "compact operator",
+            "bounded sequence",
+            "Banach space",
+            "sequence of operators converging pointwise"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 1.16",
+        "name": "Arzela-Ascoli",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "Let $\\\\Omega \\\\subset \\\\mathbb{R}^n$ be compact, let $X = C(\\\\Omega)$ equipped with the supremum norm and let $F \\\\subset X$ be any subset of $X$. Then $F$ is compact if and only if the functions in $F$ are uniformly bounded and equicontinuous, i.e. if and only if the following two conditions hold\\n\\n(i) There exists $M$ so that $\\\\|f \\\\|_{\\\\sup} \\\\leq M$ for every $f \\\\in F$\\n\\n(ii) For every $\\\\varepsilon > 0$ there exists $\\\\delta > 0$ so that for all $f \\\\in F$ and all $x, y \\\\in \\\\Omega$ with $|x - y| \\\\leq \\\\delta$ we have $|f(x) - f(y)| \\\\leq \\\\varepsilon$",
+        "proof": "The proof of the Theorem of Arzela-Ascoli is non-examinable, but also not difficult. We can e.g. choose a dense countable subset $S$ of $\\\\Omega$, then use a standard diagonal sequence argument to pass to a subsequence of a given sequence $(f_n)$ for which $f_{n_j}(s)$ converges for every $s \\\\in S$ (this part uses uniform boundedness and Bolzano Weierstrass) and finally to use the equicontinuity and density of $S$ to show that this subsequence is indeed a Cauchy sequence in $X$.",
+        "preconditions": [
+            "compact subset"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 1.17",
+        "name": "Compact Operator Properties",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Lemma 1.18"
+        ],
+        "statement": "Let $X$ be a Banach space and let $T \\\\in B(X)$ be a compact operator. Then\\n\\n(i) $\\\\dim(\\\\ker(I - T)) < \\\\infty$\\n\\n(ii) $(I - T)(X)$ is closed\\n\\n(iii) If $X$ is a Hilbert space and $T$ is additionally selfadjoint then $\\\\ker(I - T)^\\\\perp = (I - T)(X)$.",
+        "proof": "We write for short $Y := \\\\ker(I - T)$.\\n\\nTo prove (i) we note that $y = Ty$ for $y \\\\in Y$ so we can view the unit ball $\\\\overline{B}_Y = \\\\{y \\\\in Y : \\\\|y\\\\| \\\\leq 1\\\\}$ in $Y$ as a subset of the image of the unit ball $B_X := \\\\{x \\\\in X : \\\\|x\\\\| \\\\leq 1\\\\}$, i.e. use that $\\\\overline{B}_Y = T(\\\\overline{B}_Y) \\\\subset T(\\\\overline{B}_X) \\\\subset T(\\\\overline{B}_X)$. As $Y$ is closed (since it is a kernel) we hence know that $\\\\overline{B}_Y = \\\\overline{B}_X \\\\cap Y$ is a closed subset of the compact set $T(\\\\overline{B}_X)$ and hence itself compact. Having thus shown that the closed unit ball in the normed space $Y$ is compact we thus deduce that $Y$ is finite dimensional by the theorem of Heine Borel.\\n\\nTo prove (ii) we recall that a consequence of the Theorem of Hahn-Banach is that every finite dimensional subspace of a Banach space has a closed complement. As $Y$ is finite dimensional there is hence a closed subspace $V$ of $X$ so that $X = Y \\\\oplus V$. As $V$ is a closed subspace of a Banach space it is also Banach and we can consider the map $S := (I - T)|_V : V \\\\to X$ whose image is $S(V) = (I - T)(V) = (I - T)(X)$ as $(I - T)(Y) = \\\\{0\\\\}$. It hence suffices to show that $S(V)$ is closed and this follows from Lemma 1.18 provided we show that $S$ satisfies (1.9), which we will do by contradiction.\\n\\nSo suppose that there is no $\\\\delta > 0$ so that $\\\\|Sv\\\\| \\\\geq \\\\delta\\\\|v\\\\|$ for all $v \\\\in V$. Then we can choose $v_n \\\\in V$ so that $\\\\|Sv_n\\\\| < \\\\frac{1}{n} \\\\|v_n\\\\|$ and replacing $v_n$ by $\\\\frac{v_n}{\\\\|v_n\\\\|}$ we can assume that $\\\\|v_n\\\\| = 1$ and hence $\\\\|Tv_n - v_n\\\\| = \\\\|Sv_n\\\\| \\\\to 0$. As $T$ is compact we can pass to a subsequence so that $Tv_{n_j}$ converges, say $Tv_{n_j} \\\\to z$. As $T(v_{n_j}) - v_{n_j} \\\\to 0$ this also implies that $v_{n_j} \\\\to z$. As $V$ is closed we must hence have $z \\\\in V$ and as $\\\\|v_{n_j}\\\\| = 1$ we must have $\\\\|z\\\\| = 1$ so $z \\\\neq 0$. However as $T$ is continuous and hence $z = \\\\lim T v_{n_j} = T(\\\\lim v_{n_j}) = Tz$ we also have $z \\\\in Y$ so $z \\\\in Y \\\\cap V = \\\\{0\\\\}$ which gives a contradiction.\\n\\nThe final claim of the proposition immediately follows since $T$ is assumed to be selfadjoint and since the image of $I - T$ is closed and hence, by (1.5), $(\\\\ker(I - T))^\\\\perp = (I - T^*)(X) = (I - T)(X) = (I - T)(X)$.",
+        "preconditions": [
+            "Banach space",
+            "compact operator",
+            "bounded linear operator",
+            "Hilbert space",
+            "self-adjoint operator"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 1.18",
+        "name": "Closed Image Criterion",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "Let $X$ be a Banach space and suppose that $S \\\\in B(X)$ is so that\\n\\n$\\\\exists\\\\delta > 0$ so that for all $x \\\\in X$ we have $\\\\|Sx\\\\| \\\\geq \\\\delta\\\\|x\\\\|$.\\n\\nThen $S$ is injective and $SX \\\\subset X$ is closed. In particular, if $SX$ is additionally dense in $X$ then $S$ is invertible.",
+        "proof": "The only statement whose proof is not trivial is that the image $SX$ is closed and we can prove this as follows: Given any sequence $y_n$ in $SX$ which converges $y_n \\\\to y$ to some $y \\\\in X$, we let $x_n \\\\in X$ be so that $Sx_n = y_n$. We then note that as $(y_n)$ is a Cauchy-sequence, the assumption (1.9) implies that\\n\\n$\\\\|x_n - x_m\\\\| \\\\leq \\\\delta^{-1}\\\\|S(x_n - x_m)\\\\| = \\\\delta^{-1}\\\\|y_n - y_m\\\\| \\\\to 0$ as $n,m\\\\to\\\\infty$,\\n\\ni.e. that also $(x_n)$ is Cauchy and thus, as $X$ is complete, that $x_n \\\\to x$ for some $x \\\\in X$. As $S$ is continuous we thus get that $y = \\\\lim y_n = \\\\lim Sx_n = Sx \\\\in SX$.",
+        "preconditions": [
+            "Banach space",
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 2.1",
+        "name": "Termwise differentiation",
+        "topic": "Fourier Analysis",
+        "previous_results": [],
+        "statement": "Suppose that $f \\\\in L^1(-\\\\pi, \\\\pi)$ is so that $a_0(f) = 0$ and let\\n\\n$F(x) = \\\\int_0^x f(t) dt$.\\n\\nThen $F \\\\in C^0([-\\\\pi, \\\\pi])$ is so that $F(\\\\pi) = F(-\\\\pi)$ so can be extended to a continuous $2\\\\pi$-periodic function on $\\\\mathbb{R}$ and the Fourier coefficients of $F$ and $f$ are related by\\n\\n$a_n(f) = in a_n(F)$ for $n \\\\neq 0$,\\n\\ni.e. if $F(F) = \\\\sum c_n e^{inx}$, then $F(f) = \\\\sum in c_n e^{inx}$.",
+        "proof": "As $a_0(f) = 0$ we have\\n\\n$F(\\\\pi) - F(-\\\\pi) = \\\\int_{-\\\\pi}^{\\\\pi} f(x)dx = 2\\\\pi a_0(f) = 0$\\n\\nand $F$ is continuous by standard properties of integration. To get the claimed relation on the coefficients with $n \\\\neq 0$, we integrate by parts\\n\\n$a_n(f) = \\\\frac{1}{2\\\\pi} \\\\int_{-\\\\pi}^{\\\\pi} f(x) e^{-inx} dx = \\\\frac{in}{2\\\\pi} \\\\int_{-\\\\pi}^{\\\\pi} F(x) e^{-inx} dx = in a_n(F)$\\n\\nwhere this integration by parts that involves an $L^1$ function $f$ can be justified using a density argument and where we use that $F(\\\\pi) = F(-\\\\pi)$. This concludes the proof.",
+        "preconditions": [
+            "function is in L1",
+            "function is 2\u03c0-periodic"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 2.2",
+        "name": "Completeness of the trigonometric system",
+        "topic": "Fourier Analysis",
+        "previous_results": [
+            "Theorem 1.11",
+            "Proposition 2.1"
+        ],
+        "statement": "For every $f \\\\in L^2(-\\\\pi, \\\\pi)$ the partial Fourier sum $S_N f(x) := \\\\sum_{|n|\\\\leq N} a_n(f)e^{inx}$ converges $S_N f \\\\to f$ in $L^2(-\\\\pi, \\\\pi)$. In other words, $\\\\{\\\\frac{1}{\\\\sqrt{2\\\\pi}}e^{inx}\\\\}_{n\\\\in\\\\mathbb{Z}}$ is an orthonormal basis of $L^2(-\\\\pi, \\\\pi)$.",
+        "proof": "Note that if we let $\\\\tilde{f}$ be the limit of $S_N f$, then the Fourier coefficients of $f - \\\\tilde{f}$ are all zero. Thus, to prove the result, it suffices to show that if the Fourier coefficients of a function $f \\\\in L^2(-\\\\pi, \\\\pi)$ are all zero, then $f = 0$ a.e.\\n\\nWe will only consider the case when $f$ is real-valued. The complex-valued case is left as an exercise.\\n\\nSuppose first that $f$ is a continuous function with $f(-\\\\pi) = f(\\\\pi)$ and that we can hence extend $f$ to a continuous periodic function on $\\\\mathbb{R}$. If $f \\\\neq 0$, then $|f|$ attains its maximum value $M > 0$ at some point $x_0 \\\\in [-\\\\pi, \\\\pi]$ and replacing $f$ by $-f$ if necessary, we may assume that $f(x_0) = M > 0$. As $f$ is continuous we can choose $\\\\delta > 0$ so that $f(x) \\\\geq \\\\frac{1}{2}M$ on $[x_0 - \\\\delta, x_0 + \\\\delta]$ and now consider the function\\n\\n$g(x) = 1 + \\\\cos(x - x_0) - \\\\cos \\\\delta$.\\n\\nAs $g^n$ is a trigonometric polynomial, the fact that the Fourier coefficients of $f$ are zero implies that $\\\\int_{-\\\\pi}^{\\\\pi} f(x) g^n(x) dx = 0$ for all $n$.\\n\\nWe can however also use that $|g| \\\\leq 1$ for $\\\\delta \\\\leq |x - x_0| \\\\leq \\\\pi$, while $g \\\\geq 1 > 0$ for $\\\\frac{1}{2}\\\\delta < |x - x_0| \\\\leq \\\\delta$ and $g > 1 + \\\\cos(\\\\delta/2) - \\\\cos(\\\\delta) > 1$ for $|x - x_0| \\\\leq \\\\frac{1}{2}\\\\delta$ to see that\\n\\n$\\\\int_{-\\\\pi}^{\\\\pi} f(x) g^n(x) dx = \\\\int_{x_0-\\\\pi}^{x_0+\\\\pi} f(x) g^n(x) dx \\\\geq \\\\int_{x_0-\\\\delta/2}^{x_0+\\\\delta/2} f(x) g^n(x) dx - \\\\int_{\\\\delta\\\\leq|x-x_0|\\\\leq\\\\pi} |g^n(x)f(x)| dx \\\\geq \\\\frac{1}{2}M (1 + \\\\cos\\\\frac{\\\\delta}{2} - \\\\cos \\\\delta)^n \\\\delta - 2\\\\pi M \\\\cdot 1^n \\\\to \\\\infty$\\n\\nas $n\\\\to\\\\infty$, which contradicts the fact that the right hand side is equal to zero for all $n$.\\n\\nHaving shown the claim for continuous $2\\\\pi$ periodic functions we now consider the general case where $f \\\\in L^2(-\\\\pi, \\\\pi)$. As $a_n(f) = 0$ for all $n$, so in particular for $n = 0$ we know from Proposition 2.1 that $F(x) = \\\\int_0^x f(t) dt$ is $2\\\\pi$-periodic and, by standard properties of integration, also continuous. At the same time, Proposition 2.1 implies that $a_n(F) = 0$ for all $n \\\\neq 0$ so we can apply the first case to $F - a_0(F)$ to see that $F$ is constant and as $F(0) = 0$ must hence be identically zero. This implies that $f = 0$ a.e. as desired.",
+        "preconditions": [
+            "function is in L2",
+            "orthonormal basis"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 2.3",
+        "name": "Parseval's identity",
+        "topic": "Fourier Analysis",
+        "previous_results": [
+            "Theorem 1.11",
+            "Theorem 2.2"
+        ],
+        "statement": "For every $f \\\\in L^2(-\\\\pi, \\\\pi)$ we have\\n\\n$\\\\sum_{-\\\\infty}^{\\\\infty} |a_n(f)|^2 = \\\\frac{1}{2\\\\pi} \\\\int_{-\\\\pi}^{\\\\pi} |f|^2 dx$.\\n\\nIn particular, the Fourier coefficients of any $L^2$ function tend to zero as $n \\\\to \\\\pm\\\\infty$.",
+        "proof": "This follows directly from Theorem 1.11 and the fact that the functions $e_n$ form an orthonormal basis of $L^2(-\\\\pi,\\\\pi)$ as established in Theorem 2.2.",
+        "preconditions": [
+            "function is in L2",
+            "function is 2\u03c0-periodic"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 2.4",
+        "name": "Riemann-Lebesgue Lemma",
+        "topic": "Fourier Analysis",
+        "previous_results": [
+            "Corollary 2.3"
+        ],
+        "statement": "Let $f \\\\in L^1(-\\\\pi, \\\\pi)$. Then\\n\\n$\\\\int_{-\\\\pi}^{\\\\pi} f(t) e^{ikt} dt \\\\to 0$ as $k \\\\to \\\\pm\\\\infty$",
+        "proof": "If $f \\\\in L^2(-\\\\pi, \\\\pi)$, this follows from Parseval's identity.\\n\\nFor the general case $f \\\\in L^1(-\\\\pi, \\\\pi)$ we fix any $\\\\varepsilon > 0$, use that the continuous functions are dense in $L^1$ to determine $g \\\\in C[-\\\\pi, \\\\pi]$ so that $h = f - g$ satisfies $\\\\|h\\\\|_{L^1(-\\\\pi,\\\\pi)} \\\\leq \\\\varepsilon$ and use that\\n\\n$\\\\int_{-\\\\pi}^{\\\\pi} g(t) e^{ikt} dt \\\\to 0$ as $k \\\\to \\\\pm\\\\infty$\\n\\nsince $g \\\\in C[-\\\\pi, \\\\pi] \\\\subset L^2$, while\\n\\n$\\\\left|\\\\int_{-\\\\pi}^{\\\\pi} h(t) e^{ikt} dt\\\\right| \\\\leq \\\\int_{-\\\\pi}^{\\\\pi} |h(t)| dt \\\\leq \\\\varepsilon$.\\n\\nCombined we get that $\\\\limsup_{k\\\\to\\\\pm\\\\infty} |\\\\int_{-\\\\pi}^{\\\\pi} f(t) e^{ikt} dt| \\\\leq \\\\varepsilon$ which implies the conclusion as $\\\\varepsilon > 0$ was arbitrary.",
+        "preconditions": [
+            "function is in L1"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 2.5",
+        "name": "Divergent Fourier series",
+        "topic": "Fourier Analysis",
+        "previous_results": [],
+        "statement": "There exists a $2\\\\pi$-periodic continuous function $f_0 : \\\\mathbb{R} \\\\to \\\\mathbb{R}$ whose Fourier series diverges at $x = 0$.",
+        "proof": "The proof will be provided later using the Uniform boundedness principle from the next chapter.",
+        "preconditions": [
+            "function is 2\u03c0-periodic",
+            "function is continuous on a closed interval"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 2.6",
+        "name": "H\u00f6lder continuity",
+        "topic": "Fourier Analysis",
+        "previous_results": [],
+        "statement": "Let $\\\\alpha \\\\in (0, 1]$. We say that a function $f$ is $\\\\alpha$-H\\\\\\",
+        "H\\\\\\": "lder space $C^{0,\\\\alpha}([a, b])$ which is the set of functions $f : I := [a, b] \\\\to \\\\mathbb{R}$ for which\\n\\n$[f]_\\\\alpha := \\\\sup\\\\{\\\\frac{|f(x) - f(y)|}{|x - y|^\\\\alpha} : x, y \\\\in I, x \\\\neq y\\\\} < \\\\infty$\\n\\nWe remark that this space equipped with $\\\\|\\\\cdot\\\\|_{0,\\\\alpha} := \\\\|f\\\\|_{\\\\sup} + [f]_\\\\alpha$ is a Banach space.",
+        "proof": "",
+        "preconditions": [
+            "function is \u03b1-H\u00f6lder continuous"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 2.7",
+        "name": "H\u00f6lder Continuity Convergence",
+        "topic": "Fourier Analysis",
+        "previous_results": [
+            "Riemann-Lebesgue Lemma"
+        ],
+        "statement": "Assume that $f \\\\in L^1_{loc}(-\\\\pi, \\\\pi)$ is $2\\\\pi$-periodic and $\\\\alpha$-H\u00f6lder continuous at a point $x_0 \\\\in [-\\\\pi, \\\\pi]$ for some $\\\\alpha \\\\in (0, 1]$. Then $\\\\lim_{N \\\\to \\\\infty} S_N f(x_0) = f(x_0)$.",
+        "proof": "It suffices to consider real valued functions as we can split any complex valued $f$ into its real and imaginary part. Also, as the theorem trivially holds for constant functions $f$ we can assume that $f(x_0) = 0$, as we can otherwise replace $f$ by $f - f(x_0)$ and we can also assume without loss of generality that $x_0 = 0$ as we can otherwise replace $f$ by $f(\\\\cdot - x_0)$ and use that translations of the variable commute with $F$.\\n\\nGiven any $\\\\delta > 0$ we then note that we can apply the Riemann-Lebesgue lemma to the functions $\\\\frac{1}{2\\\\pi} f \\\\mathbf{1}_{[-\\\\pi,\\\\pi]\\\\setminus[-\\\\delta,\\\\delta]}$ and $\\\\frac{1}{2\\\\pi} \\\\frac{\\\\cos \\\\frac{x}{2}}{\\\\sin \\\\frac{x}{2}} f \\\\mathbf{1}_{[-\\\\pi,\\\\pi]\\\\setminus[-\\\\delta,\\\\delta]}$ to see that\\n\\n$\\\\lim_{N \\\\to \\\\infty} \\\\int_{[-\\\\pi,\\\\pi]\\\\setminus[-\\\\delta,\\\\delta]} f(t) k_N(t) dt \\\\to 0$.\\n\\nOn the other hand, using the H\u00f6lder continuity of $f$ at $x_0 = 0$, we have $|f(h)| \\\\leq A|h|^\\\\alpha$ for small $|h|$, so if $\\\\delta$ is small in particular for all $|h| \\\\leq \\\\delta$ and we thus get\\n\\n$\\\\left|\\\\int_{-\\\\delta}^{\\\\delta} f(t) k_N(t) dt\\\\right| \\\\leq A \\\\int_{-\\\\delta}^{\\\\delta} |t|^\\\\alpha |k_N(t)| dt \\\\leq \\\\frac{A}{\\\\pi} \\\\int_0^{\\\\delta} \\\\frac{t^\\\\alpha}{\\\\sin \\\\frac{t}{2}} dt$.\\n\\nUsing the inequality $\\\\sin \\\\frac{t}{2} \\\\geq \\\\frac{t}{\\\\pi}$ for $0 \\\\leq t \\\\leq \\\\pi$, we see that the right hand side is bounded from above by $A \\\\delta^\\\\alpha$. Putting everything together we obtain\\n\\n$\\\\limsup_{N \\\\to \\\\infty} |S_N f(0)| \\\\leq \\\\frac{A}{\\\\alpha} \\\\delta^\\\\alpha$.\\n\\nSince $\\\\delta > 0$ was arbitrary, this implies $S_N f(0) \\\\to 0 = f(0)$, as desired.",
+        "preconditions": [
+            "function is in L1",
+            "function is 2\u03c0-periodic",
+            "function is \u03b1-H\u00f6lder continuous"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.3",
+        "name": "Baire category theorem",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Lemma 3.2"
+        ],
+        "statement": "Let $(M, d)$ be a non-empty complete metric space. Then\\n\\n(i) $\\\\text{cat}(M) = 2$, so $M$ cannot be written as the countable union of nowhere dense sets.\\n\\n(ii) Every residual set is dense, i.e. $\\\\text{cat}(A^c) = 1$ implies that $\\\\overline{A} = M$.",
+        "proof": "One can either work directly with nowhere dense sets, or use Lemma 3.2 to instead translate everything into claims about dense sets. Here we choose the later route and as main step of the proof show:\\n\\nClaim 1: Let $U_j$, $j \\\\in \\\\mathbb{N}$, be open and dense. Then $\\\\bigcap_{j\\\\in\\\\mathbb{N}} U_j$ is dense.\\n\\nProof of Claim 1: Let $x \\\\in M$, $\\\\varepsilon > 0$. We need to show that there exists $y \\\\in \\\\bigcap U_j$ so that $d(x, y) \\\\leq \\\\varepsilon$. To this end we inductively construct a sequence $(y_j)_{j\\\\geq 1}$ by first setting $\\\\varepsilon_0 = \\\\frac{\\\\varepsilon}{2}$ and $y_0 = x$ and then for $j \\\\geq 0$\\n\\n$\\\\bullet$ use that $U_{j+1}$ is dense to get $y_{j+1} \\\\in U_{j+1}$ with $d(y_j, y_{j+1}) \\\\leq \\\\frac{\\\\varepsilon_j}{2}$\\n\\n$\\\\bullet$ use that $U_{j+1}$ is open to get $\\\\varepsilon_{j+1} \\\\in (0, \\\\frac{\\\\varepsilon_j}{2}]$ so that $\\\\overline{B}_{\\\\varepsilon_{j+1}}(y_{j+1}) \\\\subset U_{j+1}$.\\n\\nThis construction ensures that\\n\\n$\\\\bullet$ $\\\\varepsilon_{j+1} \\\\leq \\\\frac{1}{2} \\\\varepsilon_j \\\\leq ... \\\\leq 2^{-j}\\\\varepsilon_1$ so $\\\\varepsilon_j \\\\to 0$ as $j \\\\to \\\\infty$\\n\\n$\\\\bullet$ As $\\\\varepsilon_{j+1} + d(y_j, y_{j+1}) \\\\leq \\\\varepsilon_j$ we have $\\\\overline{B}_{\\\\varepsilon_{j+1}}(y_{j+1}) \\\\subset \\\\overline{B}_{\\\\varepsilon_j}(y_j)$ for every $j$ and hence\\n\\n$\\\\overline{B}_{\\\\varepsilon_j}(y_j) \\\\subset \\\\bigcap_{n=1}^j U_n$.\\n\\n$\\\\bullet$ $(y_j)$ is a Cauchy sequence since $\\\\varepsilon_N \\\\to 0$ as $N \\\\to 0$ and since for $j, k \\\\geq N$ we have $y_j, y_k \\\\in \\\\overline{B}_{\\\\varepsilon_N}(y_N)$ so $d(y_j, y_k) \\\\leq 2\\\\varepsilon_N$.\\n\\nAs $(M, d)$ is complete we hence find that $y_j \\\\to y$ for some $y$ which needs to be in $\\\\overline{B}_{\\\\varepsilon_j}(y_j)$ for every $j$ as the tail of the sequence is contained in these closed balls. As $\\\\overline{B}_{\\\\varepsilon_j}(y_j) \\\\subset \\\\bigcap_{n=1}^j U_n$ for every $j$ so $y \\\\in \\\\bigcap_{n=1}^\\\\infty U_n$ we hence get $y \\\\in \\\\bigcap_{j=1}^\\\\infty U_n$. Finally, as $y \\\\in \\\\overline{B}_{\\\\varepsilon_0}(y_0)$ and $y_0 = x$, $\\\\varepsilon_0 = \\\\frac{1}{2} \\\\varepsilon$ we have $d(y, x) \\\\leq \\\\varepsilon$ as desired. This completes the proof of claim 1.\\n\\nProof that Claim 1 implies (ii): If $\\\\text{cat}(A^c) = 1$ then we can write $A^c = \\\\bigcup_{j\\\\in\\\\mathbb{N}} A_j$ for nowhere dense sets $A_j$. As $A_j$ is closed and nowhere dense we know that the sets $(A_j)^c$ are open and dense and that their intersection is hence also dense. As $A^c \\\\subset \\\\bigcup_{j\\\\in\\\\mathbb{N}} A_j$ this means that $A \\\\supset \\\\left( \\\\bigcup_{j\\\\in\\\\mathbb{N}} A_j \\\\right)^c = \\\\bigcap_{j\\\\in\\\\mathbb{N}}(A_j)^c$ contains a set which is dense in $M$, so is itself dense in $M$.",
+        "preconditions": [
+            "complete metric space",
+            "nowhere dense subset",
+            "residual subset",
+            "dense subset"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.4",
+        "name": "Uniform boundedness principle",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Theorem 3.3"
+        ],
+        "statement": "Let $X$ be a Banach space and let $Y$ be a normed space. Let $F \\\\subset B(X, Y)$ be a set of bounded linear operators from $X$ into $Y$ which is pointwise bounded, i.e. so that for every $x \\\\in X$ we have $\\\\sup_{T \\\\in F} \\\\|T x\\\\| < \\\\infty$. Then $F$ is uniformly bounded, i.e. so that $\\\\sup_{T \\\\in F} \\\\|T\\\\| < \\\\infty$.",
+        "proof": "For each $n \\\\in \\\\mathbb{N}$ we set $A_n = \\\\{x \\\\in X : \\\\|T x\\\\|_Y \\\\leq n \\\\text{ for all } T \\\\in F \\\\}$ and note that this set is closed as all $T$ are continuous.\\n\\nBy hypothesis, each $x \\\\in X$ belongs to some $A_n$ and so $X = \\\\cup_{n=1}^\\\\infty A_n$. By the Baire category theorem, we hence cannot have that all $A_n$ are nowhere dense, so there must be some $n_0$ such that $A_{n_0} = \\\\overline{A}_{n_0}$ has non-empty interior i.e. contains some ball $B_{r_0}(x_0)$, $x_0 \\\\in X$, $r_0 > 0$.\\n\\nWe now want to get a uniform bound on $\\\\|T x\\\\|_Y$ that is valid for all $T \\\\in F$ and all $\\\\|x\\\\|_X < r_0$.\\n\\nFor this we note that for each such $x$, we have $x_0 + x \\\\in B_{r_0}(x_0)$ and so, by the definition of $A_{n_0}$,\\n\\n$\\\\|T(x_0 + x)\\\\|_Y \\\\leq n_0 \\\\text{ for all } T \\\\in F$.\\n\\nAs also $x_0 \\\\in B_{r_0}(x_0)$ we also have $\\\\|T(x_0)\\\\|_Y \\\\leq n_0$ for all $T \\\\in F$ so by the triangle inequality get\\n\\n$\\\\|Tx\\\\|_Y \\\\leq \\\\|T(x_0 + x)\\\\|_Y + \\\\|Tx_0\\\\|_Y \\\\leq 2n_0 \\\\text{ for all } T \\\\in F \\\\text{ and all } \\\\|x\\\\|_X < r_0$.\\n\\nSince all $T$'s are linear this implies that $\\\\|Tx\\\\| \\\\leq 2n_0r_0^{-1}$ for all $x$ with $\\\\|x\\\\| < 1$, so by continuity also for all $x$ with $\\\\|x\\\\| \\\\leq 1$. This shows that $\\\\sup_{T \\\\in F} \\\\|T\\\\|_{B(X,Y)} \\\\leq 2n_0 r_0^{-1} < \\\\infty$.",
+        "preconditions": [
+            "Banach space",
+            "normed space",
+            "bounded linear operator",
+            "pointwise bounded set of operators"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 3.1",
+        "name": "Baire Categories",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "A subset $S$ of a metric space $M$ is\\n\\n(i) nowhere dense in $M$ if $\\\\overline{S}$ has empty interior.\\n\\n(ii) has Baire category 1 if it can be written as a countable union $S = \\\\bigcup_{i\\\\in\\\\mathbb{N}} A_i$ of nowhere dense sets $A_i$.\\n\\n(iii) has Baire category 2 if it has not category 1.\\n\\n(iv) residual if $S^c$ has category 1.",
+        "proof": "",
+        "preconditions": [
+            "complete metric space"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 3.2",
+        "name": "Nowhere Dense Equivalence",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "Let $A$ be a subset of a metric space. Then the following are equivalent\\n\\n(i) $A$ is closed and nowhere dense\\n\\n(ii) $A^c$ is open and dense.",
+        "proof": "If $A^c$ is open and dense then $A$ is of course closed. If it was not nowhere dense then $\\\\overline{A} = A$ would have non-empty interior so would contain some ball $B_r(x)$, $r > 0$, $x \\\\in M$. But then there would be no $y \\\\in A^c$ so that $d(x, y) < r$ which contradicts the assumption that $A^c$ is dense.\\n\\nIf we instead know that $A$ is closed and nowhere dense then we of course know that $A^c$ is open. Given $x \\\\in M$ and $\\\\varepsilon > 0$ we know that $B_\\\\varepsilon(x)$ cannot be fully contained in $A$ (as this would contradict $A$ nowhere dense) so there must be $y \\\\in A^c$ with $d(x, y) < \\\\varepsilon$. As $x$ and $\\\\varepsilon > 0$ were arbitrary we hence get that $A^c$ is dense.",
+        "preconditions": [
+            "closed subset",
+            "nowhere dense subset",
+            "open map",
+            "dense subset"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.5",
+        "name": "Pointwise Convergence Equivalence",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Principle of uniform boundedness"
+        ],
+        "statement": "Let $X$ and $Y$ be Banach spaces and consider a sequence $T_n \\\\in B(X, Y)$. Then the following statements are equivalent.\\n\\n(i) There exists $T \\\\in B(X, Y)$ such that, for every $x \\\\in X$, $T_nx \\\\to T x$ as $n \\\\to \\\\infty$.\\n\\n(ii) For each $x \\\\in X$, the sequence $(T_nx)$ is convergent.\\n\\n(iii) There is a constant $M$ and a dense subset $Z$ of $X$ such that $\\\\|T_n\\\\| \\\\leq M$ and so that the sequence $(T_nz)$ is convergent for each $z \\\\in Z$.",
+        "proof": "It is clear that (i) $\\\\Rightarrow$ (ii). That (ii) $\\\\Rightarrow$ (iii) is a direct application of the principle of uniform boundedness as pointwise convergence yields pointwise boundedness.\\n\\nIt remains to prove (iii) $\\\\Rightarrow$ (i), so suppose that the assumptions of (iii) hold:\\nWe first claim that, for every $x \\\\in X$, $(T_nx)$ is Cauchy, and hence convergent. To see this, fix any $x \\\\in X$, $\\\\epsilon > 0$, and note that, for every $z \\\\in Z$,\\n\\n$\\\\|T_nx - T_mx\\\\| \\\\leq \\\\|T_nz - T_mz\\\\| + \\\\|T_n(x - z)\\\\| + \\\\|T_m(x - z)\\\\|$\\n$\\\\leq \\\\|T_nz - T_mz\\\\| + 2M \\\\|x - z\\\\|$.\\n\\nIn particular, if we choose $z \\\\in Z$ such that $\\\\|x - z\\\\| \\\\leq \\\\frac{\\\\epsilon}{4M}$ and choose $N$ such that $\\\\|T_nz - T_mz\\\\| \\\\leq \\\\frac{\\\\epsilon}{2}$ for $n, m \\\\geq N$, we obtain $\\\\|T_nx - T_mx\\\\| \\\\leq \\\\epsilon$ for all $n, m \\\\geq N$. This proves the claim.\\n\\nFor each $x \\\\in X$, we can hence define $Tx$ as the limit of $T_nx$. As each $T_n$ is linear also $T$ is linear. Finally, we have\\n\\n$\\\\|Tx\\\\| = \\\\lim_{n\\\\to\\\\infty} \\\\|T_nx\\\\| \\\\leq \\\\limsup_{n\\\\to\\\\infty} \\\\|T_n\\\\|\\\\|x\\\\| \\\\leq M \\\\|x\\\\|$ for all $x \\\\in X$\\n\\nThus $T$ is a bounded linear operator on $X$ and we have established (i).",
+        "preconditions": [
+            "Banach space",
+            "bounded linear operator",
+            "dense subset"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.6",
+        "name": "Hilbert Space Boundedness",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Principle of uniform boundedness",
+            "Riesz representation theorem"
+        ],
+        "statement": "Let $X$ be a Hilbert space and suppose that $F$ is a subset of $B(X)$ such that\\n\\n$\\\\sup_{T \\\\in F} |\\\\langle T x, y\\\\rangle| < \\\\infty$ for each $x, y \\\\in X$.\\n\\nThen $\\\\sup_{T \\\\in F} \\\\|T\\\\| < \\\\infty$.",
+        "proof": "By the principle of uniform boundedness, it suffices to show that, for each fixed $x \\\\in X$, $\\\\{\\\\|Tx\\\\| : T \\\\in F\\\\}$ is bounded.\\n\\nFix an $x \\\\in X$. Define $K_{T,x} \\\\in X^*$ by $K_{T,x}(y) = \\\\langle y, Tx \\\\rangle$. Then, for each $y \\\\in X$, $\\\\{|K_{T,x}(y)| : T \\\\in F\\\\}$ is bounded. The principle of uniform boundedness implies then $\\\\{\\\\|K_{T,x}\\\\|_* : T \\\\in F\\\\}$ is bounded. As $\\\\|K_{T,x}\\\\|_* = \\\\|Tx\\\\|$, we conclude the proof.",
+        "preconditions": [
+            "Hilbert space",
+            "bounded linear operator",
+            "pointwise bounded set of operators"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 3.7",
+        "name": "Open Map",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "A map $f$ between two metric spaces $X$ and $Y$ (or more generally two topological spaces) is called open if $f(U)$ is open for every open subset $U$ of $X$.",
+        "proof": "",
+        "preconditions": [
+            "open map"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 3.8",
+        "name": "Open Linear Map",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [],
+        "statement": "Let $X, Y$ be normed spaces, $T : X \\\\to Y$ linear. Then the following are equivalent\\n\\n(i) $T$ is open\\n\\n(ii) There exists $\\\\delta > 0$ so that $B^Y_\\\\delta \\\\subset T(B^X_1)$\\n\\n(iii) There exists $\\\\varepsilon > 0$, $y_0 \\\\in Y$ and $R > 0$ so that $B^Y_\\\\varepsilon(y_0) \\\\subset T(B^X_R)$",
+        "proof": "(i) $\\\\Rightarrow$ (ii) follows as $0 \\\\in T(B^X_1)$ and (ii) $\\\\Rightarrow$ (iii) is trivially true.\\n\\nProof that (ii) implies (i):\\n\\nLet $U$ be open, $y \\\\in T(U)$. Then there exists $x \\\\in U$ so that $y = Tx$ and since $U$ is open there exists $r > 0$ so that $B^X_r(x) \\\\subset U$. By linearity and (ii) hence $T(B^X_r(x)) = \\\\{Tx\\\\} + rT(B^X_1) \\\\supset \\\\{Tx\\\\} + rB^Y_\\\\delta = B^Y_{\\\\delta r}(Tx)$.\\n\\nProof that (iii) implies (ii): Note that $\\\\Omega := T(B^X_R)$ is convex (as $T$ is linear and $B^X_R$ is convex) and symmetric in the sense that if $y \\\\in \\\\Omega$ then also $-y \\\\in \\\\Omega$ (again as the ball has this property and as $T$ is linear).\\n\\nHence also $B^Y_\\\\varepsilon(-y_0) \\\\subset \\\\Omega$ and so for each $y \\\\in B^Y_\\\\varepsilon$ we know that both $\\\\pm y_0 + y$ are in $\\\\Omega$ and hence, by convexity, so is $y = \\\\frac{1}{2}(y_0 + y) + \\\\frac{1}{2}(-y_0 + y)$.\\n\\nThus $B^Y_\\\\varepsilon \\\\subset T(B^X_R)$ so by linearity $B^Y_{\\\\varepsilon/R} \\\\subset T(B^X_1)$.",
+        "preconditions": [
+            "normed space",
+            "open map",
+            "linear operator"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.9",
+        "name": "Open mapping theorem",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Baire category theorem",
+            "Lemma 3.8"
+        ],
+        "statement": "Let $X, Y$ be Banach spaces and let $T \\\\in B(X, Y)$ be surjective. Then $T$ is an open map.",
+        "proof": "We first show\\n\\nClaim 1: There exists $\\\\varepsilon > 0$ so that $B^Y_{2\\\\varepsilon} \\\\subset T(B^X_1)$.\\n\\nProof of Claim 1: As $Y = T(X) = T(\\\\bigcup_n(B^X_n)) = \\\\bigcup T(B^X_n)$ and as $Y$ is Banach we know by the Baire category theorem that at least one of the $T(B^X_n)$ has nonempty interior, so contains some ball $B^Y_\\\\delta(y_0)$. As in the proof of the above lemma we can easily check that this implies that $B^Y_\\\\delta \\\\subset T(B^X_n)$ and we get the claim for $\\\\varepsilon = \\\\frac{\\\\delta}{2n}$.\\n\\nTo complete the proof we now show that\\n\\nClaim 2: For this $\\\\varepsilon$ we have $B^Y_\\\\varepsilon \\\\subset T(B^X_1)$.\\n\\nProof of Claim 2: Let $y \\\\in B^Y_\\\\varepsilon$. The idea is to construct a sequence $(x_k)$ so that $\\\\|x_k\\\\| < 2^{-k}$ and so that $\\\\sum_{k=1}^m Tx_k$ converges to $y$ in $Y$.\\n\\nTo get such a sequence we can use that $B^Y_{2^{-j+1}\\\\varepsilon} \\\\subset T(B_{2^{-j}})$ by the first part and linearity. As $y_0 = y \\\\in B^Y_\\\\varepsilon$ we can hence choose $x_1$ with $\\\\|x_1\\\\| \\\\leq 2^{-1}$ so that $y_1 := y_0 - Tx_1$ is so that $\\\\|y_1\\\\| < \\\\varepsilon 2^{-1}$.\\n\\nWe then proceed inductively, so suppose we have already found $x_1, .., x_j$ and $y_1, \\\\ldots, y_j$ with $y_k = y_{k-1} - Tx_k$ and $\\\\|x_k\\\\| < 2^{-k}$ and $\\\\|y_k\\\\| < \\\\varepsilon 2^{-k}$ for all $k = 1, \\\\ldots, j$.\\n\\nThen we use that $y_j \\\\in B^Y_{2^{-j}\\\\varepsilon} \\\\subset T(B_{2^{-j-1}})$ to choose the next $x_{j+1} \\\\in B^X_{2^{-(j+1)}}$ so that $\\\\|y_j - Tx_{j+1}\\\\| < \\\\varepsilon 2^{-j}$ and continue the process with $y_{j+1} = y_j - Tx_{j+1}$.\\n\\nSince $\\\\sum \\\\|x_k\\\\| < 1$ we know that $\\\\sum x_k$ converges in $X$ to some $x \\\\in B^X_1$, as absolute convergence of series in Banach spaces implies convergence. As $y -\\\\sum_{k=1}^n Tx_k = y_n \\\\to 0$ in $Y$ we hence get that\\n\\n$y = \\\\sum_{k=1}^\\\\infty Tx_k = \\\\lim_{n\\\\to\\\\infty} \\\\sum_{k=1}^n Tx_k = \\\\lim_{n\\\\to\\\\infty} \\\\sum_{k=1}^n T(x_k) = T(\\\\sum_{k=1}^\\\\infty x_k) = Tx$\\n\\nwhere the third step follows by linearity and the forth by continuity of $T$. As $y$ was an arbitrary element of $B^Y_\\\\varepsilon$ this shows that $B^Y_\\\\varepsilon \\\\subset T(B^X_1)$ and hence that $T$ is open.",
+        "preconditions": [
+            "Banach space",
+            "bounded linear operator",
+            "surjective map"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.10",
+        "name": "Inverse Mapping Theorem",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Theorem 3.9"
+        ],
+        "statement": "Let $X, Y$ be Banach spaces and let $T \\\\in B(X, Y)$ be bijective. Then $T$ is invertible.",
+        "proof": "This is left as an exercise in the text.",
+        "preconditions": [
+            "Banach space",
+            "bounded linear operator",
+            "bijective map"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.11",
+        "name": "Closed Range Theorem",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Theorem 3.10",
+            "Lemma 1.5"
+        ],
+        "statement": "Let $T \\\\in B(X, Y)$ be a bounded linear operator between Hilbert spaces. Then $TX$ is closed if and only if $T^*Y$ is closed.",
+        "proof": "It suffices to show only one direction, as $T^{**} = T$ so we prove that if $W := T^*Y$ is closed in $X$ then also $TX$ is closed in $Y$, i.e. $TX = \\\\overline{TX}$.\\n\\nFor this we set $Z = \\\\overline{TX}$ and need to show that $Z \\\\subset TX$ as the reverse inclusion is trivially satisfied. We will prove this by showing that the identity map $I_Z$ can be obtained as a composition of the map $T$ with a suitable map from $Z$ to $W \\\\subset X$ which we construct as follows:\\n\\nAs $T$ maps $X$ into $Z$ we can view it instead as a map into the Banach space $Z$ and we call the resulting map $S$, i.e. $S \\\\in B(X, Z)$ is simply given by $Sx = Tx$ for all $x \\\\in X$. The adjoint $S^*$ of $S$ is an operator from $Z$ to $X$. By (1.5), $Z = \\\\text{Im } S = (\\\\text{Ker } S^*)^\\\\perp$, so $\\\\text{Ker } S^* = \\\\{0\\\\}$, i.e. $S^*$ is injective.\\n\\nWe claim that $\\\\text{Im } S^* = W$. To this end we let $P$ be the orthogonal projection from $Y$ onto $Z$ and compute, for $x \\\\in X$ and $y \\\\in Y$,\\n\\n$\\\\langle Tx, y\\\\rangle_Y = \\\\langle Sx, Py\\\\rangle_Y = \\\\langle x, S^*Py\\\\rangle_X$.\\n\\nThis shows that $T^* = S^* \\\\circ P$, and so $\\\\text{Im } S^* = W$, as claimed.\\n\\nSo, $S^*$ can be regarded as a bounded bijective linear operator between $Z$ and $W$. To make the notation clearer, we rename it as $V \\\\in B(Z, W)$, $Vz = S^*z$ for all $z \\\\in Z$. As both $Z$ and $W$ are Banach we can apply the inverse mapping theorem to deduce that $V$ is invertible, which in turn implies that also $V^*$ is invertible.\\n\\nWe finally claim that\\n\\n$I_Z = T \\\\circ (V^*)^{-1}$,\\n\\nwhich then immediately implies that $Z \\\\subset TX$ and hence that indeed $TX = Z = \\\\overline{TX}$. To show this, i.e. that $z = T((V^*)^{-1}z)$ for any given $z \\\\in Z$, we write for short $w = (V^*)^{-1}z$, note that both $z$ and $Tw$ are elements of $Z$ and that for any $y \\\\in Z$:\\n\\n$\\\\langle Tw, y\\\\rangle_Y = \\\\langle Sw, y\\\\rangle_Y = \\\\langle w, S^*y\\\\rangle_X = \\\\langle w, Vy\\\\rangle_X = \\\\langle V^*w, y\\\\rangle_Y = \\\\langle z, y\\\\rangle_Y$.\\n\\nSince this holds for all $y \\\\in Z$, so in particular for $y = Tw - z$, we deduce that $Tw = z$ and so $T \\\\circ (V^*)^{-1} = I_Z$ as desired.",
+        "preconditions": [
+            "Hilbert space",
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.12",
+        "name": "Closed Graph Theorem",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Theorem 3.10"
+        ],
+        "statement": "Let $X$ and $Y$ be Banach spaces and let $T$ be a linear operator from $X$ into $Y$. Then $T$ is bounded if and only if its graph\\n\\n$\\\\Gamma(T) = \\\\{(x, y) \\\\in X \\\\times Y : y = Tx\\\\}$\\n\\nis closed in $X \\\\times Y$.",
+        "proof": "If $T$ is bounded, then it is continuous so if a sequence $(x_n, Tx_n)$ of elements of $\\\\Gamma(T)$ converges to some $(x, y)$ we must have $y = \\\\lim T x_n = T \\\\lim x_n = Tx$, i.e. $(x, y) \\\\in \\\\Gamma(T)$. Thus $\\\\Gamma(T)$ is closed.\\n\\nConversely, assume that $\\\\Gamma(T)$ is closed. We note that the graph of any linear operator is a subspace, so as $\\\\Gamma(T)$ is closed and as $X \\\\times Y$ is Banach we find that $\\\\Gamma(T)$ itself is also a Banach space with the norm induced by the norm on $X \\\\times Y$. Consider now the projections onto the components of elements of $\\\\Gamma(T)$, i.e. the continuous maps $P_1 : \\\\Gamma(T) \\\\to X$ and $P_2 : \\\\Gamma(T) \\\\to Y$ defined by\\n\\n$P_1(x, Tx) = x$ and $P_2(x, Tx) = Tx$.\\n\\nIt is clear that $P_1$ is a bijection. By the inverse mapping theorem, $P_1$ has a continuous inverse $P_1^{-1}$. The conclusion follows from the fact that $T = P_2 \\\\circ P_1^{-1}$.",
+        "preconditions": [
+            "Banach space",
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 3.13",
+        "name": "Self-adjoint Boundedness",
+        "topic": "Bounded Linear Operators and Fundamental Theorems",
+        "previous_results": [
+            "Theorem 3.12"
+        ],
+        "statement": "Let $X$ be a Hilbert space and let $T : X \\\\to X$ be linear. If $\\\\langle Tx, y\\\\rangle = \\\\langle x, Ty\\\\rangle$ for all $x, y \\\\in X$, then $T$ is bounded and so self-adjoint.",
+        "proof": "As before, we only need to show that if $x_n \\\\to x$ and $Tx_n \\\\to z$, then $z = Tx$ as we can then apply the closed graph theorem. Indeed, for any $y \\\\in X$, we have\\n\\n$\\\\langle Tx, y\\\\rangle = \\\\langle x, Ty\\\\rangle = \\\\lim_{n\\\\to\\\\infty} \\\\langle x_n, Ty\\\\rangle = \\\\lim_{n\\\\to\\\\infty} \\\\langle Tx_n, y\\\\rangle = \\\\langle z, y\\\\rangle$,\\n\\nwhich implies $z = Tx$.",
+        "preconditions": [
+            "Hilbert space",
+            "bounded linear operator",
+            "self-adjoint operator"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.1",
+        "name": "Weak Convergence",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [],
+        "statement": "A sequence $(x_n)$ in a normed space $X$ is said to converge weakly to $x \\\\in X$ if\\n\\n$\\\\lim_{n\\\\to\\\\infty} \\\\ell(x_n) = \\\\ell(x)$ for all $\\\\ell \\\\in X^*$.\\n\\nThis relation is indicated by a half arrow\\n\\n$x_n \\\\rightharpoonup x$,\\n\\nor to make it clearer (and recommended for handwritten notes to avoid confusion between weak and strong convergence) by $x_n \\\\overset{w}{\\\\rightharpoonup} x$.",
+        "proof": "",
+        "preconditions": [
+            "normed space",
+            "weakly convergent sequence"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 4.2",
+        "name": "Uniqueness of limit",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [],
+        "statement": "The weak limit, if it exists, is unique.",
+        "proof": "Suppose that $x_n \\\\rightharpoonup x$ and $x_n \\\\rightharpoonup \\\\tilde{x}$ for $x \\\\neq \\\\tilde{x}$. Then by the Corollary of Hahn-Banach that we recalled in (1.3) there would be $f \\\\in X^*$ so that $f(x) \\\\neq f(\\\\tilde{x})$. This contradicts the uniqueness of limits for the sequence of numbers $f(x_n)$.",
+        "preconditions": [
+            "weakly convergent sequence"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 4.3",
+        "name": "Weak limit properties",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [
+            "Theorem 3.4"
+        ],
+        "statement": "If $x_n \\\\rightharpoonup x$ then $(x_n)$ is bounded and\\n\\n$\\\\|x\\\\| \\\\leq \\\\liminf \\\\|x_n\\\\|$.",
+        "proof": "We recall that the canonical injection $\\\\iota : X \\\\rightarrow X^{**}$ is isometric and hence that each $x_n$ defines an element $T_n = \\\\iota x_n \\\\in X^{**}$ with $\\\\|T_n\\\\|_{**} = \\\\|x_n\\\\|$ by\\n\\n$T_n(\\\\ell) = \\\\ell(x_n)$ for all $\\\\ell \\\\in X^*$.\\n\\nNow for each $\\\\ell \\\\in X^*$, $T_n(\\\\ell) = \\\\ell(x_n)$ is convergent, and hence bounded. The principle of uniform boundedness, which is applicable as $X^*$ is Banach, thus implies that $\\\\|T_n\\\\|_{**}$ is bounded and hence that $(x_n)$ is bounded.\\n\\nTo get the second part, we apply the consequence (1.3) of Hahn-Banach to choose $\\\\ell \\\\in X^*$ such that\\n\\n$\\\\|x\\\\| = \\\\ell(x)$ and $\\\\|\\\\ell\\\\|_* = 1$.\\n\\nThe conclusion then follows from the inequality\\n\\n$|\\\\ell(x_n)| \\\\leq \\\\|\\\\ell\\\\|_*\\\\|x_n\\\\| = \\\\|x_n\\\\|$\\n\\nand the fact that $\\\\ell(x_n) \\\\to \\\\ell(x) = \\\\|x\\\\|$.",
+        "preconditions": [
+            "weakly convergent sequence",
+            "bounded sequence"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 4.4",
+        "name": "Mazur",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [
+            "Theorem 4.5",
+            "Corollary 4.6"
+        ],
+        "statement": "Let $K$ be a closed convex subset of a normed space $X$ and let $(x_n)$ be a sequence of elements of $K$ which converges weakly to some $x \\\\in X$. Then $x \\\\in K$.",
+        "proof": "Assume by contradiction that $x \\\\not\\\\in K$. Then Corollary gives $\\\\ell \\\\in X^*$ and $\\\\delta > 0$ so that\\n\\n$\\\\operatorname{Re}(\\\\ell(y)) \\\\leq \\\\operatorname{Re}(\\\\ell(x)) - \\\\delta$ for all $y \\\\in K$.\\n\\nBut this means that $\\\\operatorname{Re}(\\\\ell(x_n)) \\\\leq \\\\operatorname{Re}(\\\\ell(x)) - \\\\delta$ which contradicts $\\\\ell(x_n) \\\\to \\\\ell(x)$.",
+        "preconditions": [
+            "closed convex set",
+            "normed space",
+            "weakly convergent sequence"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 4.6",
+        "name": "Convex set separation",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [
+            "Theorem 4.5"
+        ],
+        "statement": "Let $K$ be a closed convex subset of a normed space $X$ and let $x_0 \\\\in X\\\\setminus K$. Then there exists $\\\\ell \\\\in X^*$ and $\\\\delta > 0$ so that\\n\\n$\\\\operatorname{Re}(\\\\ell(y)) \\\\leq \\\\operatorname{Re}(\\\\ell(x_0)) - \\\\delta$ for all $y \\\\in K$.",
+        "proof": "Since $x_0 \\\\in K^c$ and $K^c$ is open, there is some $r > 0$ such that $B_r(x_0) \\\\cap K = \\\\emptyset$. By the hyperplane separation theorem applied for $A = K$ and $B = B_r(x_0)$, there is $\\\\ell \\\\in X^* \\\\setminus \\\\{0\\\\}$ and a number $c \\\\in \\\\mathbb{R}$ such that\\n\\n$\\\\operatorname{Re}(\\\\ell(y)) \\\\leq c \\\\leq \\\\operatorname{Re}(\\\\ell(z))$ for all $y \\\\in K$ and $z \\\\in B_r(x_0)$.\\n\\nAs $\\\\ell \\\\neq 0$ there exists $\\\\bar{x} \\\\in X$ with $\\\\|\\\\bar{x}\\\\| = 1$ and $\\\\ell(\\\\bar{x}) > 0$. Setting $\\\\delta := r\\\\ell(\\\\bar{x}) > 0$ and noting that $x_0 - r\\\\bar{x} \\\\in \\\\bar{B}_r(x_0)$ we then get that\\n\\n$\\\\operatorname{Re}(\\\\ell(y)) \\\\leq \\\\operatorname{Re}(\\\\ell(x_0 - r\\\\bar{x})) = \\\\operatorname{Re}(\\\\ell(x_0)) - \\\\delta$ for all $y \\\\in K$\\n\\nas claimed.",
+        "preconditions": [
+            "normed space",
+            "closed convex set"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 4.7",
+        "name": "Geometric version of Mazur",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [
+            "Corollary 4.6"
+        ],
+        "statement": "Every closed convex subset $K$ of a normed space can be written as an intersection of half-spaces, i.e. there exist families of bounded linear operators $\\\\ell_\\\\iota$, $\\\\iota \\\\in I$, and numbers $c_\\\\iota$, $\\\\iota \\\\in I$, so that the corresponding half-spaces $H_{\\\\ell_\\\\iota,c_\\\\iota} := \\\\{x : \\\\text{Re}(\\\\ell_\\\\iota(x)) \\\\leq c_\\\\iota\\\\}$ are so that $K = \\\\bigcap_{\\\\iota\\\\in I} H_{\\\\ell_\\\\iota,c_\\\\iota}$.",
+        "proof": "We note that these families are not assumed to be countable and that indeed the easiest way of deriving this result from Corollary 4.6 is choose all pairs $(\\\\ell_\\\\iota, c_\\\\iota) \\\\in X^* \\\\times \\\\mathbb{R}$ for which $K \\\\subset H_{\\\\ell_\\\\iota,c_\\\\iota}$. (This proof is an optional exercise on sheet 3.)",
+        "preconditions": [
+            "normed space",
+            "closed convex set",
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 4.8",
+        "name": "Weak convergence equivalence",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [],
+        "statement": "Let $X$ be a Hilbert space, $(x_n)$ a sequence in $X$ and $x \\\\in X$. Then the following are equivalent:\\n\\n(i) $x_n \\\\to x$\\n\\n(ii) $x_n \\\\rightharpoonup x$ and $\\\\|x_n\\\\| \\\\to \\\\|x\\\\|$",
+        "proof": "Exercise",
+        "preconditions": [
+            "Hilbert space",
+            "weakly convergent sequence"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 4.9",
+        "name": "Weak convergence characterization",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [
+            "Riesz representation theorem"
+        ],
+        "statement": "Let $X$ be a Hilbert space, let $\\\\{e_\\\\iota\\\\}_{\\\\iota\\\\in I}$ be an orthonormal basis of $X$ and let $(x_n)$ be a bounded sequence in $X$ and let $x \\\\in X$. Then the following are equivalent:\\n\\n(i) $(x_n)$ converges weakly to $x$\\n\\n(ii) $\\\\langle x_n, e_\\\\iota\\\\rangle \\\\to \\\\langle x, e_\\\\iota\\\\rangle$ for all $\\\\iota \\\\in I$.",
+        "proof": "(i) $\\\\Rightarrow$ (ii) is trivially true as $y \\\\mapsto \\\\langle y, e_\\\\iota\\\\rangle$ is an element of $X^*$.\\nSo suppose that (ii) holds and let $\\\\ell$ be any element of $X^*$. By the Riesz representation theorem, there exists $y \\\\in X$ such that\\n\\n$\\\\ell(x) = \\\\langle x, y\\\\rangle$ for all $x \\\\in X$.\\n\\nWe thus need to show that\\n\\n$\\\\lim_{n\\\\to\\\\infty} \\\\langle x_n - x, y\\\\rangle = 0$\\n\\nor equivalently that $\\\\lim \\\\sup |\\\\langle x_n - x, y\\\\rangle| \\\\leq \\\\varepsilon$ for every $\\\\varepsilon > 0$.\\n\\nGiven $\\\\varepsilon > 0$ we can use that $X = \\\\overline{\\\\text{span}}\\\\{e_\\\\iota\\\\}$ since $\\\\{e_\\\\iota\\\\}$ is an on-basis and hence that there exists $y_\\\\varepsilon \\\\in \\\\text{span}\\\\{e_\\\\iota\\\\}$ with $\\\\|y - y_\\\\varepsilon\\\\| \\\\leq \\\\frac{\\\\varepsilon}{M}$ where we set $M := \\\\sup \\\\|x_n\\\\| + \\\\|x\\\\|$.\\n\\nAs $y_\\\\varepsilon$ is a finite linear combination of $e_\\\\iota$'s the assumption (ii) ensures that $\\\\langle x_n - x, y_\\\\varepsilon\\\\rangle \\\\to 0$ and we hence get that\\n\\n$\\\\lim \\\\sup_{n\\\\to\\\\infty} |\\\\langle x - x_n, y\\\\rangle| \\\\leq \\\\lim \\\\sup_{n\\\\to\\\\infty} \\\\|x - x_n\\\\|\\\\|y - y_\\\\varepsilon\\\\| \\\\leq \\\\varepsilon$.",
+        "preconditions": [
+            "Hilbert space",
+            "orthonormal basis",
+            "bounded sequence",
+            "weakly convergent sequence"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 4.10",
+        "name": "Orthonormal sequence convergence",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [
+            "Proposition 4.9"
+        ],
+        "statement": "Let $(x_n)$ be an orthonormal sequence. Then $x_n$ tends weakly, but not strongly, to zero.",
+        "proof": "",
+        "preconditions": [
+            "orthonormal set"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.11",
+        "name": "Weak sequential compactness",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [],
+        "statement": "A subset $A$ of a Banach space $X$ is called weakly sequentially compact if every sequence of $A$ has a subsequence that converges weakly to an element $x$ of $A$.",
+        "proof": "",
+        "preconditions": [
+            "Banach space",
+            "weakly convergent sequence"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 4.12",
+        "name": "Weak sequential compactness",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [],
+        "statement": "Let $X$ be a reflexive Banach space. Then the closed unit ball $\\\\{x : \\\\|x\\\\| \\\\leq 1\\\\}$ is weakly sequentially compact.",
+        "proof": "We will only prove the theorem in the case of Hilbert spaces, which are reflexive thanks to the Riesz representation theorem.\\n\\nSo let $(x_n)$ be a sequence in the unit ball of a Hilbert space $X$. We first show:\\n\\nClaim 1: There exists a subsequence $(x_{n_j})$ of $(x_n)$, such that $\\\\langle x_{n_j}, x_m \\\\rangle$ converges for every $m$.\\n\\nProof of Claim 1:\\nWe use a diagonal sequence argument: As $(x_n)$ is bounded we know from Cauchy-Schwarz that the sequence $\\\\langle x_n, x_1 \\\\rangle$ is a bounded sequence in $F$. By Bolzano-Weierstrass, we can hence extract a subsequence $n^{(1)}_j$ such that $\\\\langle x_{n^{(1)}_j}, x_1 \\\\rangle$ is convergent.\\n\\nWe then consider $\\\\langle x_{n^{(1)}_j}, x_2 \\\\rangle$, which is again a bounded sequence in $F$ and select a convergent subsequence $\\\\langle x_{n^{(2)}_j}, x_2 \\\\rangle$. Clearly, $\\\\langle x_{n^{(2)}_j}, x_1 \\\\rangle$ is also convergent.\\n\\nProceeding in this way, we construct nested subsequence $(n^{(k)}_j)$ such that $\\\\langle x_{n^{(k)}_j}, x_m \\\\rangle$ is convergent (with respect to $j$) for every $m \\\\leq k$.\\n\\nFinally we set $x_{n_j} = x_{n^{(j)}_j}$ and use that for every fixed $m$, $(n_j)_{j \\\\geq m}$ is a subsequence of $(n^{(m)}_j)_{j \\\\geq m}$. It follows that $\\\\langle x_{n_j}, x_m \\\\rangle$ is convergent for every $m$.\\n\\nFor this subsequence, we then show\\n\\nClaim 2: $\\\\langle x_{n_j}, x \\\\rangle$ converges for every $x \\\\in X$.\\n\\nProof of Claim 2:\\nBy linearity and claim 1 it is clear that for every $y \\\\in Y := \\\\text{span}\\\\{x_1, x_2, ...\\\\}$ as elements of this space are finite linear combinations of elements $x_m$.\\n\\nNext we claim that if $y$ is in the the closed linear span $\\\\overline{Y}$ of $\\\\{x_1, ...\\\\}$ then $\\\\langle x_{n_j}, y \\\\rangle$ is a Cauchy sequence so also converges.\\n\\nTo see this it suffices to consider $\\\\varepsilon > 0$ with, use that $Y$ is dense in $\\\\overline{Y}$ and that we can hence choose $\\\\tilde{y} \\\\in Y$ with $\\\\|y - \\\\tilde{y}\\\\| \\\\leq \\\\frac{1}{4}\\\\varepsilon$. As we know that $\\\\langle x_{n_j}, \\\\tilde{y} \\\\rangle$ is convergent, and hence Cauchy, we can then choose $N$ so that $|\\\\langle x_{n_j} - x_{n_k}, \\\\tilde{y} \\\\rangle| < \\\\frac{1}{2}\\\\varepsilon$ for all $j, k \\\\geq N$.\\n\\nApplying first the triangle inequality and then Cauchy-Schwarz thus gives\\n\\n$|\\\\langle x_{n_j} - x_{n'_j}, y \\\\rangle| \\\\leq |\\\\langle x_{n_j} - x_{n'_j}, \\\\tilde{y} \\\\rangle| + |\\\\langle x_{n_j} - x_{n'_j}, \\\\tilde{y} - y \\\\rangle| \\\\leq \\\\frac{1}{2}\\\\varepsilon + 2\\\\|y - \\\\tilde{y}\\\\| \\\\leq \\\\varepsilon$.\\n\\nOn the other hand, it is clear that $\\\\langle x_{n_j}, z \\\\rangle = 0$ for all $z \\\\in Y^{\\\\perp}$. Hence, as $X = \\\\overline{Y} \\\\oplus Y^{\\\\perp}$ by the projection theorem, we have that $\\\\langle x_{n_j}, x \\\\rangle$ is convergent for all $x \\\\in X$.\\n\\nWe can now finally show\\n\\nClaim 3: $x_{n_j}$ converges weakly to some $x^*$.\\n\\nProof of Claim 3: As $\\\\langle x_{n_j}, x \\\\rangle$ is convergent for all $x \\\\in X$ we can define the linear map\\n\\n$\\\\ell(x) = \\\\lim_{j \\\\to \\\\infty} \\\\langle x, x_{n_j} \\\\rangle, \\\\quad x \\\\in X$\\n\\nwhich is an element of $X^*$ with $\\\\|\\\\ell\\\\| \\\\leq 1$ since Cauchy-Schwarz ensures that $\\\\|\\\\ell(x)\\\\| \\\\leq \\\\sup \\\\|x_{n_j}\\\\|\\\\|x\\\\| \\\\leq \\\\|x\\\\|$ for every $x$. By the Riesz representation theorem, there is hence some $x^* \\\\in X$ with $\\\\|x^*\\\\| \\\\leq 1$ such that $\\\\ell(x) = \\\\langle x, x^* \\\\rangle$ for all $x \\\\in X$. This implies that $\\\\langle x_{n_j} - x^*, x \\\\rangle = \\\\langle x, x_{n_j} - x^* \\\\rangle \\\\to 0$ for every $x$ and hence that $T(x_{n_j} - x^*) \\\\to 0$ for every $T \\\\in X^*$ as the Riesz representation theorem allows us to write any such $T$ as map $z \\\\mapsto \\\\langle z, x \\\\rangle$ for some $x$. This establishes that $x_{n_j} - x^* \\\\rightharpoonup 0$ i.e. that $x_{n_j} \\\\rightharpoonup x^*$ and hence completes the proof.",
+        "preconditions": [
+            "reflexive Banach space"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 4.13",
+        "name": "Bounded sequence convergence",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [
+            "Theorem 4.12"
+        ],
+        "statement": "Every bounded sequence in a reflexive Banach space has a weakly convergent subsequence.",
+        "proof": "This follows directly from Theorem 4.12. Given a bounded sequence $(x_n)$ in a reflexive Banach space $X$, there exists $M > 0$ such that $\\\\|x_n\\\\| \\\\leq M$ for all $n$. Then the sequence $y_n = \\\\frac{x_n}{M}$ lies in the closed unit ball of $X$. By Theorem 4.12, there exists a subsequence $(y_{n_j})$ that converges weakly to some $y$ in the closed unit ball. Then the corresponding subsequence $(x_{n_j})$ converges weakly to $My$.",
+        "preconditions": [
+            "reflexive Banach space",
+            "bounded sequence"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 4.14",
+        "name": "Eberlein",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [],
+        "statement": "The closed unit ball in a Banach space $X$ is weakly sequentially compact only if $X$ is reflexive.",
+        "proof": "This result is stated without proof in the text.",
+        "preconditions": [
+            "Banach space",
+            "reflexive Banach space",
+            "weakly convergent sequence"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 4.15",
+        "name": "Closest point",
+        "topic": "Weak Convergence and Compactness",
+        "previous_results": [
+            "Theorem 4.12",
+            "Proposition 4.3"
+        ],
+        "statement": "Let $K$ be a non-empty closed convex subset of a reflexive Banach space $X$. Then, for every $x \\\\in X$, there is a point $y \\\\in K$ such that $\\\\|x - y\\\\| = \\\\text{dist}(x, K) := \\\\inf_{z\\\\in K} \\\\|x - z\\\\|$.",
+        "proof": "Let $y_n$ be a minimising sequence, i.e. a sequence in $K$ so that $\\\\|y_n - x\\\\| \\\\to d(x, K)$. Then $(y_n)$ must be bounded since for $n$ large we have $\\\\|y_n\\\\| \\\\leq \\\\|y_n - x\\\\| + \\\\|x\\\\| \\\\leq d(x, K) + 1 + \\\\|x\\\\|$. By weak compactness we hence get a subsequence $y_{n_j}$ that converges weakly to some $y \\\\in X$. As $K$ is closed and convex Mazur's theorem ensures that indeed $y \\\\in K$ and as $y_{n_j} - x \\\\rightharpoonup y - x$ we get from Proposition 4.3 that $\\\\|y - x\\\\| \\\\leq \\\\liminf \\\\|y_n - x\\\\| = d(x, K)$ so indeed $\\\\|y - x\\\\| = d(x, K)$.",
+        "preconditions": [
+            "reflexive Banach space",
+            "closed convex set"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 5.1",
+        "name": "Spectrum components",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "Let $X$ be a complex Banach space and $T \\\\in B(X)$.\\n\\n(i) The resolvent set $\\\\rho(T)$ of $T$ is defined as\\n\\n$\\\\rho(T) := \\\\{\\\\lambda \\\\in \\\\mathbb{C} : T - \\\\lambda I \\\\text{ is invertible}\\\\}$\\n\\nand for $\\\\lambda \\\\in \\\\rho(T)$, we define the resolvent operator of $T$ at $\\\\lambda$ as $R_\\\\lambda(T) = (T -\\\\lambda I)^{-1}$.\\n\\n(ii) The spectrum $\\\\sigma(T)$ of $T$ is the complement of the resolvent set, i.e.\\n\\n$\\\\sigma(T) := \\\\{\\\\lambda \\\\in \\\\mathbb{C} : T - \\\\lambda I \\\\text{ is not invertible} \\\\}$\\n\\n(iii) The point spectrum $\\\\sigma_p(T)$ of $T$ is the set of complex numbers $\\\\lambda$ such that $T - \\\\lambda I$ is not injective, i.e. so that $\\\\text{Ker}(T - \\\\lambda I)$ is non-trivial. The elements of $\\\\sigma_p(T)$ are called the eigenvalues of $T$, and, if $\\\\lambda \\\\in \\\\sigma_p(T)$, the non-trivial elements of $\\\\text{Ker}(T - \\\\lambda I)$ are called the eigenvectors of $T$.\\n\\n(iv) The residual spectrum $\\\\sigma_r(T)$ of $T$ is the set of complex numbers $\\\\lambda$ such that $T -\\\\lambda I$ is injective and $\\\\text{Im}(T - \\\\lambda I))$ is not dense in $X$.\\n\\n(v) The continuous spectrum $\\\\sigma_c(T)$ of $T$ is the set of complex numbers $\\\\lambda$ for which $T - \\\\lambda I$ is injective and $(T - \\\\lambda I)(X)$ is a proper dense subset of $X$.\\n\\n(vi) The approximate point spectrum $\\\\sigma_{ap}(T)$ of $T$ is the set of complex numbers $\\\\lambda$ such that there is a sequence $x_n \\\\in X$ such that $\\\\|x_n\\\\| = 1$ and $\\\\|T x_n - \\\\lambda x_n\\\\| \\\\to 0$.",
+        "proof": "",
+        "preconditions": [
+            "complex Banach space",
+            "bounded linear operator",
+            "spectrum of an operator",
+            "resolvent set of an operator",
+            "point spectrum of an operator",
+            "approximate point spectrum of an operator",
+            "continuous spectrum of an operator",
+            "residual spectrum of an operator",
+            "eigenvalue of an operator",
+            "eigenvector of an operator"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 5.2",
+        "name": "Continuous Spectrum Inclusion",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Lemma 1.18"
+        ],
+        "statement": "$\\\\sigma_c(T) \\\\subset \\\\sigma_{ap}(T)$.",
+        "proof": "We note that $\\\\lambda$ is in the approximate point spectrum if and only if there does not exist any $\\\\delta > 0$ so that $\\\\|(T-\\\\lambda I)(x)\\\\| \\\\geq \\\\delta\\\\|x\\\\|$ for all $x \\\\in X$, i.e. if and only if the assumption (1.9) of Lemma 1.18 is violated for $S = T - \\\\lambda I$. As this lemma ensures that the image of operators satisfying (1.9) is always closed we hence immediately deduce the result.\\n\\nAlternative proof for Hilbert spaces: Let $\\\\lambda \\\\in \\\\sigma_c(T)$ so that $Y := \\\\operatorname{Im}(\\\\lambda I - T)$ is a dense proper subspace of $X$. Pick $p \\\\in X \\\\setminus Y$. Then there is some sequence $x_n$ such that $p_n := (\\\\lambda I - T)x_n \\\\to p$.\\n\\nIf $(x_n)$ is bounded, then, by the weak sequential compactness property of the unit ball, we may assume without loss of generality that $x_n$ converges weakly to some $x$. This implies, for $z \\\\in X$, that\\n\\n$\\\\langle p_n, z \\\\rangle = \\\\langle (\\\\lambda I - T)x_n, z \\\\rangle = \\\\langle x_n, (\\\\bar{\\\\lambda}I - T^*)z \\\\rangle \\\\to \\\\langle x, (\\\\bar{\\\\lambda}I - T^*)z \\\\rangle = \\\\langle (\\\\lambda I - T)x, z \\\\rangle$.\\n\\nIn other words, $p_n$ converges weakly to $(\\\\lambda I - T)x$. But we also know that $p_n$ converges strongly to $p$, so obtain $p = (\\\\lambda I - T)x$, which contradicts the choice of $p$. We thus deduce that $(x_n)$ is unbounded. Replacing $(x_n)$ by a subsequence if necessary, we may assume that $\\\\|x_n\\\\| \\\\to \\\\infty$.\\n\\nLet $z_n = \\\\|x_n\\\\|^{-1} x_n$. We then have $\\\\|z_n\\\\| = 1$ and $\\\\|(\\\\lambda I - T)z_n\\\\| = \\\\|x_n\\\\|^{-1} \\\\|p_n\\\\| \\\\to 0$.\\n\\nHence $\\\\lambda \\\\in \\\\sigma_{ap}(T)$.",
+        "preconditions": [
+            "bounded linear operator",
+            "spectrum of an operator",
+            "continuous spectrum of an operator",
+            "approximate point spectrum of an operator"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 5.3",
+        "name": "Neumann-series",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "Let $X$ be a Banach space (over $\\\\mathbb{R}$ or $\\\\mathbb{C}$) and let $S \\\\in B(X)$ be so that $\\\\|S\\\\| < 1$. Then $I - S$ is invertible with $(I - S)^{-1} = \\\\sum_{n=0}^\\\\infty S^n$.",
+        "proof": "This result is recalled from B4.1 and no proof is provided in the given text.",
+        "preconditions": [
+            "Banach space",
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 5.4",
+        "name": "Spectrum Bound",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Lemma 5.3"
+        ],
+        "statement": "$\\\\sigma(T) \\\\subset \\\\overline{D}_{\\\\|T\\\\|} = \\\\{\\\\mu \\\\in \\\\mathbb{C} : |\\\\mu| \\\\leq \\\\|T\\\\|\\\\}$",
+        "proof": "If $|\\\\lambda| > \\\\|T\\\\|$ then $\\\\|\\\\lambda^{-1}T\\\\| < 1$ so $T - \\\\lambda I = -\\\\lambda(I - \\\\lambda^{-1}T)$ is invertible by the above lemma on Neumann-series.",
+        "preconditions": [
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 1",
+        "name": "Finite Dimensional Operators",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "(Operators on finite dimensional space) If $X$ is finite dimensional then you know from Linear Algebra (and the rank-nullity theorem) that a linear map $L : X \\\\to X$ is injective if and only if it is surjective. As all linear operators on finite dimensional spaces are continuous we thus have that in this case $\\\\sigma(T) = \\\\sigma_P(T)$.",
+        "proof": "No proof is provided as this is an example that follows directly from the rank-nullity theorem in linear algebra.",
+        "preconditions": [
+            "bounded linear operator",
+            "spectrum of an operator",
+            "point spectrum of an operator"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 2",
+        "name": "\u2113\u221e Operator",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "(An operator on $\\\\ell^\\\\infty$ for which $\\\\sigma_P \\\\neq \\\\sigma_{AP}$) Consider the operator $T \\\\in B(\\\\ell^\\\\infty)$ defined by $T(x) = (\\\\frac{x_j}{j})_{j\\\\in\\\\mathbb{N}}$. Then each $\\\\lambda = \\\\frac{1}{j}$ is an eigenvalue as we have $T(e^{(j)}) = \\\\frac{1}{j}e^{(j)}$ for $e^{(j)} = (\\\\delta_{jk})_{k\\\\in\\\\mathbb{N}}$. While $\\\\lambda = 0$ is not an eigenvalue it is in the approximate point spectrum as e.g. $e^{(k)}$ gives a sequence in $\\\\ell^\\\\infty$ with $\\\\|e^{(k)}\\\\|_\\\\infty = 1$ and $\\\\|T(e^{(k)})\\\\| \\\\to 0$.",
+        "proof": "No proof is needed as this is an example that demonstrates the difference between the point spectrum and approximate point spectrum.",
+        "preconditions": [
+            "bounded linear operator",
+            "eigenvalue of an operator",
+            "eigenvector of an operator",
+            "point spectrum of an operator",
+            "approximate point spectrum of an operator"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 3",
+        "name": "Integral Operator",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "Let $X = C([0, 1])$, as always equipped with the sup norm, and consider $T \\\\in B(X)$ defined by $T x(t) := \\\\int_0^t x(s)ds$. Claim: $\\\\sigma(T) = \\\\{0\\\\}$ while $\\\\sigma_P(T) = \\\\emptyset$.",
+        "proof": "We first show that $\\\\lambda = 0 \\\\in \\\\sigma(T) \\\\setminus \\\\sigma_P(T)$. Indeed differentiating the equation $T x = 0$ (which is allowed as $T x \\\\in C^1$ for $x \\\\in X$) we immediately get that $x(t) = 0$ for every $t$ and hence that $\\\\lambda = 0$ is not an eigenvalue. On the other hand for any $x \\\\in X$ we have that $T x(t = 0) = 0$ so $T X \\\\subset \\\\{x \\\\in X : x(0) = 0\\\\} \\\\neq X$. So $T$ is not surjective and thus $0 \\\\in \\\\sigma(T)$. Indeed $0 \\\\in \\\\sigma_r(T)$ as $\\\\{x \\\\in X : x(0) = 0\\\\}$ is a closed proper subspace of $X$ and hence $T X$ cannot be dense in $X$.\\n\\nLet now $\\\\lambda \\\\neq 0$. Then we can use that the proof of Picard's Theorem from DE1 shows that for any $y \\\\in C([0, 1])$ the integral equation $T x-\\\\lambda x = y$ has a unique solution $x = (T - \\\\lambda I)^{-1}(y)$; here we note that for $y \\\\in C^1$ the equation is equivalent to the initial value problem $x'(t) - \\\\lambda^{-1}x(t) = -\\\\lambda^{-1}y'(t)$ on $[0, 1]$ with $x(0) = 0$, but that the proof of Picard from DE1 actually applies to give the existence of a unique solution of the integral equation also just for $y$ continuous.\\n\\nFurthermore the fact that this solution depends continuously on $y$ can e.g. be obtained from Gronvall's lemma. Hence $\\\\lambda$ is not in the spectrum.\\n\\nAn alternative proof that $\\\\sigma(T) = \\\\{0\\\\}$, based on the general properties of the spectrum of compact operators that we prove in a later section can also be given.",
+        "preconditions": [
+            "Banach space",
+            "bounded linear operator",
+            "spectrum of an operator",
+            "point spectrum of an operator"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4",
+        "name": "Left Shift Operator",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "Consider $T : \\\\ell^1 \\\\to \\\\ell^1$ defined by $T(x_1, x_2, x_3, \\\\ldots) = (x_2, x_3, \\\\ldots)$.",
+        "proof": "We first determine the eigenvalues, i.e. the point spectrum. So suppose that $\\\\lambda \\\\in \\\\mathbb{C}$ is so that for some $x \\\\in \\\\ell^1 \\\\setminus \\\\{0\\\\}$ we have $T x = \\\\lambda x$. Then $T^j x = \\\\lambda^j x$ so $x_{j+1} = (T^j(x))_1 = \\\\lambda^j x_1$. Hence $x_1 \\\\neq 0$ (as $x \\\\neq 0$) and $x = x_1(1, \\\\lambda, \\\\lambda^2, \\\\ldots)$ which satisfies $T x = \\\\lambda x$ for all values of $\\\\lambda$, but is only an element of $\\\\ell^1$ if $|\\\\lambda| < 1$. We hence conclude that $\\\\sigma_P(T)$ is the open unit disc $B_1(0) \\\\subset \\\\mathbb{C}$.\\n\\nWe may now check that every point in the closed unit disc $\\\\overline{D}_1 := \\\\{\\\\lambda : |\\\\lambda| \\\\leq 1\\\\}$ is an approximate eigenvalue and hence that indeed\\n\\n$\\\\sigma(T) = \\\\sigma_{AP}(T) = \\\\overline{D}_1$\\n\\nas\\n\\n$\\\\overline{D}_1 \\\\subset \\\\sigma_{AP}(T) \\\\subset \\\\sigma(T) \\\\subset \\\\overline{D}_{\\\\|T\\\\|} = \\\\overline{D}_1$\\n\\nensures that all these sets agree.",
+        "preconditions": [
+            "Banach space",
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.5",
+        "name": "Properties of Spectrum",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "Let $(X, \\\\|\\\\cdot\\\\|)$ be a complex Banach space. Then for any $T \\\\in B(X)$ we have\\n\\n(i) The resolvent set $\\\\rho(T)$ is open and the map\\n\\n$\\\\rho(T) \\\\ni \\\\lambda \\\\mapsto R_\\\\lambda(T)$\\n\\nis analytic, i.e. for any $\\\\lambda_0 \\\\in \\\\rho(T)$ there exists a neighbourhood $U$ of $\\\\lambda_0$ and 'coefficients' $A_j(\\\\lambda_0, T) \\\\in B(X)$ so that for every $\\\\lambda \\\\in U$ the resolvent operator is given by the convergent power series\\n\\n$R_\\\\lambda(T) = \\\\sum_{j=0}^{\\\\infty} (\\\\lambda - \\\\lambda_0)^j A_j(\\\\lambda_0, T)$.\\n\\n(ii) The spectrum $\\\\sigma(T)$ is non-empty, compact and contained in $\\\\overline{D}_{\\\\|T\\\\|}$.",
+        "proof": "Let $\\\\lambda_0$ be any element of the resolvent set, i.e. so that $(T - \\\\lambda_0 I)$ is invertible, and denote by $R_{\\\\lambda_0}(T)$ its continuous inverse. Then for any $S \\\\in B(X)$ with $\\\\|S\\\\| < \\\\delta := \\\\|R_{\\\\lambda_0}(T)\\\\|^{-1}$ we can write $T - \\\\lambda_0 I - S = (T - \\\\lambda_0 I) \\\\cdot (I - R_{\\\\lambda_0}(T)S)$ where we note that $\\\\|R_{\\\\lambda_0}(T)S\\\\| < \\\\|R_{\\\\lambda_0}(T)\\\\|\\\\delta = 1$ and hence that $(I - R_{\\\\lambda_0}(T)S)$ is invertible and its inverse is given by the corresponding Neumann-series. As $\\\\lambda_0 \\\\in \\\\rho(T)$ also $(T - \\\\lambda_0 I)$ is invertible so we find that $T - \\\\lambda_0 I - S$ is invertible for any $\\\\|S\\\\| < \\\\delta$ with\\n\\n$(T - \\\\lambda_0 I + S)^{-1} = ((T - \\\\lambda_0 I) \\\\cdot (I - R_{\\\\lambda_0}(T)S))^{-1} = (I - R_{\\\\lambda_0}(T)S)^{-1}R_{\\\\lambda_0}(T)$\\n\\n$= \\\\sum_{j=0}^{\\\\infty} (R_{\\\\lambda_0}(T)S)^j R_{\\\\lambda_0}(T)$.\\n\\nGiven any $\\\\lambda \\\\in \\\\mathbb{C}$ with $|\\\\lambda - \\\\lambda_0| < \\\\delta$, we may apply this argument to $S = (\\\\lambda - \\\\lambda_0)I$, which has $\\\\|S\\\\| = |\\\\lambda - \\\\lambda_0|$ to obtain that $T - \\\\lambda I = T - \\\\lambda_0 I - S$ is invertible with inverse\\n\\n$R_\\\\lambda(T) = (T - \\\\lambda I)^{-1} = \\\\sum_{j=0}^{\\\\infty} (\\\\lambda - \\\\lambda_0)^j R_{\\\\lambda_0}(T)^{j+1}$.\\n\\nHence any such $\\\\lambda \\\\in B_\\\\delta(\\\\lambda_0) \\\\subset \\\\mathbb{C}$ is in the resolvent set, so the resolvent set is open and the resolvent operator is analytic in $\\\\lambda$.\\n\\nTo prove (ii) we first note that (i) implies that the spectrum $\\\\sigma(T) = \\\\mathbb{C} \\\\setminus \\\\rho(T)$ is closed. We have already seen that it is a subset of $\\\\overline{D}_{\\\\|T\\\\|}$ so it is also bounded and as bounded closed subsets of finite dimensional spaces are compact hence compact.\\n\\nWe furthermore note that for $\\\\lambda > \\\\|T\\\\|$\\n\\n$\\\\|R_\\\\lambda(T)\\\\| \\\\leq |\\\\lambda|^{-1}\\\\|(I - \\\\frac{1}{\\\\lambda} T)^{-1}\\\\| \\\\leq |\\\\lambda|^{-1} \\\\sum_{j=0}^{\\\\infty} \\\\|\\\\frac{T}{\\\\lambda}\\\\|^j \\\\leq |\\\\lambda|^{-1} \\\\sum_{j=0}^{\\\\infty} (\\\\frac{\\\\|T\\\\|}{\\\\lambda})^j = \\\\frac{1}{|\\\\lambda| - \\\\|T\\\\|}$.\\n\\nWe now want to combine this with the Theorem of Hahn-Banach (applied to functionals on $B(X)$, i.e elements of $(B(X))^*$, instead of $X^*$) from B4.1 and Liouville's Theorem from A.1 Complex Analysis which we recall says that the only holomorphic maps $g : \\\\mathbb{C} \\\\to \\\\mathbb{C}$ which are bounded are the constant maps.\\n\\nSo suppose that $\\\\sigma(T)$ is empty. Then the resolvent operator $R_\\\\lambda$ is defined on all of $\\\\mathbb{C}$ so given any $f \\\\in (B(X))^*$ we can define a function $g_f : \\\\mathbb{C} \\\\to \\\\mathbb{C}$ by\\n\\n$g_f(\\\\lambda) := f(R_\\\\lambda(T))$.\\n\\nWe note that this function is not only well defined, but furthermore that for any $\\\\lambda_0 \\\\in \\\\mathbb{C}$ the function $g_f$ is analytic in a neighbourhood of $\\\\lambda_0$, namely\\n\\n$g_f(\\\\lambda) = \\\\sum_{j=0}^{\\\\infty} (\\\\lambda - \\\\lambda_0)^j f(R_{\\\\lambda_0}(T)^{j+1})$\\n\\nin the neighbourhood of $\\\\lambda_0$ where the expansion (5.1) converges. In particular, $g_f$ is holomorphic.\\n\\nWe now claim that $g_f$ is also bounded. To see this we first note that as $g_f$ is continuous, it is bounded on any compact set, in particular on the closed disc $\\\\overline{D}_{2\\\\|T\\\\|}$. On the other hand, for any $\\\\lambda \\\\in \\\\mathbb{C}$ with $|\\\\lambda| \\\\geq 2\\\\|T\\\\|$ we know from (5.2) that $\\\\|R_\\\\lambda(T)\\\\| \\\\leq \\\\frac{1}{|\\\\lambda|-\\\\|T\\\\|} \\\\leq \\\\frac{1}{\\\\|T\\\\|}$ and hence\\n\\n$|g_f(\\\\lambda)| \\\\leq \\\\|f\\\\|_{(B(X))^*}\\\\|R_\\\\lambda(T)\\\\| \\\\leq \\\\|f\\\\|_{(B(X))^*}\\\\|T\\\\|^{-1}$\\n\\nso that $g_f$ is also bounded on $(\\\\overline{D}_{2\\\\|T\\\\|})^c$.\\n\\nFrom the Theorem of Liouville we thus obtain that $g_f$ must be constant, $g_f(\\\\lambda) = C_f$ for a constant that depends only on the element $f \\\\in (B(X))^*$ used in the definition of $g_f$. Returning to the expansion (5.3) we thus conclude that all terms with $j \\\\geq 1$ must be zero, i.e. that for any number $\\\\lambda_0 \\\\in \\\\mathbb{C}$ and any $k \\\\geq 2$ we have that\\n\\n$f(R_{\\\\lambda_0}(T)^k) = 0$ for every $f \\\\in (B(X))^*$.\\n\\nBut by the Corollary of the theorem of Hahn-Banach that we recalled in (1.3), this implies that all the operators $R_{\\\\lambda_0}(T)^k$, $k \\\\geq 2$, must be zero, which is of course wrong since all of these operators are powers of invertible operators and thus invertible.",
+        "preconditions": [
+            "complex Banach space",
+            "bounded linear operator",
+            "resolvent set of an operator",
+            "spectrum of an operator"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 5.6",
+        "name": "Commuting Invertibility",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "Let $(X, \\\\|\\\\cdot\\\\|)$ be a normed space, $S, T \\\\in B(X)$. Suppose that $ST = TS$ and that $ST$ is invertible. Then also $S$ and $T$ are invertible.",
+        "proof": "By symmetry it suffices to prove the claim for $T$ and we shall prove this by an argument by contradiction. So suppose that the claim is false. Then we either have that $T$ is not surjective, which is impossible as in this case we would have that $ST(X) = TS(X) = T(SX) \\\\subset TX \\\\subsetneq X$ so $ST$ would not be surjective, or there exists no $\\\\delta > 0$ so that (1.9) holds. In this case we can choose $x_n \\\\in X \\\\setminus \\\\{0\\\\}$ so that $\\\\frac{\\\\|Tx_n\\\\|}{\\\\|x_n\\\\|} \\\\to 0$ and thus conclude that also\\n\\n$\\\\frac{\\\\|STx_n\\\\|}{\\\\|x_n\\\\|} \\\\leq \\\\|S\\\\|_{B(X)} \\\\frac{\\\\|Tx_n\\\\|}{\\\\|x_n\\\\|} \\\\to 0$,\\n\\nwhich means that (1.9) does not hold true for $ST$, and hence that $ST$ does not have a bounded inverse.",
+        "preconditions": [
+            "normed space",
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.7",
+        "name": "Polynomial Spectrum",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Lemma 5.6"
+        ],
+        "statement": "Let $X$ be a complex Banach space, $T \\\\in B(X)$ and let $p$ be a complex polynomial. Then\\n\\n$\\\\sigma(p(T)) = p(\\\\sigma(T)) := \\\\{p(\\\\lambda) : \\\\lambda \\\\in \\\\sigma(T)\\\\}$.\\n\\nHere we set $p(T) := \\\\sum_{j=0}^n a_j T^j$ if the polynomial $p$ is given by $p(z) = \\\\sum_{j=0}^n a_j z^j$, with the usual convention that $T^0 = I$.",
+        "proof": "We first remark that if $p$ is constant, say $p = c \\\\in \\\\mathbb{R}$, then the spectrum of $p(T) = cI$ is simply $\\\\{c\\\\}$ while the fact that $\\\\sigma(T)$ is non-empty implies that also $p(\\\\sigma(T)) = \\\\{c\\\\}$. So suppose that $p$ has degree $n \\\\geq 1$ and let $\\\\mu \\\\in \\\\mathbb{C}$ be any given number. As we are working in $\\\\mathbb{C}$ we can factorise $p(\\\\cdot) - \\\\mu$ and write it as $p(z) - \\\\mu = \\\\alpha(z - \\\\beta_1(\\\\mu)) \\\\ldots (z - \\\\beta_n(\\\\mu))$ for some $\\\\alpha \\\\neq 0$ and equally factorise\\n\\n$p(T) - \\\\mu I = \\\\alpha(T - \\\\beta_1(\\\\mu)I) \\\\ldots (T - \\\\beta_n(\\\\mu)I)$\\n\\nwhere we note that all operators on the right hand side commute which will allow us to apply Lemma 5.6.\\n\\nWe now note that since the zeros $\\\\beta_j(\\\\mu)$ of $p(\\\\cdot) - \\\\mu$ can be equivalently characterised as the solutions $t = \\\\beta_j(\\\\mu)$ of the equation $p(t) = \\\\mu$ we have that\\n\\n$\\\\mu \\\\in p(\\\\sigma(T)) \\\\Leftrightarrow \\\\exists j$ so that $\\\\beta_j(\\\\mu) \\\\in \\\\sigma(T)$.\\n\\nWe then note that, applying Lemma 5.6 to (5.4) yields that if $\\\\beta_j(\\\\mu) \\\\in \\\\sigma(T)$ then $p(T) - \\\\mu I$ cannot be invertible, i.e. $\\\\mu$ must be an element of $\\\\sigma(p(T))$. Hence $p(\\\\sigma(T)) \\\\subset \\\\sigma(p(T))$. We now prove that also $p(\\\\sigma(T))^c \\\\subset \\\\sigma(p(T))^c$ and hence that $p(\\\\sigma(T)) \\\\subset \\\\sigma(p(T))$. To see this we note that if $\\\\mu \\\\not\\\\in p(\\\\sigma(T))$ then $\\\\beta_j(\\\\mu) \\\\not\\\\in \\\\sigma(T)$ so $T - \\\\beta_j(\\\\mu)I$ is invertible for all $j = 1, \\\\ldots, n$. But then (5.4) shows that $p(T) - \\\\mu I$ is the composition of invertible operators so invertible and thus $\\\\mu \\\\in \\\\rho(T) = \\\\sigma(p(T))^c$.\\n\\nWe also remark that a similar argument shows that for $T$ invertible $\\\\lambda$ is an eigenvalue of $T$ if and only if $\\\\lambda^{-1}$ is an eigenvalue of $T^{-1}$.",
+        "preconditions": [
+            "complex Banach space",
+            "bounded linear operator",
+            "polynomial of an operator",
+            "spectrum of an operator"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 5.8",
+        "name": "Spectral Inclusion",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Theorem 5.7"
+        ],
+        "statement": "Let $(X, \\\\| \\\\cdot \\\\|)$ be a Banach space, $T \\\\in B(X)$. Then for any $k \\\\in \\\\mathbb{N}$ and any $\\\\lambda \\\\in \\\\sigma(T)$ we have $\\\\lambda^k \\\\in \\\\sigma(T^k)$. In particular $|\\\\lambda| \\\\leq \\\\inf_j \\\\|T^j\\\\|^{1/j}$ for all $\\\\lambda \\\\in \\\\sigma(T)$, $j \\\\in \\\\mathbb{N}$.",
+        "proof": "This follows directly from Theorem 5.7 by considering the polynomial $p(z) = z^k$. Since $p(\\\\sigma(T)) = \\\\sigma(p(T))$, we have $\\\\lambda^k \\\\in \\\\sigma(T^k)$ for any $\\\\lambda \\\\in \\\\sigma(T)$.\\n\\nFor the second part, since $\\\\lambda^k \\\\in \\\\sigma(T^k)$, we know that $|\\\\lambda^k| \\\\leq \\\\|T^k\\\\|$ by Corollary 5.4. Therefore, $|\\\\lambda| \\\\leq \\\\|T^k\\\\|^{1/k}$ for all $k \\\\in \\\\mathbb{N}$, which implies $|\\\\lambda| \\\\leq \\\\inf_j \\\\|T^j\\\\|^{1/j}$.",
+        "preconditions": [
+            "Banach space",
+            "bounded linear operator",
+            "spectrum of an operator"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 5.9",
+        "name": "Spectral Radius",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Corollary 5.8"
+        ],
+        "statement": "The spectral radius of an operator $T \\\\in B(X)$ is defined as $r_\\\\sigma(T) := \\\\sup\\\\{|\\\\lambda| : \\\\lambda \\\\in \\\\sigma(T)\\\\}$. From the above we know that $r_\\\\sigma(T) \\\\leq \\\\inf_j \\\\|T^j\\\\|^{1/j}$.",
+        "proof": "",
+        "preconditions": [
+            "bounded linear operator",
+            "spectrum of an operator",
+            "spectral radius of an operator"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.10",
+        "name": "Gelfand's formula",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Corollary 5.8",
+            "Definition 5.9"
+        ],
+        "statement": "Let $(X, \\\\| \\\\cdot \\\\|)$ be a complex Banach space. Then for any $T \\\\in B(X)$ we have $r(T) = \\\\lim_{j\\\\to\\\\infty} \\\\|T^j\\\\|^{1/j} = \\\\inf_{j\\\\in\\\\mathbb{N}} \\\\|T^j\\\\|^{1/j}$.",
+        "proof": "This result is used without proof in the text.",
+        "preconditions": [
+            "complex Banach space",
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 5.11",
+        "name": "Selfadjoint Spectral Radius",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Theorem 5.10",
+            "Proposition 1.7"
+        ],
+        "statement": "If $X$ is a $\\\\mathbb{C}$-Hilbert space and $T \\\\in B(X)$ is selfadjoint then $r_\\\\sigma(T) = \\\\|T\\\\|$.",
+        "proof": "For a selfadjoint operator $T$ on a Hilbert space, we have $\\\\|T^2\\\\| = \\\\|T\\\\|^2$ by Proposition 1.7. By iteration, we get $\\\\|T^{2j}\\\\| = \\\\|T\\\\|^{2j}$ for all $j \\\\in \\\\mathbb{N}$.\\n\\nUsing Gelfand's formula (Theorem 5.10), we have:\\n$r_\\\\sigma(T) = \\\\lim_{j\\\\to\\\\infty} \\\\|T^j\\\\|^{1/j}$\\n\\nConsider the subsequence with $j = 2^k$:\\n$r_\\\\sigma(T) = \\\\lim_{k\\\\to\\\\infty} \\\\|T^{2^k}\\\\|^{1/2^k} = \\\\lim_{k\\\\to\\\\infty} \\\\|T\\\\|^{2^k/2^k} = \\\\|T\\\\|$\\n\\nTherefore, $r_\\\\sigma(T) = \\\\|T\\\\|$.",
+        "preconditions": [
+            "Hilbert space",
+            "bounded linear operator",
+            "self-adjoint operator"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.12",
+        "name": "Spectrum Decomposition",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Lemma 1.18",
+            "Corollary 5.2"
+        ],
+        "statement": "Let $(X, \\\\| \\\\cdot \\\\|)$ be a Banach space, let $T \\\\in B(X)$ and let $T' \\\\in B(X^*)$ be the corresponding dual operator defined by $(T'f)(x) = f(Tx)$. Then $\\\\sigma(T) = \\\\sigma_{AP}(T) \\\\cup \\\\sigma_P(T')$.",
+        "proof": "By definition $\\\\sigma_{AP}(T) \\\\subset \\\\sigma(T)$, so it is enough to prove\\n\\nClaim 1: $\\\\sigma_P(T') \\\\subset \\\\sigma(T)$\\nand\\nClaim 2: $\\\\sigma(T) \\\\setminus \\\\sigma_{AP}(T) \\\\subset \\\\sigma_P(T')$\\n\\nProof of Claim 1: Let $\\\\lambda \\\\in \\\\sigma_P(T')$. Then there exists $f \\\\in X^*$ with $f \\\\neq 0$ so that $T'f = \\\\lambda f$, i.e., so that for every $x \\\\in X$\\n\\n$0 = (T'f - \\\\lambda f)(x) = f(Tx) - \\\\lambda f(x) = f(Tx - \\\\lambda x)$.\\n\\nHence the restriction $f|_Y$ of $f$ to the image $Y = (T - \\\\lambda I)X$ of $T - \\\\lambda I$ is zero, so as $f$ is not the zero element, we must have that $\\\\overline{Y} \\\\neq X$. Thus the image of $T - \\\\lambda I$ is not dense in $X$ so $\\\\lambda$ is either in the point spectrum (if it's also not injective) or else in the residual spectrum, and in any case $\\\\lambda \\\\in \\\\sigma(T)$.\\n\\nProof of Claim 2: Let $\\\\lambda \\\\in \\\\sigma(T) \\\\setminus \\\\sigma_{AP}(T)$. Then as $\\\\lambda$ is not an approximate eigenvalue of $T$ we know that there exists some $\\\\delta > 0$ so that $\\\\|Tx - \\\\lambda x\\\\| \\\\geq \\\\delta\\\\|x\\\\|$ for all $x \\\\in X$ which, thanks to Lemma 1.18, implies that the image $Y = (T - \\\\lambda I)(X)$ is closed. At the same time $Y$ cannot be all of $X$ as otherwise $T - \\\\lambda I$ would have a bounded inverse, so $Y$ is a proper closed subspace of $X$. We can thus apply the consequence (1.3) of Hahn-Banach, to conclude that there exists some $f \\\\in X^*$ with $f \\\\neq 0$, so that $f|_Y = 0$. This implies that $T'(f) = \\\\lambda f$ and thus that $\\\\lambda \\\\in \\\\sigma_P(T')$ since for every $x \\\\in X$ we have $Tx - \\\\lambda x \\\\in Y$ and thus $(T'(f) - \\\\lambda f)(x) = f(Tx - \\\\lambda x) = 0$.",
+        "preconditions": [
+            "Banach space",
+            "bounded linear operator",
+            "spectrum of an operator",
+            "approximate point spectrum of an operator",
+            "point spectrum of an operator"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.13",
+        "name": "Spectrum Characterization",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [],
+        "statement": "Let $X$ be a complex Hilbert space and let $T \\\\in B(X)$. Then\\n\\n$\\\\sigma(T) = \\\\sigma_{ap}(T) \\\\cup \\\\sigma'_p(T^*)$\\n\\nwhere $\\\\sigma'_p(T^*) = \\\\{\\\\lambda : \\\\bar{\\\\lambda} \\\\in \\\\sigma_p(T^*)\\\\}$.",
+        "proof": "This can be proven directly based on the basic properties of the adjoint that we recalled in the first chapter which, when applied to $(\\\\lambda I - T)^* = \\\\bar{\\\\lambda}I - T^*$, yield that\\n\\n$\\\\bullet$ $\\\\lambda I - T$ is invertible if and only if $\\\\bar{\\\\lambda}I - T^*$ is invertible, so $\\\\lambda \\\\in \\\\sigma(T)$ if and only if $\\\\bar{\\\\lambda} \\\\in \\\\sigma(T^*)$.\\n\\n$\\\\bullet$ $\\\\text{Ker}(\\\\lambda I - T) = \\\\text{Im}(\\\\bar{\\\\lambda}I - T^*)^{\\\\perp}$ and $\\\\text{Ker}(\\\\lambda I - T)^{\\\\perp} = \\\\text{Im}(\\\\bar{\\\\lambda}I - T^*)$.",
+        "preconditions": [
+            "Hilbert space",
+            "bounded linear operator"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.14",
+        "name": "Self-adjoint Spectrum",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Theorem 5.13",
+            "Lemma 1.6"
+        ],
+        "statement": "Let $X$ be a complex Hilbert space and let $T \\\\in B(X)$ be self-adjoint. Then\\n\\n(i) $\\\\sigma(T) = \\\\sigma_{ap}(T) \\\\subset [a, b] \\\\subset \\\\mathbb{R}$, for\\n\\n$a = \\\\inf_{\\\\|x\\\\|=1} \\\\langle x, T x \\\\rangle$ and $b = \\\\sup_{\\\\|x\\\\|=1} \\\\langle x, T x \\\\rangle$\\n\\nand both $a$ and $b$ are in the spectrum.\\n\\n(ii) $T$ has no residual spectrum, i.e. $\\\\sigma(T) = \\\\sigma_p(T) \\\\cup \\\\sigma_c(T)$.\\n\\n(iii) Eigenvectors corresponding to different eigenvalues of $T$ are orthogonal.",
+        "proof": "We first prove that $\\\\sigma_{ap}(T) \\\\subset [a, b]$.\\n\\nSo let $\\\\lambda \\\\in \\\\sigma_{ap}(T)$. Then there exist $x_n$ with $\\\\|x_n\\\\| = 1$ so that $T x_n - \\\\lambda x_n \\\\to 0$.\\n\\nThanks to Cauchy-Schwarz this implies that\\n\\n$|\\\\langle T x_n, x_n \\\\rangle - \\\\lambda| \\\\leq \\\\|T x_n - \\\\lambda x_n\\\\| \\\\to 0$.\\n\\nHence $\\\\lambda = \\\\lim \\\\langle T x_n, x_n \\\\rangle \\\\in [a, b] \\\\subset \\\\mathbb{R}$ since we know that $\\\\langle T x, x \\\\rangle \\\\in [a, b] \\\\subset \\\\mathbb{R}$.\\n\\nThis in particular implies that all eigenvalues of $T = T^*$ are real and hence that $\\\\sigma'_P(T^*) = \\\\sigma'_P(T) = \\\\sigma_P(T)$ so Theorem 5.13 implies that indeed $\\\\sigma(T) = \\\\sigma_{ap}(T) \\\\cup \\\\sigma'_P(T^*) = \\\\sigma_{ap}(T)$ and hence also that every element of the spectrum is a real number that is contained in $[a, b]$.\\n\\nWe next show that the endpoints of this interval are indeed both in $\\\\sigma(T)$. By definition of $a, b$, we have $|a| \\\\leq \\\\|T\\\\|$ and $|b| \\\\leq \\\\|T\\\\|$. But as $\\\\sigma(T) \\\\subset [a, b]$ and as $r_\\\\sigma(T) = \\\\|T\\\\|$ since $T$ is selfadjoint, we have also $\\\\|T\\\\| = r_\\\\sigma(T) \\\\leq \\\\max(|a|, |b|)$. Hence at least one of $a$ and $b$ belongs to $\\\\sigma(T)$. Now note that, if $c$ is a real constant, then the spectrum of $cI + T$ is shifted by $c$ and the \\",
+        "a$\\": "nd \\",
+        "b$\\": "f $cI + T$ are also shifted by $c$. Applying what we just established to $cI + T$ for suitable $c$, we conclude that both $a$ and $b$ belong to $\\\\sigma(T)$.\\n\\nThis establishes the first statement (i) of the Theorem.\\n\\nTo see that the residual spectrum of $T$ is empty we use that\\n\\n$(T - \\\\lambda I)(X) = (\\\\ker(T^* - \\\\bar{\\\\lambda}I))^{\\\\perp} = (\\\\ker(T - \\\\lambda I))^{\\\\perp}$\\n\\nwhere the first equality follows from (1.5) while the second follows as $T^* = T$ and as the spectrum is real.\\n\\nHence, if $\\\\lambda$ is so that the image of $(T-\\\\lambda I)$ is not dense in $X$ then we must have that $\\\\ker(T - \\\\lambda I) \\\\neq \\\\{0\\\\}$, i.e. that $\\\\lambda$ will be in the point spectrum rather than the residual spectrum.\\n\\nThe final part of the claim follows by direct computation, exactly as in the case of finite dimensional symmetric matrices discussed in prelims Linear Algebra.\\n\\nAlternatively, we can show that $\\\\sigma(T) \\\\subset [a, b]$ as follows: It suffices to show that if $\\\\lambda$ is a real number such that $\\\\lambda > b$ then $\\\\lambda I - T$ is invertible. (A similar argument applies to $\\\\lambda < a$.) We have\\n\\n$\\\\langle x, (\\\\lambda I - T)x \\\\rangle = \\\\lambda \\\\|x\\\\|^2 - \\\\langle x, Tx \\\\rangle \\\\geq (\\\\lambda - b)\\\\|x\\\\|^2$.\\n\\nIt thus follows that $\\\\langle x, y \\\\rangle_\\\\lambda := \\\\langle x, (\\\\lambda I - T)y \\\\rangle$ defines a scalar product on $X$ and its associated norm $\\\\|x\\\\|_\\\\lambda := \\\\langle x, (\\\\lambda I - T)x \\\\rangle^{1/2}$ is equivalent to $\\\\| \\\\cdot \\\\|$.\\n\\nFor every $z \\\\in X$, consider the linear functional\\n\\n$\\\\ell_z(x) = \\\\langle x, z \\\\rangle$.\\n\\nBy the Riesz representation theorem, there is some $y$ depending on $z$ such that\\n\\n$\\\\ell_z(x) = \\\\langle x, y \\\\rangle_\\\\lambda$ i.e. $\\\\langle x, z \\\\rangle = \\\\langle x, (\\\\lambda I - T)y \\\\rangle$ for every $x$.\\n\\nIt thus follows that $\\\\lambda I - T$ is surjective. Since $\\\\lambda I - T$ is self-adjoint, this implies that $\\\\lambda I - T$ is also injective, and hence invertible.",
+        "preconditions": [
+            "Hilbert space",
+            "bounded linear operator",
+            "self-adjoint operator",
+            "spectrum of an operator",
+            "approximate point spectrum of an operator",
+            "residual spectrum of an operator",
+            "continuous spectrum of an operator",
+            "eigenvalue of an operator",
+            "eigenvector of an operator"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 5.15",
+        "name": "Unitary Spectrum",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Proposition 1.4"
+        ],
+        "statement": "Let $X$ be a complex Hilbert space and let $U \\\\in B(X)$ be unitary. Then $|\\\\lambda| = 1$ for all $\\\\lambda \\\\in \\\\sigma(U)$.",
+        "proof": "By Proposition 1.4, $U$ is a surjective isometry and $U^{-1} = U^*$.\\n\\nAs $\\\\|U\\\\| = 1$ it follows that $|\\\\lambda| \\\\leq \\\\|U\\\\| = 1$ for all $\\\\lambda \\\\in \\\\sigma(U)$.\\n\\nAssume by contradiction that there is some $\\\\lambda$ with $|\\\\lambda| < 1$ such that $\\\\lambda I - U$ is not invertible. It follows that $\\\\bar{\\\\lambda}I - U^*$ is also not invertible. Consequently, $\\\\bar{\\\\lambda}U - I = (\\\\bar{\\\\lambda}I - U^*)U$ is also not invertible (since $U$ is invertible), and so $\\\\bar{\\\\lambda}^{-1} \\\\in \\\\sigma(U)$. This amounts to a contradiction as $|\\\\bar{\\\\lambda}^{-1}| > 1$.",
+        "preconditions": [
+            "Hilbert space",
+            "unitary operator"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 5.16",
+        "name": "Compact Injectivity",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Proposition 1.17"
+        ],
+        "statement": "Let $X$ be a Banach space, $T \\\\in B(X)$ compact and suppose that $S := I - T$ is injective. Then $S$ is also surjective.",
+        "proof": "We argue by contradiction so assume that $X_1 := S(X)$ is a proper subspace of $X$. We set $X_k := S^k(X)$, note that these spaces are nested, $X_{k+1} \\\\subset X_k \\\\subset ... \\\\subset X_1 \\\\subsetneq X$ and we claim that these inclusions must all be strict.\\n\\nIndeed, as $X_1 \\\\neq X$ we can fix some $x \\\\in X \\\\setminus X_1$ and get that $S^n x$ is obviously in $X_n$, but cannot be in $X_{n+1}$ as otherwise there would be $y \\\\in X$ with $S^n x = S^{n+1}y$, i.e. with $S^n(x - Sy) = 0$ which would be a contradiction to $x \\\\notin SX$ since $S^n$ is injective (since $S$ is injective).\\n\\nAs sums and powers of compact operators are compact we can write $S^n = (I - T)^n$ also in the form $I - T_n$ for a compact operator $T_n$ so know from Proposition 1.17 that the spaces $X_n$ are all closed.\\n\\nBy the Riesz-lemma from B4.1 we can hence pick $x_k \\\\in X_k$ with $\\\\|x_k\\\\| = 1$ and $\\\\text{dist}(x_k, X_{k+1}) \\\\geq \\\\frac{1}{2}$ and we want to argue that this bounded sequence does not have a subsequence for which $T x_{n_j}$ converges.\\n\\nTo see this we note that since $(T - I)(x_k) \\\\in X_{k+1} = (I - T)(X_k)$ we can write $T x_k = x_k + (T - I)(x_k)$ to see that\\n\\n$\\\\text{dist}(T x_k, X_{k+1}) = \\\\text{dist}(x_k, X_{k+1}) \\\\geq \\\\frac{1}{2}$.\\n\\nOn the other hand, we know that for every $l$ we have $T x_l = x_l+(T-I)(x_l) \\\\in X_l+X_{l+1} = X_l$.\\n\\nThus, as the sets are nested we have $T x_l \\\\in X_{k+1}$ whenever $l \\\\geq k+1$ and thus $\\\\|T x_l - T x_k\\\\| \\\\geq \\\\text{dist}(T x_k, X_{k+1}) \\\\geq \\\\frac{1}{2}$. This means that $(T x_k)$ cannot have any subsequence that is Cauchy and hence cannot have any subsequence that converges.",
+        "preconditions": [
+            "Banach space",
+            "compact operator",
+            "bounded linear operator",
+            "injective map"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.17",
+        "name": "Spectral theorem for compact (selfadjoint) operators",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Proposition 1.17",
+            "Lemma 5.16",
+            "Corollary 5.11"
+        ],
+        "statement": "Let $X$ be an infinite dimensional Banach space and let $T$ be a compact selfadjoint operator. Then\\n\\n(i) $\\\\sigma(T) \\\\setminus \\\\{0\\\\} = \\\\sigma_P(T) \\\\setminus \\\\{0\\\\}$, the eigenspace $\\\\ker(T - \\\\lambda I)$ is finite dimensional for every $\\\\lambda \\\\in \\\\sigma_p(T) \\\\setminus \\\\{0\\\\}$ and $\\\\lambda = 0$ is in the spectrum.\\n\\n(ii) For every $r > 0$ there are at most finitely many eigenvalues $\\\\lambda$ with $|\\\\lambda| \\\\geq r$. Hence $\\\\lambda = 0$ is the only potential accumulation point of $\\\\sigma(T)$.\\n\\n(iii) If $X$ is a Hilbert space and $T$ is additionally selfadjoint then there exists a countable (either finite or countably infinite) on basis $\\\\{e_k\\\\}$ of $\\\\ker(T)^\\\\perp$ that consists of eigenvectors $e_k$ to eigenvalues $\\\\lambda_k \\\\neq 0$, with $|\\\\lambda_k| \\\\to 0$ if the basis is infinite, and for each $x \\\\in X$\\n\\n$T x = \\\\sum \\\\lambda_k \\\\langle x, e_k \\\\rangle e_k$",
+        "proof": "The fact that each $\\\\lambda \\\\in \\\\sigma(T) \\\\setminus \\\\{0\\\\}$ must be an eigenvalue with finite dimensional eigenspace follows from Proposition 1.17 and Lemma 5.16 as we can write $(T - \\\\lambda I) = -\\\\lambda(I - \\\\lambda^{-1}T)$ for $\\\\lambda \\\\neq 0$ and use that $\\\\lambda^{-1}T$ is compact.\\n\\nFurthermore, as $T$ is compact, we cannot have that $T$ is invertible as that would imply that the identity map $I = T^{-1} \\\\circ T$ is also compact which would contradict the theorem of Heine Borel as our space is infinite dimensional. Hence $0 \\\\in \\\\sigma(T)$.\\n\\nTo prove (ii) we want to argue by contradiction and suppose that there is some $r > 0$ so that there infinitely many distinct $\\\\lambda_k \\\\in \\\\sigma(T)$ with $|\\\\lambda| \\\\geq r$. By (i) all these $\\\\lambda_k$ are eigenvalues.\\n\\nWe can use a very similar argument as carried out in the proof of Lemma 5.16 to get a contradiction, now using spaces $X_k = E_{\\\\lambda_1} \\\\oplus...\\\\oplus E_{\\\\lambda_k}$, $E_{\\\\lambda_i}$ the (finite dimensional!) eigenspaces to $\\\\lambda_i$.\\n\\nWe note that these spaces are all closed (as finite dimensional), so that $T X_k \\\\subset X_k$ (as $X_k$ is built out of eigenspaces), and so that $X_k$ is a proper subspace of $X_{k+1}$. Additionally we note that $(T - \\\\lambda_k I)(X_k) \\\\subset X_{k-1}$ as $E_{\\\\lambda_k}$ is the kernel of this map.\\n\\nSimilar to above we can now use the Riesz-lemma to get a sequence of unit vectors $x_k \\\\in X_k$ with $\\\\text{dist}(x_k, X_{k-1}) \\\\geq \\\\frac{1}{2}$.\\n\\nIf $n < m$ then $X_{m-1}$ contains both $X_n$, and thus $T x_n \\\\in T(X_n) \\\\subset X_n$, and also $(T - \\\\lambda_m I)(X_m)$, and thus $T x_m - \\\\lambda x_m$, so we get that\\n\\n$\\\\|T x_m - T x_n\\\\| = \\\\|\\\\lambda_m x_m + (T - \\\\lambda_m)x_m - T x_n\\\\| \\\\geq \\\\text{dist}(\\\\lambda_m x_m, X_{m-1}) \\\\geq \\\\frac{1}{2} |\\\\lambda_m| \\\\geq \\\\frac{1}{2} r > 0$\\n\\nThe sequence $(T x_n)$ hence cannot have any subsequence which is Cauchy, which leads to a contradiction as $(x_n)$ is bounded and $T$ is compact.\\n\\nWe note that if $X$ is Hilbert and $T$ is selfadjoint then this argument can be simplified significantly: We first pass to a subsequence to ensure that the $\\\\lambda_j$ converge, then choose for each $\\\\lambda_j$ a unit eigenvector $e_j$ and use that as $T$ is selfadjoint these $e_j$ are orthonormal and hence so that $\\\\|e_j - e_k\\\\| = \\\\sqrt{2}$.\\n\\nAt the same time, as $T$ is compact there is a subsequence so that $T e_{j_n} = \\\\lambda_j e_{j_n}$ converges and combined with the convergence of the $\\\\lambda_j \\\\to \\\\lambda \\\\neq 0$ this gives convergence of $e_{j_n}$, contradiction.\\n\\nIt hence remains to show (iii) and for this we inductively construct the $e_k$ using that Corollary 5.11 (which was a consequence of Gelfand's formula) ensures that the spectral radius of any selfadjoint operator is equal to the norm of the operator.\\n\\nWe first set $S_1 = T$ and consider this as an operator on $X_1 = X$, apply Corollary 5.11 to find $\\\\lambda_1 \\\\in \\\\sigma(S_1)$ so that $|\\\\lambda_1| = \\\\|S_1\\\\|$ and let $e_1, \\\\ldots, e_{k_1}$ be an on-basis of the (finite dimensional as $S_1$ compact!) space $Z_1 := \\\\ker(S_1 - \\\\lambda_1 I_{X_1})$. We then let $X_2$ be the orthogonal complement of $Z_1$ in $X_1$. This is a closed subspace of a Hilbert space so again a Hilbert space. We claim that $T$ maps $X_2$ into itself. Indeed, since $Z_1$ is an eigenspace we have $T(Z_1) \\\\subset Z_1$ and hence get that if $z \\\\in X_2$ then $\\\\langle T z, y \\\\rangle = \\\\langle z, T y \\\\rangle = 0$ for all $y \\\\in Z_1$ so $T z \\\\in (Z_1)^\\\\perp = X_2$.\\n\\nWe then set $S_2 := T|_{X_2} \\\\in B(X_2)$ and repeat this argument, obtaining the next eigenvalue $\\\\lambda_2$ with an on-eigenbasis $e_{k_1+1}, \\\\ldots, e_{k_1+k_2}$ of $Z_2 = \\\\ker(S_2 - \\\\lambda_2 I)$. We note that $Z_2$ is the eigenspace of $T$ for $\\\\lambda_2$ as $Z_2 = \\\\ker(S_2 - \\\\lambda_2 I) = \\\\ker(T - \\\\lambda_2 I) \\\\cap X_2 = \\\\ker(T - \\\\lambda_2 I)$ since the eigenspaces are orthogonal and hence $\\\\ker(T - \\\\lambda_2 I) \\\\subset (\\\\ker(T - \\\\lambda_1 I))^\\\\perp = X_2$.\\n\\nWe continue to apply this argument to the restriction of $T$ to the next space $X_{k+1}$ obtained as orthogonal complement of $Z_k$ in the Hilbert space $X_k$.\\n\\nThis process either ends with us obtaining an operator $S_k$ which is identically zero (and hence a finite set of eigenvalues), or continues for all $k \\\\in \\\\mathbb{N}$ to give a countably infinite set of distinct eigenvalues with $|\\\\lambda_k| \\\\geq |\\\\lambda_{k+1}| > 0$ which by (ii) must converge to zero.\\n\\nTo obtain the final claim we first note that the right hand side converges thanks to Bessel's inequality. We then set $K_j := k_1 + \\\\ldots + k_j$ note that $e_1, \\\\ldots, e_{K_j}$ is an on-basis of $Z_1 \\\\oplus \\\\ldots \\\\oplus Z_j = (X_{j+1})^\\\\perp$. Hence $P_j x := \\\\sum_{k \\\\leq K_j} \\\\langle x, e_k \\\\rangle e_k$ is simply the orthogonal projection onto $Z_1 \\\\oplus \\\\ldots \\\\oplus Z_j$ while $I - P_j$ is the orthogonal projection onto $X_{j+1}$.\\n\\nThus\\n\\n$\\\\|T x - \\\\sum_{k \\\\leq K_j} \\\\lambda_k \\\\langle x, e_k \\\\rangle e_k\\\\| = \\\\|T(x - P_j x)\\\\| = \\\\|T|_{X_{j+1}} \\\\circ (I - P_j)(x)\\\\| \\\\leq \\\\|T|_{X_{j+1}}\\\\| \\\\|I - P_j\\\\| \\\\|x\\\\| \\\\leq |\\\\lambda_{j+1}| \\\\cdot 1 \\\\cdot \\\\|x\\\\| \\\\to 0$",
+        "preconditions": [
+            "Banach space",
+            "compact operator",
+            "self-adjoint operator",
+            "Hilbert space",
+            "orthonormal basis",
+            "eigenvalue of an operator",
+            "eigenvector of an operator",
+            "spectrum of an operator",
+            "point spectrum of an operator"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 5.18",
+        "name": "Positive compact operators",
+        "topic": "Compact Operators and Spectral Theory",
+        "previous_results": [
+            "Theorem 5.17"
+        ],
+        "statement": "Suppose that $T$ is a selfadjoint compact operator on an infinite dimensional Hilbert space which is positive definite, i.e. so that $\\\\langle T x, x \\\\rangle > 0$ for all $x \\\\in X$. Then $X$ must be separable and there exists a (countable) on-basis $e_1, e_2, ...$ of eigenvectors corresponding to eigenvalues $\\\\lambda_1 \\\\geq \\\\lambda_2 \\\\geq ...$ with $\\\\lambda_k \\\\searrow 0$ as $k \\\\to \\\\infty$.",
+        "proof": "",
+        "preconditions": [
+            "Hilbert space",
+            "self-adjoint operator",
+            "compact operator"
+        ]
+    }
+]

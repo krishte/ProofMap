@@ -1,0 +1,711 @@
+[
+    {
+        "type": "definition",
+        "id": "Definition 1.1",
+        "name": "Step Function",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "Let $[a, b]$ be an interval. A function $\\\\phi : [a, b] \\\\rightarrow \\\\mathbb{R}$ is called a step function if there is a finite sequence $a = x_0 \\leq x_1 \\leq \\\\ldots \\\\leq x_n = b$ such that $\\\\phi$ is constant on each open interval $(x_{i-1}, x_i)$.",
+        "proof": "",
+        "preconditions": [
+            "step function"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.2",
+        "name": "Refinement of Partition",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Definition 1.1"
+        ],
+        "statement": "A partition $P'$ given by $a = x'_0 \\\\leq \\\\ldots \\\\leq x'_{n'} \\\\leq b$ is a refinement of $P$ if every $x_i$ is an $x'_j$ for some $j$.",
+        "proof": "",
+        "preconditions": [
+            "partition with mesh tending to zero"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 1.3",
+        "name": "Partition Properties",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Definition 1.1",
+            "Definition 1.2"
+        ],
+        "statement": "We have the following facts about partitions:\\n\\n(i) Suppose that $\\\\phi$ is a step function adapted to $P$, and if $P'$ is a refinement of $P$, then $\\\\phi$ is also a step function adapted to $P'$.\\n\\n(ii) If $P_1, P_2$ are two partitions then there is a common refinement of both of them.\\n\\n(iii) If $\\\\phi_1, \\\\phi_2$ are step functions then so are $\\\\max(\\\\phi_1, \\\\phi_2)$, $\\\\phi_1 + \\\\phi_2$ and $\\\\lambda\\\\phi_i$ for any scalar $\\\\lambda$.",
+        "proof": "All completely straightforward; for (iii), suppose that $\\\\phi_1$ is adapted to $P_1$ and that $\\\\phi_2$ is adapted to $P_2$, and pass to a common refinement of $P_1, P_2$.",
+        "preconditions": [
+            "step function"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 1.4",
+        "name": "Step Function Characterization",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Lemma 1.3"
+        ],
+        "statement": "A function $\\\\phi : [a, b] \\\\rightarrow \\\\mathbb{R}$ is a step function if and only if it is a finite linear combination of indicator functions of intervals (open and closed).",
+        "proof": "Suppose first that $\\\\phi$ is a step function adapted to some partition $P$, $a = x_0 \\\\leq x_1 \\\\leq \\\\ldots \\\\leq x_n = b$. Then $\\\\phi$ can be written as a weighted sum of the functions $1_{(x_{i-1},x_i)}$ (each an indicator function of an open interval) and the functions $1_{\\\\{x_i\\\\}}$ (each an indicator function of a closed interval containing a single point).\\n\\nConversely, the indicator function of any interval is a step function, and hence so is any finite linear combination of these by Lemma 1.3.",
+        "preconditions": [
+            "function on a closed interval",
+            "step function"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.5",
+        "name": "Integral of Step Function",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Definition 1.1",
+            "Lemma 1.3",
+            "Lemma 1.4"
+        ],
+        "statement": "Let $\\\\phi$ be a step function adapted to some partition $P$, and suppose that $\\\\phi(x) = c_i$ on the interval $(x_{i-1}, x_i)$. Then we define\\n\\n$I(\\\\phi) = \\\\sum_{i=1}^n c_i(x_i - x_{i-1})$.",
+        "proof": "",
+        "preconditions": [
+            "step function",
+            "sequence of partitions"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 1.6",
+        "name": "Linearity of I",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "The map $I : L_{step}[a, b] \\\\rightarrow R$ is linear: $I(\\\\lambda\\\\phi_1 + \\\\mu\\\\phi_2) = \\\\lambda I(\\\\phi_1) + \\\\mu I(\\\\phi_2)$.",
+        "proof": "This is obvious on passing to a common refinement of the partitions $P_1$ and $P_2$ to which $\\\\phi_1, \\\\phi_2$ are adapted.",
+        "preconditions": [
+            "step function"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.7",
+        "name": "Integrable Function",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "A function $f$ is integrable if\\n\\n$\\\\sup_{\\\\phi^-} I(\\\\phi^-) = \\\\inf_{\\\\phi^+} I(\\\\phi^+)$,\\n\\nwhere the sup is over all minorants $\\\\phi^- \\\\leq f$, and the inf is over all majorants $\\\\phi^+ \\\\geq f$. These minorants and majorants are always assumed to be step functions. We define the integral $\\\\int_a^b f$ to be the common value of the two quantities in (1.1).",
+        "proof": "",
+        "preconditions": [
+            "function on a closed interval",
+            "step function"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 1.8",
+        "name": "Integrability Criterion",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "Let $f : [a, b] \\\\rightarrow R$ be a bounded function. Then the following are equivalent:\\n\\n(i) $f$ is integrable;\\n(ii) for every $\\\\varepsilon > 0$, there is a majorant $\\\\phi^+$ and a minorant $\\\\phi^-$ for $f$ such that $I(\\\\phi^+) - I(\\\\phi^-) < \\\\varepsilon$.",
+        "proof": "Suppose first that $f$ is integrable. Let $\\\\varepsilon > 0$. Then by the approximation property for sup and inf, there is a minorant $\\\\phi^-$ such that\\n\\n$I(\\\\phi^-) > \\\\sup_{\\\\phi^-} I(\\\\phi^-) - (\\\\varepsilon/2)$\\n\\nand a majorant $\\\\phi^+$ such that\\n\\n$I(\\\\phi^+) < \\\\inf_{\\\\phi^+} I(\\\\phi^+) + (\\\\varepsilon/2)$.\\n\\nSince the sup and inf are assumed to be equal, we deduce that\\n\\n$I(\\\\phi^+) - I(\\\\phi^-) < \\\\varepsilon$.\\n\\nNow suppose that (ii) holds. Let $\\\\varepsilon > 0$ be arbitrary, and let $\\\\phi^+$ and $\\\\phi^-$ be the majorant and minorant provided by (ii). Then\\n\\n$I(\\\\phi^+) < I(\\\\phi^-) + \\\\varepsilon \\\\leq \\\\sup_{\\\\phi^-} I(\\\\phi^-) + \\\\varepsilon$.\\n\\nSo, taking the infimum over all majorants, we deduce that\\n\\n$\\\\inf_{\\\\phi^+} I(\\\\phi^+) < \\\\sup_{\\\\phi^-} I(\\\\phi^-) + \\\\varepsilon$.\\n\\nTherefore, $\\\\inf_{\\\\phi^+} I(\\\\phi^+)$ is squeezed between $\\\\sup_{\\\\phi^-} I(\\\\phi^-)$ and $\\\\sup_{\\\\phi^-} I(\\\\phi^-)+\\\\varepsilon$. Since $\\\\varepsilon > 0$ was arbitrary, we deduce that the inf and sup must be equal. In other words, $f$ is integrable.",
+        "preconditions": [
+            "function on a closed interval",
+            "function is bounded"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 1.9",
+        "name": "Integrating Linear Function",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Lemma 1.8"
+        ],
+        "statement": "The function $f(x) = x$ is integrable on $[0, 1]$, and $\\\\int_0^1 f(x)dx = \\\\frac{1}{2}$.",
+        "proof": "We define explicit minorants and majorants. Let $n$ be an integer to be specified later, and set $\\\\phi^-(x) = \\\\frac{i}{n}$ for $\\\\frac{i}{n} \\\\leq x < \\\\frac{i+1}{n}$ where $i = 0, 1, \\\\ldots, n - 1$. Set $\\\\phi^+(x) = \\\\frac{j}{n}$ for $\\\\frac{j-1}{n} \\\\leq x < \\\\frac{j}{n}$ where $j = 1, \\\\ldots, n$. Then $\\\\phi^- \\\\leq f \\\\leq \\\\phi^+$ pointwise, so $\\\\phi^-, \\\\phi^+$ (being step functions) are minorant/majorant for $f$. We have\\n\\n$I(\\\\phi^-) = \\\\sum_{i=0}^{n-1} \\\\frac{i}{n} \\\\cdot \\\\frac{1}{n} = \\\\frac{1}{2}(1 - \\\\frac{1}{n})$\\n\\nand\\n\\n$I(\\\\phi^+) = \\\\sum_{j=1}^{n} \\\\frac{j}{n} \\\\cdot \\\\frac{1}{n} = \\\\frac{1}{2}(1 + \\\\frac{1}{n})$.\\n\\nSo, by Lemma 1.8, $f$ is integrable. Moreover, the integral of $f$ must lie between $\\\\frac{1}{2}(1 - \\\\frac{1}{n})$ and $\\\\frac{1}{2}(1 + \\\\frac{1}{n})$. Since $n$ was arbitrary, the integral must be $\\\\frac{1}{2}$.",
+        "preconditions": [
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 1.10",
+        "name": "Step Function Integral",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Lemma 1.8"
+        ],
+        "statement": "Suppose that $\\\\phi$ is a step function on $[a, b]$. Then $\\\\phi$ is integrable, and $\\\\int_a^b \\\\phi = I(\\\\phi)$.",
+        "proof": "Take $\\\\phi^- = \\\\phi^+ = \\\\phi$, and the result is immediate from Lemma 1.8 and (1.3).",
+        "preconditions": [
+            "step function"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 1.11",
+        "name": "Non-zero Zero-integral Function",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "There is a non-negative integrable function $f$ on $[a, b]$ which is not identically zero, but for which $\\\\int_a^b f = 0$.",
+        "proof": "Simply take $f$ to be the zero function, modified at one point.",
+        "preconditions": [
+            "function is non-negative",
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 1.12",
+        "name": "Non-integrable Function",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "There is a bounded function $f : [0, 1] \\\\to \\\\mathbb{R}$ which is not (Riemann) integrable.",
+        "proof": "Consider the function $f$ such that $f(x) = 1$ if $x \\\\in \\\\mathbb{Q}$ and $0$ if $x \\\\notin \\\\mathbb{Q}$. Since any open interval contains both rational points and points which are not rational, any step function majorising $f$ must satisfy $\\\\phi^+(x) > 1$ except possibly at the finitely many endpoints $x_i$, and hence $I(\\\\phi^+) \\\\geq 1$. Similarly any minorant $\\\\phi^-$ satisfies $\\\\phi^-(x) \\\\leq 0$ except at finitely many points, and so $I(\\\\phi^-) \\\\leq 0$. This function $f$ cannot possibly be integrable.",
+        "preconditions": [
+            "function on a closed interval",
+            "function is bounded"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 1.13",
+        "name": "Integral Additivity",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [],
+        "statement": "Suppose that $f$ is integrable on $[a, b]$. Then, for any $c$ with $a < c < b$, $f$ is Riemann integrable on $[a, c]$ and on $[c, b]$. Moreover $\\\\int_a^b f = \\\\int_a^c f + \\\\int_c^b f$.",
+        "proof": "Let $M$ be a bound for $f$, thus $|f(x)| \\\\leq M$ everywhere. In this proof it is convenient to assume that (i) all partitions of $[a, b]$ include the point $c$ and that (ii) all minorants take the value $-M$ at $c$, and all majorants the value $M$. By refining partitions if necessary, this makes no difference to any computations involving $I(\\\\phi^-), I(\\\\phi^+)$.\\n\\nNow observe that a minorant $\\\\phi^-$ of $f$ on $[a, b]$ is precisely the same thing as a minorant $\\\\phi^{(1)}_-$ of $f$ on $[a, c]$ juxtaposed with a minorant $\\\\phi^{(2)}_-$ of $f$ on $[c, b]$, and that $I(\\\\phi^-) = I(\\\\phi^{(1)}_-) + I(\\\\phi^{(2)}_-)$. A similar comment applies to majorants. Thus, since $f$ is integrable,\\n\\n\\\\begin{equation}\\n\\\\sup_{\\\\phi^-} I(\\\\phi^-) = \\\\sup_{\\\\phi^{(1)}_-} I(\\\\phi^{(1)}_-) + \\\\sup_{\\\\phi^{(2)}_-} I(\\\\phi^{(2)}_-) = \\\\inf_{\\\\phi^{(1)}_+} I(\\\\phi^{(1)}_+) + \\\\inf_{\\\\phi^{(2)}_+} I(\\\\phi^{(2)}_+) = \\\\inf_{\\\\phi^+} I(\\\\phi^+).\\n\\\\end{equation}\\n\\nSince $\\\\sup_{\\\\phi^{(i)}_-} I(\\\\phi^{(i)}_-) \\\\leq \\\\inf_{\\\\phi^{(i)}_+} I(\\\\phi^{(i)}_+)$ for $i = 1, 2$, we are forced to conclude that equality holds: $\\\\sup_{\\\\phi^{(i)}_-} I(\\\\phi^{(i)}_-) = \\\\inf_{\\\\phi^{(i)}_+} I(\\\\phi^{(i)}_+)$ for $i = 1, 2$. (Here, we used the fact that if $x \\\\leq x', y \\\\leq y'$ and $x + y = x' + y'$ then $x = x'$ and $y = y'$.) Thus $f$ is indeed integrable on $[a, c]$ and on $[c, b]$, and it follows from (1.4) that $\\\\int_a^b f = \\\\int_a^c f + \\\\int_c^b f$.",
+        "preconditions": [
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 1.14",
+        "name": "Subinterval Integrability",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [
+            "Proposition 1.13"
+        ],
+        "statement": "Suppose that $f : [a, b] \\\\to \\\\mathbb{R}$ is integrable, and that $[c, d] \\\\subseteq [a, b]$. Then $f$ is integrable on $[c, d]$.",
+        "proof": "This is immediate.",
+        "preconditions": [
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 1.15",
+        "name": "Integral Linearity",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [
+            "Proposition 1.10"
+        ],
+        "statement": "If $f, g$ are integrable on $[a, b]$ then so is $\\\\lambda f + \\\\mu g$ for any $\\\\lambda, \\\\mu \\\\in \\\\mathbb{R}$. Moreover $\\\\int_a^b (\\\\lambda f + \\\\mu g) = \\\\lambda \\\\int_a^b f + \\\\mu \\\\int_a^b g$. That is, the integrable functions on $[a, b]$ form a vector space and the integral is a linear functional (linear map to $\\\\mathbb{R}$) on it.",
+        "proof": "Suppose that $\\\\lambda > 0$. If $\\\\phi^- \\\\leq f \\\\leq \\\\phi^+$ are minorant/majorant for $f$, then $\\\\lambda\\\\phi^- \\\\leq \\\\lambda f \\\\leq \\\\lambda\\\\phi^+$ are minorant and majorant for $\\\\lambda f$. Moreover $I(\\\\lambda\\\\phi^+) - I(\\\\lambda\\\\phi^-) = \\\\lambda(I(\\\\phi^+) - I(\\\\phi^-))$ can be made arbitrarily small. Thus $\\\\lambda f$ is integrable. Moreover $\\\\inf_{\\\\phi^+} I(\\\\lambda\\\\phi^+) = \\\\lambda \\\\inf_{\\\\phi^+} I(\\\\phi^+)$, $\\\\sup_{\\\\phi^-} I(\\\\lambda\\\\phi^-) = \\\\lambda \\\\sup_{\\\\phi^-} I(\\\\phi^-)$, and so $\\\\int_a^b (\\\\lambda f) = \\\\lambda \\\\int_a^b f$. If $\\\\lambda < 0$ then we can proceed in a very similar manner. We leave this to the reader. If $\\\\lambda = 0$, then $\\\\lambda f$ is identically zero and hence is integrable by Proposition 1.10.",
+        "preconditions": [
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 1.16",
+        "name": "Finite Point Modification",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Proposition 1.10",
+            "Proposition 1.15"
+        ],
+        "statement": "If $f$ is integrable on $[a, b]$, and if $\\\\tilde{f}$ differs from $f$ in finitely many points, then $\\\\tilde{f}$ is also integrable.",
+        "proof": "The function $\\\\tilde{f} - f$ is zero except at finitely many points. Suppose that these points are $x_1, \\\\ldots, x_{n-1}$. Then $\\\\tilde{f} - f$ is a step function adapted to the partition $a = x_0 \\\\leq x_1 \\\\leq \\\\ldots \\\\leq x_{n-1} \\\\leq x_n = b$. By Proposition 1.10, $\\\\tilde{f} - f$ is integrable, and hence so is $\\\\tilde{f} = (\\\\tilde{f} - f) + f$, by Proposition 1.15.",
+        "preconditions": [
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 1.17",
+        "name": "Max-Min Integrability",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Proposition 1.15"
+        ],
+        "statement": "Suppose that $f$ and $g$ are integrable on $[a, b]$. Then $\\\\max(f, g)$ and $\\\\min(f, g)$ are both Riemann integrable, as is $|f|$.",
+        "proof": "We have $\\\\max(f, g) = g + \\\\max(f - g, 0)$, $\\\\min(h, 0) = - \\\\max(-h, 0)$ and $|h| = \\\\max(h, 0) - \\\\min(h, 0)$. Using these relations and Proposition 1.15, it is enough to prove that if $f$ is integrable on $[a, b]$, then so is $\\\\max(f, 0)$.\\n\\nNow the function $x \\\\mapsto \\\\max(x, 0)$ is order-preserving (if $x \\\\leq y$ then $\\\\max(x, 0) \\\\leq \\\\max(y, 0)$) and non-expanding (we have $|\\\\max(x, 0) - \\\\max(y, 0)| \\\\leq |x - y|$, as can be established by an easy case-check, according to the signs of $x, y$). It follows that if $\\\\phi_- \\\\leq f \\\\leq \\\\phi_+$ are minorant and majorant for $f$ then $\\\\max(\\\\phi_-, 0) \\\\leq \\\\max(f, 0) \\\\leq \\\\max(\\\\phi_+, 0)$ are minorant and majorant for $\\\\max(f, 0)$ (it is obvious that they are both step functions). Moreover,\\n\\n$I(\\\\max(\\\\phi_+, 0)) - I(\\\\max(\\\\phi_-, 0)) \\\\leq I(\\\\phi_+) - I(\\\\phi_-)$.\\n\\nSince $f$ is integrable, this can be made arbitrarily small.",
+        "preconditions": [
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 1.18",
+        "name": "Integral Bounds",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "Suppose that $f$ is integrable on $[a, b]$.\\n\\n(i) We have $(b - a) \\\\inf_{x\\\\in[a,b]} f(x) \\\\leq \\\\int_a^b f \\\\leq (b - a) \\\\sup_{x\\\\in[a,b]} f(x)$.\\n(ii) If $g$ is another integrable function on $[a, b]$, and if $f \\\\leq g$ pointwise, then $\\\\int_a^b f \\\\leq \\\\int_a^b g$.\\n(iii) $|\\\\int_a^b f| \\\\leq \\\\int_a^b |f|$.",
+        "proof": "(i) is an immediate consequence of the fact that the constant function $\\\\phi_-(x) = \\\\inf_{x\\\\in[a,b]} f(x)$ is a minorant for $f$ on $[a, b]$, whilst $\\\\phi_+(x) = \\\\sup_{x\\\\in[a,b]} f(x)$ is a majorant. Thus\\n\\n$(b - a) \\\\inf_{x\\\\in[a,b]} f(x) = I(\\\\phi_-) \\\\leq \\\\sup_{\\\\phi_-} I(\\\\phi_-) = \\\\int_a^b f$,\\n\\nand similarly for the upper bound.\\n\\n(ii) Applying (i) to $g - f$ gives $\\\\int_a^b (g - f) \\\\geq 0$, from which the result is immediate from linearity of the integral.\\n\\n(iii) Apply (ii) to $f$ and $|f|$, and also to $-f$ and $|f|$, obtaining $\\\\pm \\\\int_a^b f \\\\leq \\\\int_a^b |f|$.",
+        "preconditions": [
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 1.19",
+        "name": "Product Integrability",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Proposition 1.17"
+        ],
+        "statement": "Suppose that $f, g : [a, b] \\\\to \\\\mathbb{R}$ are two integrable functions. Then their product $fg$ is integrable.",
+        "proof": "Write $f = f_+ - f_-$, where $f_+ = \\\\max(f, 0)$ and $f_- = - \\\\min(f, 0)$, and similarly for $g$. Then $fg = f_+g_+ - f_-g_+ - f_+g_- + f_-g_-$, and so it suffices to prove the statement for non-negative functions such as $f_\\\\pm, g_\\\\pm$. Suppose, then, that $f, g \\\\geq 0$. Let $\\\\varepsilon > 0$, and let $\\\\phi_- \\\\leq f \\\\leq \\\\phi_+$, $\\\\psi_- \\\\leq g \\\\leq \\\\psi_+$ be minorants and majorants for $f, g$ with $I(\\\\phi_+) - I(\\\\phi_-)$, $I(\\\\psi_+) - I(\\\\psi_-) \\\\leq \\\\varepsilon$. Replacing $\\\\phi_-$ with $\\\\max(\\\\phi_-, 0)$ if necessary (and similarly for $\\\\psi_-$), we may assume that $\\\\phi_-, \\\\psi_- \\\\geq 0$ pointwise. Replacing $\\\\phi_+$ with $\\\\min(\\\\phi_+, M)$, where $M = \\\\max\\\\{\\\\sup_{[a,b]} f, \\\\sup_{[a,b]} g\\\\}$ (and similarly for $\\\\psi_+$) we may assume that $\\\\phi_+, \\\\psi_+ \\\\leq M$ pointwise. By refining partitions if necessary, we may assume that all of these step functions are adapted to the same partition $P$. Now observe that $\\\\phi_-\\\\psi_-, \\\\phi_+\\\\psi_+$ are both step functions and that $\\\\phi_-\\\\psi_- \\\\leq fg \\\\leq \\\\phi_+\\\\psi_+$ pointwise. Moreover, if $0 \\\\leq u, v, u', v' \\\\leq M$ and $u \\\\leq u'$, $v \\\\leq v'$ then we have\\n\\n$u'v' - uv = (u' - u)v' + (v' - v)u \\\\leq M(u' - u + v' - v)$.\\n\\nApplying this on each interval of the partition $P$, with $u = \\\\phi_-$, $u' = \\\\phi_+$, $v = \\\\psi_-$, $v' = \\\\psi_+$, we have\\n\\n$I(\\\\phi_+\\\\psi_+) - I(\\\\phi_-\\\\psi_-) \\\\leq M(I(\\\\phi_+) - I(\\\\phi_-) + I(\\\\psi_+) - I(\\\\psi_-)) \\\\leq 2\\\\varepsilon M$.\\n\\nSince $\\\\varepsilon > 0$ was arbitrary, the result follows.",
+        "preconditions": [
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 2.1",
+        "name": "Continuous Functions Integrable",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [],
+        "statement": "Continuous functions $f : [a, b] \\\\to \\\\mathbb{R}$ are integrable.",
+        "proof": "Since $f$ is continuous on a closed and bounded interval, $f$ is also bounded. We will also use the fact that a continuous function $f$ is uniformly continuous. Let $\\\\varepsilon > 0$, and let $\\\\delta$ be so small that $|f(x) - f(y)| \\\\leq \\\\varepsilon$ whenever $|x - y| \\\\leq \\\\delta$. Let $P$ be a partition with mesh $< \\\\delta$. Let $\\\\phi^+$ be the step function whose value on $(x_{i-1}, x_i)$ is $\\\\sup_{x\\\\in[x_{i-1},x_i]} f(x)$ and which takes the value $f(x_i)$ at the points $x_i$, and let $\\\\phi^-$ be the step function whose value on $(x_{i-1}, x_i)$ is $\\\\inf_{x\\\\in[x_{i-1},x_i]} f(x)$ and which takes the value $f(x_i)$ at the points $x_i$.\\n\\nBy construction, $\\\\phi^+$ is a majorant for $f$ and $\\\\phi^-$ is a minorant. Since a continuous function on a closed bounded interval attains its bounds, there are $\\\\xi^-, \\\\xi^+ \\\\in [x_{i-1}, x_i]$ such that $\\\\sup_{x\\\\in[x_{i-1},x_i]} f(x) = f(\\\\xi^+)$ and $\\\\inf_{x\\\\in[x_{i-1},x_i]} f(x) = f(\\\\xi^-)$.\\n\\nFor $x \\\\in (x_{i-1}, x_i)$ we have $\\\\phi^+(x) - \\\\phi^-(x) \\\\leq f(\\\\xi^+) - f(\\\\xi^-) \\\\leq \\\\varepsilon$. Therefore $\\\\phi^+(x) - \\\\phi^-(x) \\\\leq \\\\varepsilon$ for all $x \\\\in [a, b]$.\\n\\nIt follows that $I(\\\\phi^+) - I(\\\\phi^-) \\\\leq \\\\varepsilon(b - a)$. Since $\\\\varepsilon$ was arbitrary, this concludes the proof.",
+        "preconditions": [
+            "function is continuous on a closed interval"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 2.2",
+        "name": "Bounded Continuous Integrable",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [
+            "Theorem 2.1"
+        ],
+        "statement": "Bounded continuous functions $f : (a, b) \\\\to \\\\mathbb{R}$ are integrable.",
+        "proof": "Suppose that $|f| \\\\leq M$. Let $\\\\varepsilon > 0$. Then $f$ is continuous, and hence uniformly continuous, on $[a + \\\\varepsilon, b - \\\\varepsilon]$. Let $\\\\delta$ be such that if $x, y \\\\in [a + \\\\varepsilon, b - \\\\varepsilon]$ and $|x - y| \\\\leq \\\\delta$ then $|f(x) - f(y)| \\\\leq \\\\varepsilon$, and consider a partition $P$ with $a = x_0$, $a + \\\\varepsilon = x_1$, $b - \\\\varepsilon = x_{n-1}$, $b = x_n$ and mesh $\\\\leq \\\\delta$.\\n\\nLet $\\\\phi^+$ be the step function whose value on $(x_{i-1}, x_i)$ is $\\\\sup_{x\\\\in[x_{i-1},x_i]} f(x)$ when $i = 2, \\\\ldots, n - 1$, and whose value on $(x_0, x_1)$ and $(x_{n-1}, x_n)$ is $M$.\\n\\nLet $\\\\phi^-$ be the step function whose value on $(x_{i-1}, x_i)$ is $\\\\inf_{x\\\\in[x_{i-1},x_i]} f(x)$ when $i = 2, \\\\ldots, n - 1$, and whose value on $(x_0, x_1)$ and $(x_{n-1}, x_n)$ is $-M$.\\n\\nThen $\\\\phi^- \\\\leq f \\\\leq \\\\phi^+$ pointwise. As in the proof of the previous theorem, we have $|\\\\phi^+(x) - \\\\phi^-(x)| \\\\leq \\\\varepsilon$ when $x \\\\in (x_{i-1}, x_i)$, $i = 2, \\\\ldots, n - 1$. On $(x_0, x_1)$ and $(x_{n-1}, x_n)$ we have the trivial bound $|\\\\phi^+(x) - \\\\phi^-(x)| \\\\leq 2M$. Thus\\n\\n$I(\\\\phi^+) - I(\\\\phi^-) \\\\leq (b - a)\\\\varepsilon + 2M \\\\cdot 2\\\\varepsilon$,\\n\\nwhich can be made arbitrarily small by taking $\\\\varepsilon$ arbitrarily small.",
+        "preconditions": [
+            "function is bounded",
+            "function is continuous on an open interval"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 2.3",
+        "name": "Continuous Positive Integral",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [],
+        "statement": "Suppose that $f : [a, b] \\\\to \\\\mathbb{R}$ is a continuous function with $f > 0$ pointwise and $\\\\int_a^b f = 0$. Then $f(x) = 0$ for $x \\\\in [a, b]$.",
+        "proof": "Suppose not. Then there is some point $x \\\\in [a, b]$ with $f(x) > 0$, let us say $f(x) = \\\\varepsilon$. Since $f$ is continuous, there is some $\\\\delta > 0$ such that if $|x - y| \\\\leq \\\\delta$ then $|f(x) - f(y)| \\\\leq \\\\varepsilon/2$, and hence $|f(x)| > \\\\varepsilon/2$. The set of all $y \\\\in [a, b]$ with $|x - y| \\\\leq \\\\delta$ is a subinterval $I \\\\subset [a, b]$ with length $\\\\ell$ at least $\\\\min(b - a, \\\\delta)$, and so\\n\\n$\\\\int f > \\\\int_I f > \\\\frac{\\\\varepsilon}{2} \\\\min(b - a, \\\\delta) > 0$.",
+        "preconditions": [
+            "function is continuous on a closed interval",
+            "function is non-negative"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 2.4",
+        "name": "Mean Value Theorem",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [
+            "Proposition 1.18"
+        ],
+        "statement": "Suppose that $f : [a, b] \\\\to \\\\mathbb{R}$ is continuous. Then there is some $c \\\\in [a, b]$ such that $\\\\int_a^b f = (b - a)f(c)$.",
+        "proof": "Since $f$ is continuous, it attains its maximum $M$ and its minimum $m$. By Proposition 1.18 (i),\\n\\n$m(b - a) \\\\leq \\\\int_a^b f \\\\leq M(b - a)$,\\n\\nwhich implies that\\n\\n$m \\\\leq \\\\frac{1}{b - a}\\\\int_a^b f \\\\leq M$.\\n\\nBy the intermediate value theorem, $f$ attains every value in $[m, M]$, and in particular there is some $c$ such that\\n\\n$f(c) = \\\\frac{1}{b - a}\\\\int_a^b f$.",
+        "preconditions": [
+            "function is continuous on a closed interval"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 2.5",
+        "name": "Mean Value Theorem",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [
+            "Proposition 1.19",
+            "Proposition 2.4"
+        ],
+        "statement": "Suppose that $f : [a, b] \\\\to \\\\mathbb{R}$ is continuous, and that $w : [a, b] \\\\to \\\\mathbb{R}$ is a nonnegative integrable function. Then there is some $c \\\\in [a, b]$ such that $\\\\int_a^b f w = f(c) \\\\int_a^b w$.",
+        "proof": "First one should remark that $fw$ is indeed integrable, this being a consequence of Proposition 1.19. As in the proof of Proposition 2.4, write $M, m$ for the maximum and minimum of $f$ respectively. Then $mw \\\\leq fw \\\\leq Mw$ pointwise, and so $m \\\\int_a^b w \\\\leq \\\\int_a^b fw \\\\leq M \\\\int_a^b w$. If $\\\\int_a^b w = 0$ then the result follows immediately; otherwise, we may divide through to get $m \\\\leq \\\\frac{\\\\int_a^b fw}{\\\\int_a^b w} \\\\leq M$. Since both $m$ and $M$ are values attained by $f$, the result now follows from the intermediate value theorem.",
+        "preconditions": [
+            "function is continuous on a closed interval",
+            "function is non-negative",
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 2.6",
+        "name": "Monotone Functions Integrability",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [],
+        "statement": "Monotone functions $f : [a, b] \\\\to \\\\mathbb{R}$ are integrable.",
+        "proof": "By replacing $f$ with $-f$ if necessary we may suppose that $f$ is monotone increasing, i.e. $f(x) \\\\leq f(y)$ whenever $x \\\\leq y$. Since $f(a) \\\\leq f(x) \\\\leq f(b)$, $f$ is automatically bounded. Let $n$ be a positive integer, and consider the partition of $[a, b]$ into $n$ equal parts. Thus $P$ is $a = x_0 \\\\leq x_1 \\\\leq \\\\ldots \\\\leq x_n = b$, with $x_i = a + \\\\frac{i}{n}(b-a)$. On $(x_{i-1}, x_i)$, define $\\\\phi_+(x) = f(x_i)$ and $\\\\phi_-(x) = f(x_{i-1})$. Define $\\\\phi_-(x_i) = f(x_i)$ and $\\\\phi_+(x_i) = f(x_i)$. Then $\\\\phi_+$ is a majorant for $f$ and $\\\\phi_-$ is a minorant. We have $I(\\\\phi_+) - I(\\\\phi_-) = \\\\sum_{i=1}^n (f(x_i) - f(x_{i-1}))(x_i - x_{i-1}) = \\\\frac{b-a}{n} \\\\sum_{i=1}^n (f(x_i) - f(x_{i-1})) = \\\\frac{1}{n}(b-a)(f(b) - f(a))$. Taking $n$ large, this can be made as small as desired.",
+        "preconditions": [
+            "function is monotone",
+            "function on a closed interval"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 3.1",
+        "name": "Riemann Sum Convergence",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "Let $f : [a, b] \\\\to \\\\mathbb{R}$ be a bounded function. Fix a sequence of partitions $P^{(i)}$. For each $i$, let $\\\\Sigma(f, P^{(i)}, \\\\vec{\\\\xi}^{(i)})$ be a Riemann sum adapted to $P^{(i)}$. Suppose that there is some constant $c$ such that, no matter how $\\\\vec{\\\\xi}^{(i)}$ is chosen, $\\\\Sigma(f; P^{(i)}, \\\\vec{\\\\xi}^{(i)}) \\\\to c$. Then $f$ is integrable and $c = \\\\int_a^b f$.",
+        "proof": "Let $\\\\varepsilon > 0$. Let $i$ be chosen so that $\\\\Sigma(f; P^{(i)}, \\\\vec{\\\\xi}^{(i)}) \\\\leq c + \\\\varepsilon$, no matter which $\\\\vec{\\\\xi}^{(i)}$ is chosen. Write $P = P^{(i)}$, and suppose that $P$ is $a = x_0 \\\\leq \\\\ldots \\\\leq x_n = b$. For each $j$, choose some point $\\\\xi_j \\\\in [x_{j-1}, x_j]$ such that $f(\\\\xi_j) \\\\geq \\\\sup_{x \\\\in [x_{j-1}, x_j]} f(x) - \\\\varepsilon$. (Note that $f$ does not necessarily attain its supremum on this interval.) Let $\\\\phi_+$ be a step function taking the value $f(\\\\xi_j) + \\\\varepsilon$ on $(x_{j-1}, x_j)$, and with $\\\\phi_+(x_j) = f(x_j)$. Then $\\\\phi_+$ is a majorant for $f$. It is easy to see that $I(\\\\phi_+) = \\\\varepsilon(b-a) + \\\\Sigma(f; P, \\\\vec{\\\\xi})$. We therefore have $I(\\\\phi_+) \\\\leq \\\\varepsilon(b-a) + c + \\\\varepsilon$. Since $\\\\varepsilon > 0$ was arbitrary, it follows that $\\\\inf_{\\\\phi_+} I(\\\\phi_+) \\\\leq c$. By an identical argument, $\\\\sup_{\\\\phi_-} I(\\\\phi_-) \\\\geq c$. Therefore $c \\\\leq \\\\sup_{\\\\phi_-} I(\\\\phi_-) \\\\leq \\\\inf_{\\\\phi_+} I(\\\\phi_+) \\\\leq c$, and so all these quantities equal $c$.",
+        "preconditions": [
+            "function on a closed interval",
+            "function is bounded",
+            "sequence of partitions"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 3.2",
+        "name": "Riemann Sum Limit",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "Let $P^{(i)}, i = 1, 2, \\\\ldots$ be a sequence of partitions satisfying $\\\\text{mesh}(P^{(i)}) \\\\to 0$. Suppose that $f$ is integrable. Then $\\\\lim_{i \\\\to \\\\infty} \\\\Sigma(f; P^{(i)}, \\\\vec{\\\\xi}^{(i)}) = \\\\int_a^b f$, no matter what choice of $\\\\vec{\\\\xi}^{(i)}$ we make.",
+        "proof": "Throughout the proof, write $M := \\\\sup_{x \\\\in [a,b]} |f(x)|$. Let $P : a = x_0 \\\\leq x_1 \\\\leq \\\\cdot \\\\cdot \\\\cdot \\\\leq x_n = b$ be a partition. In this proof it is convenient to introduce the notion of the optimal majorant $\\\\phi^P_+$ for $f$ relative to $P$ (and similarly minorant). This is the majorant defined by $\\\\phi^P_+ := \\\\begin{cases} \\\\sup_{x \\\\in (x_{i-1}, x_i)} f(x) & \\\\text{on } (x_{i-1}, x_i) \\\\\\\\ f(x_i) & \\\\text{at the points } x_i \\\\end{cases}$. It is easy to see that if $\\\\phi_+$ is any majorant for $f$ adapted to $P$, then $I(\\\\phi^P_+) \\\\leq I(\\\\phi_+)$. Similarly, $I(\\\\phi^P_-) \\\\geq I(\\\\phi_-)$, and so $I(\\\\phi^P_+) - I(\\\\phi^P_-) \\\\leq I(\\\\phi_+) - I(\\\\phi_-)$. Let $\\\\varepsilon > 0$. Since $f$ is integrable it follows from what we just said that there is a partition $P : a = x_0 \\\\leq x_1 \\\\leq \\\\cdot \\\\cdot \\\\cdot \\\\leq x_n = b$ such that $I(\\\\phi^P_+) - I(\\\\phi^P_-) < \\\\varepsilon$. In particular, since $I(\\\\phi_-) \\\\leq \\\\int_a^b f$ for any minorant $\\\\phi_-$, $I(\\\\phi^P_+) \\\\leq \\\\int_a^b f + \\\\varepsilon$. Set $\\\\delta := \\\\varepsilon/nM$. Let $P' : a = x'_0 \\\\leq x'_1 \\\\leq \\\\ldots \\\\leq x'_{n'} = b$ be any partition with $\\\\text{mesh}(P') \\\\leq \\\\delta$, and consider an arbitrary Riemann sum $\\\\Sigma(f; P', \\\\vec{\\\\xi}') = \\\\sum_{j=1}^{n'} f(\\\\xi'_j)(x'_j - x'_{j-1})$. This is equal to $I(\\\\psi)$, where the step function $\\\\psi$ is defined to be $f(\\\\xi'_j)$ on $(x'_{j-1}, x'_j)$ and $f(x'_j)$ at the $x'_j$. Let us compare $\\\\psi$ and the optimal majorant $\\\\phi^P_+$. Say that $j$ is good if $[x'_{j-1}, x'_j] \\\\subset (x_{i-1}, x_i)$ for some $i$. If $j$ is good then, for $t \\\\in (x'_{j-1}, x'_j)$, $\\\\psi(t) = f(\\\\xi'_j) \\\\leq \\\\sup_{x \\\\in [x'_{j-1}, x'_j]} f(x) \\\\leq \\\\sup_{x \\\\in (x_{i-1}, x_i)} f(x) = \\\\phi^P_+(t)$. If $j$ is bad (i.e. not good) then we cannot assert such a bound, but we do have the trivial bound $\\\\psi(t) \\\\leq \\\\phi^P_+(t) + 2M$ for all $j$. Now if $j$ is bad then we have $x_i \\\\in [x'_{j-1}, x'_j]$ for some $i$. No $x_i$ can belong to more than two intervals $[x'_{j-1}, x'_j]$, so there cannot be more than $2n$ bad values of $j$. Therefore the total length of the corresponding intervals $(x'_{j-1}, x'_j)$ is at most $2\\\\delta n = 2\\\\varepsilon/M$. It therefore follows, using (3.2) on the good intervals and (3.3) on the bad, that $\\\\Sigma(f; P', \\\\vec{\\\\xi}') = I(\\\\psi) \\\\leq I(\\\\phi^P_+) + 2M \\\\cdot \\\\frac{2\\\\varepsilon}{M} = I(\\\\phi^P_+) + 4\\\\varepsilon$. Combining this with (3.1) yields $\\\\Sigma(f; P', \\\\vec{\\\\xi}') \\\\leq \\\\int_a^b f + 5\\\\varepsilon$. There is a similar lower bound, proven in an analogous manner. Since $\\\\varepsilon$ was arbitrary, this concludes the proof.",
+        "preconditions": [
+            "function is integrable",
+            "partition with mesh tending to zero"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 3.3",
+        "name": "Riemann Integral Equivalence",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Proposition 3.2"
+        ],
+        "statement": "Let $f : [a, b] \\\\to \\\\mathbb{R}$ be a function. Let $P^{(i)}$, $i = 1, 2, \\\\ldots$ be a sequence of partitions with $\\\\text{mesh}(P^{(i)}) \\\\to 0$. Then $f$ is integrable if and only if $\\\\lim_{i\\\\to\\\\infty} \\\\Sigma(f, P^{(i)}, \\\\vec{\\\\xi}^{(i)})$ is equal to some constant $c$, independently of the choice of $\\\\vec{\\\\xi}^{(i)}$. If this is so, then $\\\\int_a^b f = c$.",
+        "proof": "This follows directly from Propositions 3.1 and 3.2. If $f$ is integrable, then by Proposition 3.2, $\\\\lim_{i\\\\to\\\\infty} \\\\Sigma(f, P^{(i)}, \\\\vec{\\\\xi}^{(i)}) = \\\\int_a^b f$ for any choice of $\\\\vec{\\\\xi}^{(i)}$. Conversely, if $\\\\lim_{i\\\\to\\\\infty} \\\\Sigma(f, P^{(i)}, \\\\vec{\\\\xi}^{(i)}) = c$ for some constant $c$ independent of the choice of $\\\\vec{\\\\xi}^{(i)}$, then by Proposition 3.1, $f$ is integrable and $\\\\int_a^b f = c$.",
+        "preconditions": [
+            "function on a closed interval",
+            "sequence of partitions",
+            "partition with mesh tending to zero"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.1",
+        "name": "Non-continuous Function Integration",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [],
+        "statement": "If $f$ is not continuous, then $F$ can be differentiable but it need not be the case that $F' = f$. For example, let $f : [0, 1] \\\\to \\\\mathbb{R}$ be the function that takes value $1$ at $x = \\\\frac{1}{2}$ but that is $0$ elsewhere. Then $F$ is identically zero. Hence, $F$ is differentiable and $F'$ is the zero function. This shows that in general, when you integrate and then differentiate, you might not get the original function back.",
+        "proof": "Let $f : [0, 1] \\\\to \\\\mathbb{R}$ be defined by $f(x) = 1$ if $x = \\\\frac{1}{2}$ and $f(x) = 0$ otherwise. Then $f$ is integrable (since it differs from the zero function at only one point), and $\\\\int_0^x f(t)\\\\,dt = 0$ for all $x \\\\in [0, 1]$. Thus $F(x) = \\\\int_0^x f(t)\\\\,dt = 0$ for all $x$, which means $F'(x) = 0$ for all $x$. But $F'(\\\\frac{1}{2}) = 0 \\\\neq 1 = f(\\\\frac{1}{2})$, showing that $F' \\\\neq f$.",
+        "preconditions": [
+            "function on a closed interval",
+            "function is not continuous"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.2",
+        "name": "Non-differentiable Integral",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [],
+        "statement": "We note that $F$ is not necessarily differentiable assuming only that $f$ is Riemann-integrable. For example if we take the function $f$ defined by $f(t) = 0$ for $t \\\\leq \\\\frac{1}{2}$ and $f(t) = 1$ for $t > \\\\frac{1}{2}$ then $f$ is integrable on $[0, 1]$, and the function $F(x) = \\\\int_0^x f(t)dt$ is given by $F(x) = 0$ for $x \\\\leq \\\\frac{1}{2}$ and $F(x) = x - \\\\frac{1}{2}$ for $\\\\frac{1}{2} \\\\leq x \\\\leq 1$. Evidently, $F$ fails to be differentiable at $\\\\frac{1}{2}$.",
+        "proof": "Let $f : [0, 1] \\\\to \\\\mathbb{R}$ be defined by $f(t) = 0$ for $t \\\\leq \\\\frac{1}{2}$ and $f(t) = 1$ for $t > \\\\frac{1}{2}$. This function is integrable since it is a step function.\\n\\nFor $x \\\\leq \\\\frac{1}{2}$, we have $F(x) = \\\\int_0^x f(t)\\\\,dt = \\\\int_0^x 0\\\\,dt = 0$.\\n\\nFor $x > \\\\frac{1}{2}$, we have $F(x) = \\\\int_0^x f(t)\\\\,dt = \\\\int_0^{\\\\frac{1}{2}} 0\\\\,dt + \\\\int_{\\\\frac{1}{2}}^x 1\\\\,dt = 0 + (x - \\\\frac{1}{2}) = x - \\\\frac{1}{2}$.\\n\\nThus, $F(x) = \\\\begin{cases} 0 & \\\\text{if } x \\\\leq \\\\frac{1}{2} \\\\\\\\ x - \\\\frac{1}{2} & \\\\text{if } x > \\\\frac{1}{2} \\\\end{cases}$\\n\\nThe left derivative of $F$ at $x = \\\\frac{1}{2}$ is $\\\\lim_{h \\\\to 0^-} \\\\frac{F(\\\\frac{1}{2} + h) - F(\\\\frac{1}{2})}{h} = \\\\lim_{h \\\\to 0^-} \\\\frac{0 - 0}{h} = 0$.\\n\\nThe right derivative of $F$ at $x = \\\\frac{1}{2}$ is $\\\\lim_{h \\\\to 0^+} \\\\frac{F(\\\\frac{1}{2} + h) - F(\\\\frac{1}{2})}{h} = \\\\lim_{h \\\\to 0^+} \\\\frac{(\\\\frac{1}{2} + h - \\\\frac{1}{2}) - 0}{h} = \\\\lim_{h \\\\to 0^+} \\\\frac{h}{h} = 1$.\\n\\nSince the left and right derivatives are different, $F$ is not differentiable at $x = \\\\frac{1}{2}$.",
+        "preconditions": [
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 4.3",
+        "name": "First Fundamental Theorem",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [],
+        "statement": "Suppose that $f$ is integrable on $(a, b)$. Define a new function $F : [a, b] \\\\to \\\\mathbb{R}$ by $F(x) := \\\\int_a^x f$. Then $F$ is continuous. Moreover, if $f$ is continuous at $c \\\\in (a, b)$ then $F$ is differentiable at $c$ and $F'(c) = f(c)$.",
+        "proof": "The fact that $F$ is continuous follows immediately from the fact that $f$ is bounded (which it must be, as it is integrable), say by $M$. Then\\n\\n$|F(c + h) - F(c)| = \\\\left|\\\\int_c^{c+h} f\\\\right| \\\\leq \\\\int_c^{c+h} |f| \\\\leq M |h|$.\\n\\nIn fact, this argument directly establishes that $F$ is uniformly continuous (and in fact Lipschitz).\\n\\nNow we turn to the second part. Suppose that $c \\\\in (a, b)$ and that $h > 0$ is sufficiently small that $c + h < b$. We have\\n\\n$F(c + h) - F(c) = \\\\int_c^{c+h} f$.\\n\\nLet $\\\\varepsilon > 0$. Since $f$ is continuous at $c$, there is a $\\\\delta > 0$ such that for all $t \\\\in [c, c + \\\\delta]$, we have $|f(t) - f(c)| \\\\leq \\\\varepsilon$. Therefore, for any $h \\\\in (0, \\\\delta)$,\\n\\n$|F(c + h) - F(c) - hf(c)| = \\\\left|\\\\int_c^{c+h} (f(t) - f(c))dt\\\\right| \\\\leq \\\\varepsilon h$.\\n\\nDivide through by $h$:\\n\\n$\\\\left|\\\\frac{F(c + h) - F(c)}{h} - f(c)\\\\right| \\\\leq \\\\varepsilon$.\\n\\nEssentially the same argument works for $h < 0$ (in fact, exactly the same argument works if we interpret $\\\\int_c^{c+h} f$ in the natural way as $-\\\\int_{c+h}^c f$). This statement is exactly the definition of $F$ being differentiable at $c$ with derivative $f(c)$.",
+        "preconditions": [
+            "function is integrable",
+            "function is continuous"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 4.4",
+        "name": "Second Fundamental Theorem",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [
+            "Proposition 3.2"
+        ],
+        "statement": "Suppose that $F : [a, b] \\\\to \\\\mathbb{R}$ is continuous on $[a, b]$ and differentiable on $(a, b)$. Suppose furthermore that its derivative $F'$ is integrable on $(a, b)$. Then $\\\\int_a^b F' = F(b) - F(a)$.",
+        "proof": "Let $P$ be a partition, $a = x_0 < x_1 < \\\\cdots < x_n = b$. We claim that some Riemann sum $\\\\Sigma(F'; P, \\\\xi)$ is equal to $F(b) - F(a)$. By Proposition 3.2 (the harder direction of the equivalence between integrability and limits of Riemann sums), the second fundamental theorem follows immediately from this.\\n\\nThe claim is an almost immediate consequence of the mean value theorem. By that theorem, we may choose $\\\\xi_i \\\\in (x_{i-1}, x_i)$ so that $F'(\\\\xi_i)(x_i - x_{i-1}) = F(x_i) - F(x_{i-1})$. Summing from $i = 1$ to $n$ gives\\n\\n$\\\\Sigma(F'; P, \\\\xi) = \\\\sum_{i=1}^n (F(x_i) - F(x_{i-1})) = F(b) - F(a)$.",
+        "preconditions": [
+            "function is continuous on a closed interval",
+            "function is differentiable",
+            "derivative is integrable"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 4.5",
+        "name": "Integration by Parts",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [
+            "Proposition 1.19",
+            "Theorem 4.4"
+        ],
+        "statement": "Suppose that $f, g : [a, b] \\\\to \\\\mathbb{R}$ are continuous functions, differentiable on $(a, b)$. Suppose that the derivatives $f', g'$ are integrable on $(a, b)$. Then $fg'$ and $f'g$ are integrable on $(a, b)$, and $\\\\int_a^b fg' = f(b)g(b) - f(a)g(a) - \\\\int_a^b f'g$.",
+        "proof": "We use the second form of the fundamental theorem of calculus, applied to the function $F = fg$. We know from basic differential calculus that $F$ is differentiable and $F' = f'g + fg'$. By Proposition 1.19 and the assumption that $f', g'$ are integrable, $F'$ is integrable on $(a, b)$. Applying the fundamental theorem gives $\\\\int_a^b F' = F(b) - F(a)$, which is obviously equivalent to the stated claim.",
+        "preconditions": [
+            "function is continuous on a closed interval",
+            "function is differentiable",
+            "derivative is integrable"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 4.6",
+        "name": "Substitution rule",
+        "topic": "Properties and Theorems of Integration",
+        "previous_results": [
+            "Proposition 1.19",
+            "Theorem 4.3",
+            "Theorem 4.4"
+        ],
+        "statement": "Suppose that $f : [a, b] \\\\to \\\\mathbb{R}$ is continuous and that $\\\\phi : [c, d] \\\\to [a, b]$ is continuous on $[c, d]$, has $\\\\phi(c) = a$ and $\\\\phi(d) = b$, and maps $(c, d)$ to $(a, b)$. Suppose moreover that $\\\\phi$ is differentiable on $(c, d)$ and that its derivative $\\\\phi'$ is integrable on this interval. Then $\\\\int_a^b f = \\\\int_c^d (f \\\\circ \\\\phi)\\\\phi'$.",
+        "proof": "Let us first remark that $f \\\\circ \\\\phi$ is continuous and hence integrable on $[c, d]$. It therefore follows from Proposition 1.19 that $(f \\\\circ \\\\phi)\\\\phi'$ is integrable on $[c, d]$, so the statement does at least make sense.\\n\\nSince $f$ is continuous on $[a, b]$, it is integrable. The first fundamental theorem of calculus implies that its antiderivative $F(x) := \\\\int_a^x f$ is continuous on $[a, b]$, differentiable on $(a, b)$ and that $F' = f$.\\n\\nBy the chain rule and the fact that $\\\\phi((c, d)) \\\\subset (a, b)$, $F \\\\circ \\\\phi$ is differentiable on $(c, d)$, and $(F \\\\circ \\\\phi)' = (F' \\\\circ \\\\phi)\\\\phi' = (f \\\\circ \\\\phi)\\\\phi'$.\\n\\nBy the remarks at the start of the proof, it follows that $(F \\\\circ \\\\phi)'$ is an integrable function. By the second form of the fundamental theorem,\\n\\n$\\\\int_c^d (f \\\\circ \\\\phi)\\\\phi' = \\\\int_c^d (F \\\\circ \\\\phi)' = (F \\\\circ \\\\phi)(d) - (F \\\\circ \\\\phi)(c) = F(b) - F(a) = F(b) = \\\\int_a^b f$.",
+        "preconditions": [
+            "function is continuous on a closed interval",
+            "derivative is integrable"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 5.1",
+        "name": "Non-interchangeable Limits",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "There is a sequence of integrable functions $f_n : [0, 1] \\\\to \\\\mathbb{R}$ (in fact, step functions) such that $f_n(x) \\\\to 0$ pointwise for all $x \\\\in [0, 1]$ but $\\\\int_0^1 f_n = 1$ for all $n$. Thus $\\\\lim_{n\\\\to\\\\infty}\\\\int_0^1 f_n = 1$, whilst $\\\\int_0^1 \\\\lim_{n\\\\to\\\\infty} f_n = 0$, and so interchange of integration and limit is not valid in this case.",
+        "proof": "Define $f_n(x)$ to be equal to $n$ for $0 < x < \\\\frac{1}{n}$ and $0$ elsewhere.",
+        "preconditions": [
+            "sequence of functions converges pointwise",
+            "step function"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.2",
+        "name": "Uniform Convergence Integration",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Proposition 1.19"
+        ],
+        "statement": "Suppose that $f_n : [a, b] \\\\to \\\\mathbb{R}$ are integrable, and that $f_n \\\\to f$ uniformly on $[a, b]$. Then $f$ is also integrable, and $\\\\lim_{n\\\\to\\\\infty} \\\\int_a^b f_n = \\\\int_a^b f = \\\\int_a^b \\\\lim_{n\\\\to\\\\infty} f_n$.",
+        "proof": "Let $\\\\varepsilon > 0$. Since $f_n \\\\to f$ uniformly, there is some choice of $n$ such that we have $|f_n(x) - f(x)| \\\\leq \\\\varepsilon$ for all $x \\\\in [a, b]$.\\n\\nNow $f_n$ is integrable, and so there is a majorant $\\\\phi^+$ and a minorant $\\\\phi^-$ for $f_n$ with $I(\\\\phi^+) - I(\\\\phi^-) \\\\leq \\\\varepsilon$.\\n\\nDefine $\\\\tilde{\\\\phi}^+ := \\\\phi^+ + \\\\varepsilon$ and $\\\\tilde{\\\\phi}^- := \\\\phi^- - \\\\varepsilon$. Then $\\\\tilde{\\\\phi}^-, \\\\tilde{\\\\phi}^+$ are minorant/majorant for $f$. Moreover\\n\\n$I(\\\\tilde{\\\\phi}^+) - I(\\\\tilde{\\\\phi}^-) \\\\leq 2\\\\varepsilon(b - a) + I(\\\\phi^+) - I(\\\\phi^-) \\\\leq 2\\\\varepsilon(b - a) + \\\\varepsilon$.\\n\\nSince $\\\\varepsilon$ was arbitrary, this shows that $f$ is integrable. Now\\n\\n$|\\\\int_a^b f_n - \\\\int_a^b f| \\\\leq \\\\int_a^b |f_n - f| \\\\leq (b - a) \\\\sup_{x\\\\in[a,b]} |f_n(x) - f(x)|$.\\n\\nSince $f_n \\\\to f$ uniformly, it follows that $\\\\lim_{n\\\\to\\\\infty} |\\\\int_a^b f_n - \\\\int_a^b f| = 0$, and hence that $\\\\lim_{n\\\\to\\\\infty} \\\\int_a^b f_n = \\\\int_a^b f = \\\\int_a^b \\\\lim_{n\\\\to\\\\infty} f_n$.\\n\\nThis concludes the proof.",
+        "preconditions": [
+            "sequence of functions converges uniformly",
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 5.3",
+        "name": "Term-by-term Integration",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Theorem 5.2"
+        ],
+        "statement": "Suppose that $\\\\phi_i : [a, b] \\\\to \\\\mathbb{R}$, $i = 1, 2, \\\\ldots$ are integrable functions and that $|\\\\phi_i(x)| \\\\leq M_i$ for all $x \\\\in [a, b]$, where $\\\\sum_{i=1}^\\\\infty M_i < \\\\infty$. Then the sum $\\\\sum_i \\\\phi_i$ is integrable and $\\\\int_a^b \\\\sum_i \\\\phi_i = \\\\sum_i \\\\int_a^b \\\\phi_i$.",
+        "proof": "This is immediate from the Weierstrass $M$-test and Theorem 5.2, applied with $f_n = \\\\sum_{i=1}^n \\\\phi_i$.",
+        "preconditions": [
+            "function is integrable",
+            "function is bounded"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 5.4",
+        "name": "Non-convergent Derivatives",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "There is a sequence of functions $f_n : [0, 1] \\\\to \\\\mathbb{R}$, each continuously differentiable on $(0, 1)$, such that $f_n \\\\to 0$ uniformly but such that $f'_n$ does not converge at every point.",
+        "proof": "Take $f_n(x) = \\\\frac{1}{n} \\\\sin(n^2x)$. Then $f'_n(x) = -n \\\\cos(n^2x)$. Taking $x = \\\\frac{\\\\pi}{4}$, we see that if $n$ is a multiple of $4$ then $f'_n(x) = -n$, which certainly does not converge.",
+        "preconditions": [
+            "function is continuously differentiable",
+            "sequence of functions converges uniformly"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 5.5",
+        "name": "Uniform Derivative Convergence",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Theorem 2.2",
+            "Theorem 5.2"
+        ],
+        "statement": "Suppose that $f_n : [a, b] \\\\to \\\\mathbb{R}$, $n = 1, 2, \\\\ldots$ is a sequence of functions with the property that $f_n$ is continuously differentiable on $(a, b)$, that $f_n$ converges pointwise to some function $f$ on $[a, b]$, and that $f'_n$ converges uniformly to some bounded function $g$ on $(a, b)$. Then $f$ is differentiable and $f' = g$. In particular, $\\\\lim_{n\\\\to\\\\infty} f'_n = (\\\\lim_{n\\\\to\\\\infty} f_n)'$.",
+        "proof": "First note that, since the $f'_n$ are continuous and $f'_n \\\\to g$ uniformly, $g$ is continuous. Since we are also assuming $g$ is bounded, it follows from Theorem 2.2 that $g$ is integrable.\\n\\nWe may therefore apply the first form of the fundamental theorem of calculus to $g$. Since $g$ is continuous, the theorem says that if we define a function $F : [a, b] \\\\to \\\\mathbb{R}$ by\\n\\n$F(x) := \\\\int_a^x g(t)dt$\\n\\nthen $F$ is differentiable with $F' = g$. By the second form of the fundamental theorem of calculus applied to $f_n$, we have\\n\\n$\\\\int_a^x f'_n(t)dt = f_n(x) - f_n(a)$.\\n\\nTaking limits as $n \\\\to \\\\infty$ and using the fact that $f_n \\\\to f$ pointwise, we obtain\\n\\n$\\\\lim_{n\\\\to\\\\infty} \\\\int_a^x f'_n(t)dt = f(x) - f(a)$.\\n\\nHowever, since $f'_n \\\\to g$ uniformly, it follows from Theorem 5.2 that\\n\\n$\\\\lim_{n\\\\to\\\\infty} \\\\int_a^x f'_n(t)dt = \\\\int_a^x g(t)dt$.\\n\\nThus\\n\\n$F(x) = \\\\int_a^x g(t)dt = f(x) - f(a)$.\\n\\nIt follows immediately that $f$ is differentiable and that its derivative is the same as that of $F$, namely $g$.",
+        "preconditions": [
+            "function is continuously differentiable",
+            "sequence of functions converges pointwise",
+            "sequence of functions converges uniformly",
+            "function is bounded"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 5.6",
+        "name": "Series Differentiation",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Proposition 5.5"
+        ],
+        "statement": "Suppose we have a sequence of continuous functions $\\\\phi_i : [a, b] \\\\to \\\\mathbb{R}$, continuously differentiable on $(a, b)$, with $\\\\sum_i \\\\phi_i$ converging pointwise. Suppose that $|\\\\phi'_i(x)| \\\\leq M_i$ for all $x \\\\in (a, b)$, where $\\\\sum_i M_i < \\\\infty$. Then $\\\\sum \\\\phi_i$ is differentiable and $\\\\left(\\\\sum_i \\\\phi_i\\\\right)' = \\\\sum_i \\\\phi'_i$.",
+        "proof": "Apply Proposition 5.5 with $f_n := \\\\sum_{i=1}^n \\\\phi_i$. By the Weierstrass $M$-test, $f'_n = \\\\sum_{i=1}^n \\\\phi'_i$ does converge pointwise to some bounded function, which we may call $g$.",
+        "preconditions": [
+            "sequence of functions converges pointwise",
+            "function is continuously differentiable"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 5.8",
+        "name": "Geometric Series Convergence",
+        "topic": "Foundations of Integration",
+        "previous_results": [],
+        "statement": "Suppose that $0 \\\\leq \\\\lambda < 1$. Then $\\\\sum_{i=0}^{\\\\infty} \\\\lambda^i$ and $\\\\sum_{i=1}^{\\\\infty} i\\\\lambda^{i-1}$ both converge.",
+        "proof": "By the well-known geometric series formula we have\\n\\n$$\\\\sum_{i=0}^{n-1} \\\\lambda^i = \\\\frac{1 - \\\\lambda^n}{1 - \\\\lambda}.$$\\n\\nLetting $n \\\\to \\\\infty$ gives the first statement immediately, the value of the sum being $\\\\frac{1}{1-\\\\lambda}$.\\n\\nFor the second statement, we differentiate the geometric series formula. This gives\\n\\n$$\\\\sum_{i=1}^{n-1} i\\\\lambda^{i-1} = \\\\frac{1 + (n - 1)\\\\lambda^n - n\\\\lambda^{n-1}}{(1 - \\\\lambda)^2},$$\\n\\nwhich tends to $\\\\frac{1}{(1-\\\\lambda)^2}$ as $n \\\\to \\\\infty$.",
+        "preconditions": [
+            "power series with radius of convergence"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.9",
+        "name": "Differentiation of Power Series",
+        "topic": "Foundations of Integration",
+        "previous_results": [
+            "Corollary 5.6",
+            "Lemma 5.8"
+        ],
+        "statement": "Suppose a formal power series $\\\\sum_{i=0}^{\\\\infty} a_ix^i$ has radius of convergence $R$. Then the series converges for $|x| < R$, giving a well-defined function $f(x) = \\\\sum_{i=0}^{\\\\infty} a_ix^i$. Moreover, $f$ is differentiable on $(-R, R)$, and its derivative is given by term-by-term differentiation, that is to say $f'(x) = \\\\sum_{i=1}^{\\\\infty} ia_ix^{i-1}$. Moreover, the radius of convergence for this power series for $f'$ is at least $R$.",
+        "proof": "If $R = 0$, there is nothing to prove. Suppose that $R > 0$. Let $R_1$ satisfy $0 < R_1 < R$. We apply Corollary 5.6 with $\\\\phi_i(x) = a_ix^i$ and $[a, b] = [-R_1, R_1]$. We need to check that the hypotheses of that result are satisfied. By definition of the radius of convergence, there is some $R_0$ satisfying $R_1 < R_0 \\\\leq R$ for which $\\\\sum_i |a_iR_0^i|$ converges, and in particular $|a_iR_0^i|$ is bounded, uniformly in $i$: let us say $|a_iR_0^i| \\\\leq K$. Then if $x \\\\in [a, b]$ we have\\n\\n$$|\\\\phi_i(x)| \\\\leq K\\\\left(\\\\frac{R_1}{R_0}\\\\right)^i$$\\n\\nand\\n\\n$$|\\\\phi_i'(x)| \\\\leq K\\\\frac{i}{R_0}\\\\left(\\\\frac{R_1}{R_0}\\\\right)^{i-1}.$$\\n\\nThe first condition of Corollary 5.6, that is to say pointwise convergence of $\\\\sum_i \\\\phi_i(x)$, is now immediate from the first part of Lemma 5.8. Taking $M_i := K\\\\frac{i}{R_0}\\\\left(\\\\frac{R_1}{R_0}\\\\right)^{i-1}$, we obtain the other condition of Corollary 5.6 from the second part of Lemma 5.8.\\n\\nIt now follows from Corollary 5.6 that $f$ is differentiable on $(-R_1, R_1)$, and that its derivative is given by term-by-term differentiation of the power series for $f$. Since $R_1 < R$ was arbitrary, we may assert the same on $(-R, R)$.\\n\\nFinally, it follows from (5.1) and Lemma 5.8 that the radius of convergence of the power series for $f'$ is at least $R_1$. Since $R_1 < R$ was arbitrary, the radius of convergence of this power series is at least $R$, as claimed.",
+        "preconditions": [
+            "power series with radius of convergence",
+            "function is differentiable"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 6.1",
+        "name": "Differential Equation Solution",
+        "topic": "Special Functions and Applications",
+        "previous_results": [],
+        "statement": "Suppose that $f : \\\\mathbb{R} \\\\to \\\\mathbb{R}$ is a differentiable function with $f' = f$ identically and $f(0) = 0$. Then $f$ is identically zero.",
+        "proof": "Since $f$ is continuous, it attains its maximum value on $[0, \\\\frac{1}{2}]$ at some point $x$. Suppose that $x > 0$. By the mean value theorem,\\n\\n$$f(x) = f(x) - f(0) = xf'(\\\\xi) = xf(\\\\xi)$$\\n\\nfor some point $\\\\xi \\\\in (0, x)$. Therefore\\n\\n$$f(x) \\\\leq xf(x) \\\\leq \\\\frac{1}{2}f(x),$$\\n\\nwhich implies that $f(x) \\\\leq 0$. That is, $f \\\\leq 0$ on $[0, \\\\frac{1}{2}]$. Applying the same argument to $-f$ gives $f \\\\geq 0$ on $[0, \\\\frac{1}{2}]$, and so $f = 0$ identically on $[0, \\\\frac{1}{2}]$.\\n\\nWe may now apply the same argument to $g(x) = f(x + \\\\frac{1}{2})$, which satisfies $g' = g$ and $g(0) = 0$. We conclude that $g$ is identically zero on $[0, \\\\frac{1}{2}]$, and hence that $f$ is identically zero on $[\\\\frac{1}{2}, 1]$ and hence on $[0, 1]$. Continuing in this manner eventually shows that $f$ is identically zero on the whole of $\\\\mathbb{R}$.",
+        "preconditions": [
+            "function is differentiable"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 6.2",
+        "name": "The exponential function",
+        "topic": "Special Functions and Applications",
+        "previous_results": [
+            "Corollary 5.6",
+            "Lemma 6.1"
+        ],
+        "statement": "For $x \\\\in \\\\mathbb{R}$, define\\n\\n$$e(x) = \\\\sum_{k=0}^{\\\\infty} \\\\frac{x^k}{k!}.$$\\n\\nThen\\n\\n(i) The series converges for all $x$, and $e(x)$ is a differentiable function satisfying $e' = e$.\\n\\n(ii) We have $e(x) > 0$ for all $x \\\\in \\\\mathbb{R}$.\\n\\n(iii) We have $e(x + y) = e(x)e(y)$ for all $x, y \\\\in \\\\mathbb{R}$.",
+        "proof": "(i) Clearly we may work on bounded intervals $[-X, X]$, and let $X \\\\to \\\\infty$ at the end. Fix $X$ from now on.\\n\\nWe will apply Corollary 5.6, taking $\\\\phi_k(x) = x^k/k!$. Since the $\\\\phi_k$ are continuously differentiable and $\\\\phi_k'(x) = x^{k-1}/(k - 1)!$, the result will follow if we can show that $|\\\\phi_k(x)| \\\\leq M_k$ for $x \\\\in [-X, X]$, where $\\\\sum_k M_k$ converges. (In particular it will then follow from the Weierstrass $M$-test that $\\\\sum_k \\\\phi_k(x)$ converges, which is one of the hypotheses of Corollary 5.6).\\n\\nTo establish this, we can use very crude bounds. Observe that $k! \\\\geq (k/2)^{k/2}$ for all $k$, since the product for $k!$ contains at least $k/2$ terms of size $k/2$ or greater. Therefore\\n\\n$$\\\\frac{x^k}{k!} \\\\leq \\\\left(\\\\frac{2x^2}{k}\\\\right)^{k/2}.$$\\n\\nIf $|x| \\\\leq X$ and $k \\\\geq 8X^2$, this is bounded above by $2^{-k}$, which clearly converges when summed over $k$. (One could also use the \\",
+        "test\\": "ere, though personally I wouldn't bother when a direct proof is so short.)\\n\\n(ii) Suppose that $e(a) = 0$. Consider the function $f(x) = e(x+a)$; then $f(0) = 0$ and $f' = f$. By Lemma 6.1, $f$ is identically zero and hence so is $e$. But this is a contradiction, as $e$ is clearly not identically zero (for example $e(0) = 1$).\\n\\nThus $e$ never vanishes. Since it is continuous, and positive somewhere, the intermediate value theorem implies that it is positive everywhere.\\n\\n(iii) Consider the function $\\\\tilde{e}(x) = \\\\frac{e(x+y)}{e(y)}$. As just established, $e(y) \\\\neq 0$ and so for every fixed $y$ this is a continuous function of $x$. Moreover by the chain rule we have $\\\\tilde{e}'(x) = \\\\tilde{e}(x)$, and by direct substitution we have $\\\\tilde{e}(0) = e(0) = 1$.\\n\\nTherefore the function $f := e - \\\\tilde{e}$ satisfies the hypotheses of Lemma 6.1. It follows that $\\\\tilde{e}(x) = e(x)$, which is what we were required to prove.",
+        "preconditions": [
+            "power series with radius of convergence",
+            "function is differentiable"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 6.3",
+        "name": "The logarithm function",
+        "topic": "Special Functions and Applications",
+        "previous_results": [
+            "Proposition 4.6"
+        ],
+        "statement": "For $x > 0$, define\\n\\n$$L(x) = \\\\int_1^x \\\\frac{dy}{y}.$$\\n\\nThen\\n\\n(i) $L$ is differentiable with derivative $\\\\frac{1}{x}$ at each $x > 0$;\\n\\n(ii) $L(e^t) = t$ for all $t \\\\in \\\\mathbb{R}$.",
+        "proof": "(i) This is almost immediate from the first fundamental theorem of calculus except that we need to convince ourselves that it still applies when $x \\\\leq 1$. This may be done as follows. Let $c > 0$ and write\\n\\n$$\\\\int_1^x \\\\frac{dy}{y} = \\\\int_c^x \\\\frac{dy}{y} - \\\\int_c^1 \\\\frac{dy}{y}.$$\\n\\nIt is easy to check that this holds for any $c > 0$. Then we may apply the fundamental theorem of calculus to get that $L'(x) = \\\\frac{1}{x}$ for any $x > c$. Since $c$ was arbitrary, the result follows.\\n\\n(ii) We use the substitution rule, Proposition 4.6, taking $f(y) = \\\\frac{1}{y}$ and $\\\\phi(t) = e^t$. Note that $f(\\\\phi(t))\\\\phi'(t) = 1$, since $\\\\phi' = \\\\phi$. We therefore have\\n\\n$$\\\\int_1^{e^x} \\\\frac{dt}{t} = \\\\int_0^x (f \\\\circ \\\\phi)\\\\phi' = x.$$\\n\\nWe leave the reader to check that the conditions required in the substitution lemma are valid (this is easy).",
+        "preconditions": [
+            "function is differentiable",
+            "function is integrable"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 7.1",
+        "name": "Improper Integral Log",
+        "topic": "Advanced Integration Concepts",
+        "previous_results": [
+            "Theorem 4.4"
+        ],
+        "statement": "Consider the function $f(x) = \\\\log x$. This is continuous on $(0, 1]$ but it is not integrable there since it is not bounded (it tends to $-\\\\infty$ as $x \\\\to 0$). However, it is integrable on any interval $[\\\\varepsilon, 1]$, $\\\\varepsilon > 0$.",
+        "proof": "By the second fundamental theorem of calculus (and the fact that if $F(x) = x \\\\log x - x$ then $F'(x) = \\\\log x$) we have\\n\\n$$\\\\int_{\\\\varepsilon}^{1} \\\\log x dx = [x \\\\log x - x]_{\\\\varepsilon}^{1} = -1 - \\\\varepsilon \\\\log \\\\varepsilon + \\\\varepsilon.$$\\n\\nWe claim that\\n\\n$$\\\\lim_{\\\\varepsilon \\\\to 0+} \\\\varepsilon \\\\log \\\\varepsilon = 0.$$\\n\\nOnce this is shown, it follows that\\n\\n$$\\\\lim_{\\\\varepsilon \\\\to 0+} \\\\int_{\\\\varepsilon}^{1} \\\\log x dx = -1.$$\\n\\nThis will often be written as $\\\\int_{0}^{1} \\\\log x dx = -1$, but strictly speaking, this is not an integral as discussed in this course.\\n\\nTo prove the claim, recall that $\\\\log \\\\varepsilon = -\\\\int_{\\\\varepsilon}^{1} \\\\frac{dx}{x}$ for $\\\\varepsilon < 1$. We divide the range of integration into the ranges $[\\\\varepsilon, \\\\sqrt{\\\\varepsilon}]$ and $[\\\\sqrt{\\\\varepsilon}, 1]$. On the first range we have $1/x \\\\leq 1/\\\\varepsilon$ and so\\n\\n$$\\\\left|\\\\int_{\\\\varepsilon}^{\\\\sqrt{\\\\varepsilon}} \\\\frac{dx}{x}\\\\right| \\\\leq \\\\frac{1}{\\\\varepsilon} \\\\cdot (\\\\sqrt{\\\\varepsilon} - \\\\varepsilon) \\\\leq \\\\frac{\\\\sqrt{\\\\varepsilon}}{\\\\varepsilon} = \\\\frac{1}{\\\\sqrt{\\\\varepsilon}}.$$\\n\\nOn the second range we have $1/x \\\\leq 1/\\\\sqrt{\\\\varepsilon}$ and so\\n\\n$$\\\\left|\\\\int_{\\\\sqrt{\\\\varepsilon}}^{1} \\\\frac{dx}{x}\\\\right| \\\\leq \\\\frac{1}{\\\\sqrt{\\\\varepsilon}} \\\\cdot (1 - \\\\sqrt{\\\\varepsilon}) \\\\leq \\\\frac{1}{\\\\sqrt{\\\\varepsilon}}.$$\\n\\nIt follows that $|\\\\log \\\\varepsilon| \\\\leq \\\\frac{2}{\\\\sqrt{\\\\varepsilon}}$, from which we get $|\\\\varepsilon \\\\log \\\\varepsilon| \\\\leq 2\\\\sqrt{\\\\varepsilon}$, which tends to 0 as $\\\\varepsilon \\\\to 0+$.",
+        "preconditions": [
+            "function is continuous on an open interval",
+            "function is not bounded"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 7.2",
+        "name": "Improper Integral 1/x\u00b2",
+        "topic": "Advanced Integration Concepts",
+        "previous_results": [],
+        "statement": "Consider the function $f(x) = 1/x^2$. We would like to discuss the integral of this \\",
+        "infty)$\\": "but this is not permitted by the way we have defined the integral, which requires a bounded interval. However, on any bounded interval $[1, K]$ we have",
+        "proof": "$$\\\\int_{1}^{K} \\\\frac{1}{x^2} dx = \\\\left[ -\\\\frac{1}{x} \\\\right]_{1}^{K} = 1 - \\\\frac{1}{K}.$$\\n\\nTherefore\\n\\n$$\\\\lim_{K \\\\to \\\\infty} \\\\int_{1}^{K} \\\\frac{1}{x^2} dx = 1.$$\\n\\nThis is invariably written\\n\\n$$\\\\int_{1}^{\\\\infty} \\\\frac{1}{x^2} dx = 1.$$",
+        "preconditions": [
+            "function on an open interval",
+            "function is continuous on an open interval",
+            "function is non-negative"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 7.3",
+        "name": "Combined Improper Integral",
+        "topic": "Advanced Integration Concepts",
+        "previous_results": [
+            "Example 7.1",
+            "Example 7.2"
+        ],
+        "statement": "Define $f(x)$ to be $\\\\log x$ if $0 < x \\\\leq 1$, and $f(x) = \\\\frac{1}{x^2}$ for $x > 1$. Then it makes sense to write $\\\\int_{0}^{\\\\infty} f(x)dx = 0$.",
+        "proof": "By this we mean\\n\\n$$\\\\lim_{K \\\\to \\\\infty, \\\\varepsilon \\\\to 0} \\\\int_{\\\\varepsilon}^{K} f(x)dx = 0.$$\\n\\nThis is a combination of the preceding two examples. From Example 7.1, we know that $\\\\lim_{\\\\varepsilon \\\\to 0} \\\\int_{\\\\varepsilon}^{1} \\\\log x dx = -1$, and from Example 7.2, we know that $\\\\lim_{K \\\\to \\\\infty} \\\\int_{1}^{K} \\\\frac{1}{x^2} dx = 1$. Therefore, the combined limit equals $-1 + 1 = 0$.",
+        "preconditions": [
+            "function is integrable",
+            "function on an open interval"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 7.4",
+        "name": "Principal Value Integral",
+        "topic": "Advanced Integration Concepts",
+        "previous_results": [],
+        "statement": "Define $f(x)$ to be $1/x$ for $0 < |x| \\\\leq 1$, and $f(0) = 0$. Then $f$ is unbounded as $x \\\\to 0$, and so we cannot define the integral $\\\\int_{-1}^{1} f$. We can nonetheless try to make some kind of sense of this quantity.",
+        "proof": "Excising the problematic region around 0, one can look at\\n\\n$$I_{\\\\varepsilon,\\\\varepsilon'} := \\\\int_{\\\\varepsilon}^{1} f(x)dx + \\\\int_{-1}^{-\\\\varepsilon'} f(x)dx,$$\\n\\nand one easily computes that\\n\\n$$I_{\\\\varepsilon,\\\\varepsilon'} = \\\\log\\\\frac{\\\\varepsilon'}{\\\\varepsilon}.$$\\n\\nThis does not necessarily tend to a limit as $\\\\varepsilon, \\\\varepsilon' \\\\to 0$ (for example, if $\\\\varepsilon' = \\\\varepsilon^2$ it does not tend to a limit). One will often hear the term Cauchy principal value (PV) for the limit $\\\\lim_{\\\\varepsilon \\\\to 0} I_{\\\\varepsilon,\\\\varepsilon}$, which in this case equals 0. We won't discuss principal values any further in this course, and in this case it is not appropriate to write $\\\\int_{-1}^{1} \\\\frac{1}{x} dx = 0$; one could possibly write $\\\\text{PV} \\\\int_{-1}^{1} \\\\frac{1}{x} dx = 0$.",
+        "preconditions": [
+            "function on a closed interval",
+            "function is unbounded"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 7.5",
+        "name": "Principal Value Sine",
+        "topic": "Advanced Integration Concepts",
+        "previous_results": [
+            "Example 7.4"
+        ],
+        "statement": "Similarly to the last example, one should not write $\\\\int_{-\\\\infty}^{\\\\infty} \\\\sin x dx = 0$.",
+        "proof": "One might be tempted to write $\\\\int_{-\\\\infty}^{\\\\infty} \\\\sin x dx = \\\\lim_{K \\\\to \\\\infty} \\\\int_{-K}^{K} \\\\sin x dx = 0$ (because $\\\\sin$ is an odd function). In this case, $\\\\lim_{K \\\\to \\\\infty} \\\\int_{-K}^{K} \\\\sin x dx = 0$, even though $\\\\lim_{K,K' \\\\to \\\\infty} \\\\int_{-K}^{K'} \\\\sin x dx$ does not exist. One could maybe write\\n\\n$$\\\\text{PV} \\\\int_{-\\\\infty}^{\\\\infty} \\\\sin x dx = 0,$$\\n\\nbut I would not be tempted to do so.",
+        "preconditions": [
+            "function is integrable"
+        ]
+    }
+]
