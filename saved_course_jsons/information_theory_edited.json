@@ -1,0 +1,1338 @@
+[
+    {
+        "type": "definition",
+        "id": "Definition 1.1",
+        "name": "Entropy",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [],
+        "statement": "The entropy $H_b(X)$ in base $b$ of a discrete random variable $X$ is defined as\\n\\n$H_b(X) = -\\\\sum_{x\\\\in X} P(X = x) \\\\log_b P(X = x)$,\\n\\nwhere we use the convention that $0 \\\\times \\\\log_b(0) = 0$. As we will often be working with binary signals, for $b = 2$ we usually write $H(X)$ instead of $H_2(X)$, and write $\\\\log(q)$ instead $\\\\log_2(q)$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "probability mass function",
+            "entropy"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 1.2",
+        "name": "Binary Entropy",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [
+            "Definition 1.1"
+        ],
+        "statement": "If $X = \\\\{H, T\\\\}$ and $P(X = H) = p$, then\\n\\n$H(X) = -p \\\\log(p) - (1 - p) \\\\log(1 - p)$.\\n\\nIf $p \\\\in \\\\{0, 1\\\\}$, then $H(X) = 0$. Differentiating in $p$ shows that the entropy as a function of $p$ increases on $(0, 0.5)$ and decreases on $(0.5, 1)$. Hence, the entropy is maximised if $p = 0.5$ with $H(X) = \\\\log(2) = 1$ bits. In order to maximize notational confusion, as this case comes up frequently, we will also write\\n\\n$H(p) = -p \\\\log(p) - (1 - p) \\\\log(1 - p)$,\\n\\nin which case we have the equivalent notations $H(X) = H(p) = H(p_X) = H(P_X)$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "probability mass function",
+            "entropy"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 1.3",
+        "name": "Joint Entropy",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [
+            "Definition 1.1",
+            "Example 1.2"
+        ],
+        "statement": "If $X$ is a 2-dim vector in the form $(X_1, X_2)$ with $X_i \\\\in \\\\mathcal{X}_i$ for $i = 1, 2$, then\\n\\n$H(X) = H(X_1, X_2) = -\\\\sum_{x_1\\\\in \\\\mathcal{X}_1,x_2\\\\in \\\\mathcal{X}_2} p_{X_1,X_2}(x_1, x_2) \\\\log (p_{X_1,X_2}(x_1, x_2))$.\\n\\nIf additionally, $X_1$ and $X_2$ are independent, i.e., $p_{X_1,X_2} (x_1, x_2) = p_{X_1} (x_1)p_{X_2}(x_2)$, then\\n\\n$H(X) = H(X_1) + H(X_2)$.\\n\\nIf $X_1$ and $X_2$ are independent and identically distributed (i.i.d.), then\\n\\n$H(X) = 2H(X_1) = 2H(X_2)$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "entropy",
+            "i.i.d. sequence"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.4",
+        "name": "Divergence",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [
+            "Definition 1.1"
+        ],
+        "statement": "Let $p$ and $q$ be pmfs on $\\\\mathcal{X}$. We call\\n\\n$D(p\\\\|q) = \\\\sum_{x\\\\in \\\\mathcal{X}} p(x) \\\\log\\\\left(\\\\frac{p(x)}{q(x)}\\\\right)$\\n\\nthe divergence between $p$ and $q$ and set by convention $0 \\\\times \\\\log(0) = 0$ and $D(p\\\\|q) = \\\\infty$ if $\\\\exists x \\\\in \\\\mathcal{X}$ such that $q(x) = 0$ and $p(x) > 0$. (Divergence is also known as information divergence, Kullback\u2013Leibler divergence, relative entropy).",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "probability mass function",
+            "divergence"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 1.5",
+        "name": "Divergence Properties",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [
+            "Definition 1.4"
+        ],
+        "statement": "(Asymmetry and infinite values are useful). Let $\\\\mathcal{X} = \\\\{0, 1\\\\}$ and $p(0) = 0.5$, $q(0) = 1$. We are given independent samples from one of these two distributions but we do not know which one. If we observe $0000001$, we can immediately infer that $p$ is the underlying pmf. On the other hand, if we observe $0000000$ it is likely that the sample comes from $q$ but we cannot exclude that it comes from $p$. This is reflected in the divergence since $D(p\\\\|q) = \\\\infty$ but $D(q\\\\|p) = 1$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "probability mass function",
+            "divergence"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 1.6",
+        "name": "Uniform Distribution Divergence",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [],
+        "statement": "If $q$ is a uniform distribution, then it is clear that the relative entropy $D(p\\\\|q) = \\\\log(|X |) - H(X)$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "probability mass function",
+            "entropy",
+            "divergence"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.7",
+        "name": "Mutual Information",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [],
+        "statement": "Let $X, Y$ be discrete random variables taking values in $X$ and $Y$ respectively. The mutual information $I(X; Y)$ between $X$ and $Y$ is defined as\\n\\n$I(X; Y) = \\\\sum_{x\\\\in X} \\\\sum_{y\\\\in Y} P(X = x, Y = y) \\\\log\\\\left(\\\\frac{P(X = x, Y = y)}{P(X = x)P(Y = y)}\\\\right)$.\\n\\nSome motivations:\\n\\n$\\\\bullet$ Denote with $p_{X,Y}$, $p_X$, $p_Y$ the pmfs of $(X, Y)$, $X$ and $Y$. Then\\n\\n$I(X; Y) = D(p_{X,Y} \\\\| p_X p_Y)$.\\n\\nHence, we can regard the mutual information as a measure of how much dependence there is between two random variables.\\n\\n$\\\\bullet$ Unlike covariance $Cov(X, Y) = E[(X - E[X])(Y - E[Y])]$, the mutual information $I(X; Y)$ takes into account higher order dependence (not just second order dependence).\\n\\n$\\\\bullet$ It is obvious that $I(X; Y) = I(Y; X)$.\\n\\n$\\\\bullet$ Another way to think about mutual information is in terms of entropies\\n\\n$I(X; Y) = E\\\\left[\\\\log\\\\left(\\\\frac{p_{X,Y}(X, Y)}{p_X(X)p_Y(Y)}\\\\right)\\\\right]$\\n\\n$= E[\\\\log(p_{X,Y}(X, Y)) - \\\\log(p_X(X)) - \\\\log(p_Y(Y))]$\\n\\n$= H(X) + H(Y) - H(X, Y)$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "probability mass function",
+            "entropy",
+            "divergence",
+            "mutual information"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.8",
+        "name": "Conditional Entropy",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [],
+        "statement": "Let $X, Y$ be discrete random variables taking values in $X$. The conditional entropy of $Y$ given $X$ is defined as\\n\\n$H(Y|X) = -\\\\sum_{x\\\\in X}\\\\sum_{y\\\\in X} P(X = x, Y = y) \\\\log(P(Y = y|X = x))$\\n\\n$= -\\\\sum_{x\\\\in X}\\\\sum_{y\\\\in X} P(X = x, Y = y) \\\\log\\\\left(\\\\frac{P(Y = y, X = x)}{P(X = x)}\\\\right)$.\\n\\nIn analogy to entropy, it holds that\\n\\n$H(Y|X) = -\\\\sum_{x\\\\in X} P(X = x)\\\\sum_{y\\\\in X} P(Y = y|X = x) \\\\log(P(Y = y|X = x))$\\n\\n$= \\\\sum_{x\\\\in X} P(X = x)H(Y|X = x)$\\n\\n$= -\\\\sum_{x\\\\in X} P(X = x)E[\\\\log(p_{Y|X=x}(Y))]$\\n\\n$= -E[\\\\log(p_{Y|X}(Y))]$.\\n\\nAn intuitive way to think about $H(X|Y)$ is as the average (with respect to $X$) surprise we have about $Y$ after having observed $X$ (e.g. if $Y = X$ there's no surprise).\\n\\nBy rearranging and Bayes' rule, we have the 'chain rule' of conditional entropy\\n\\n$H(X|Y) = H(X, Y) - H(Y)$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "entropy",
+            "conditional entropy"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.9",
+        "name": "Conditional Divergence",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [],
+        "statement": "Let $p_X$ be a pmf on a discrete space $X$, and $p(\\\\cdot|x)$ and $q(\\\\cdot|x)$ be two (conditional on the parameter $x$) pmfs on $X$ for any $x \\\\in X$. The divergence between $p(\\\\cdot|X)$ and $q(\\\\cdot|X)$ conditioned on $p_X$ (also known as conditional divergence, conditional Kullback\u2013Leibler divergence, condition relative entropy) is defined as\\n\\n$D(p_{Y|X} \\\\| q_{Y|X} | p_X) = \\\\sum_{x\\\\in X} p_X(x)D(p_{Y_1|X=x}\\\\|q_{Y_2|X=x})$\\n\\nwhere random variables $X, Y, Y_1, Y_2$ are all such that $p_{Y|X}(y|x) = p(y|x) = p_{Y_1|X}(y|x)$, $q_{Y|X}(y|x) = q(y|x) = p_{Y_2|X}(y|x)$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "probability mass function",
+            "divergence",
+            "conditional divergence"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.10",
+        "name": "Conditional Divergence v2",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [],
+        "statement": "Let $X$ and $Y_1, Y_2$ be discrete random variables taking values in $X$, and the joint pmf of $(X, Y_i)$ be $p_{X,Y_i}$. The divergence between $p_{Y_1}$ and $p_{Y_2}$ conditioned on $X$ is defined as\\n\\n$D(p_{Y_1|X} \\\\| p_{Y_2|X} | p_X) = \\\\sum_{x\\\\in X} p_X(x)D(p_{Y_1|X=x}\\\\|p_{Y_2|X=x})$\\n\\nand can be written\\n\\n$D(p_{Y|X} \\\\| q_{Y|X} | p_X) = E[D(p_{Y_1|X}(\\\\cdot|X)\\\\|p_{Y_2|X}(\\\\cdot|X))]$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "probability mass function",
+            "divergence",
+            "conditional divergence"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 1.11",
+        "name": "Conditional Mutual Information",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [],
+        "statement": "Let $X$, $Y$, $Z$ be discrete random variables taking values in $\\\\mathcal{X}$. The conditional mutual information $I(X; Y|Z)$ (conditioned on $Z$) between $X$ and $Y$ is defined as\\n\\n$I(X; Y|Z) := H(X|Z) - H(X|Y, Z)$.\\n\\nAgain, we can write this as $I(X; Y|Z) = \\\\mathbb{E}\\\\left[\\\\log\\\\left(\\\\frac{p_{X,Y|Z}(X,Y)}{p_{X|Z}(X)p_{Y|Z}(Y)}\\\\right)\\\\right]$, by which we can see that $I(X; Y|Z) = I(Y; X|Z)$.\\n\\nIn the same way we regard mutual information as measure of dependence, we can regard conditional mutual information as a measure of dependence of two r.v.'s $(X, Y)$ conditional on knowing another random variable $(Z)$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "conditional mutual information",
+            "conditional entropy",
+            "mutual information"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 1.12",
+        "name": "Gibbs' inequality",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [],
+        "statement": "Let $p$ and $q$ be pmfs on $\\\\mathcal{X}$. Then\\n\\n$-\\\\sum_{x\\\\in\\\\mathcal{X}} p(x) \\\\log(p(x)) \\\\leq -\\\\sum_{x\\\\in\\\\mathcal{X}} p(x) \\\\log(q(x))$\\n\\nand the equality holds if and only if (iff) $p \\\\equiv q$.",
+        "proof": "Denote by $X$ an r.v. following the pmf $p$. Adding $\\\\sum_{x\\\\in\\\\mathcal{X}} p(x) \\\\log(p(x))$ on both sides, we estimate the right hand side\\n\\n$\\\\sum_{x\\\\in\\\\mathcal{X}} p(x) \\\\log\\\\left(\\\\frac{p(x)}{q(x)}\\\\right) = \\\\mathbb{E}\\\\left[\\\\log\\\\left(\\\\frac{p(X)}{q(X)}\\\\right)\\\\right] = -\\\\mathbb{E}\\\\left[-\\\\log\\\\left(\\\\frac{q(X)}{p(X)}\\\\right)\\\\right] \\\\geq -\\\\log\\\\left(\\\\mathbb{E}\\\\left[\\\\frac{q(X)}{p(X)}\\\\right]\\\\right) = -\\\\log\\\\left(\\\\sum_{x\\\\in\\\\mathcal{X}} p(x)\\\\frac{q(x)}{p(x)}\\\\right) = -\\\\log(1) = 0$,\\n\\nwhere the inequality follows by Jensen's inequality applied to $f(x) = -\\\\log(x)$ (a strictly convex function). Note that, by Jensen, equality holds iff $\\\\frac{q(x)}{p(x)}$ is constant.\\n\\nPut differently, Gibbs' inequality tells us that the minimiser of the map\\n\\n$q \\\\mapsto -\\\\mathbb{E}[\\\\log(q(X))]$\\n\\nis the pmf $p_X$ and the minimum is $H(X)$.",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "probability mass function"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 1.13",
+        "name": "Log sum inequality",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [],
+        "statement": "Let $a_1, \\\\cdot \\\\cdot \\\\cdot, a_n; b_1, \\\\cdot \\\\cdot \\\\cdot, b_n$ are all nonnegative. Then\\n\\n$\\\\sum_{i=1}^n a_i \\\\log\\\\left(\\\\frac{a_i}{b_i}\\\\right) \\\\geq \\\\left(\\\\sum_{i=1}^n a_i\\\\right) \\\\log\\\\left(\\\\frac{\\\\sum_{i=1}^n a_i}{\\\\sum_{i=1}^n b_i}\\\\right)$\\n\\nwith equality holds iff $\\\\frac{a_i}{b_i}$ is constant.",
+        "proof": "",
+        "preconditions": [
+            "convex function",
+            "divergence"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 1.14",
+        "name": "Divergence properties",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [
+            "Lemma 1.12",
+            "Lemma 1.13"
+        ],
+        "statement": "Let $(X, Y)$ and $(\\\\hat{X}, \\\\hat{Y})$ be 2-dimensional discrete random variables taking values in $\\\\mathcal{X} \\\\times \\\\mathcal{Y}$. Then\\n\\n(1) (Information inequality) $D(p_X \\\\|p_{\\\\hat{X}}) \\\\geq 0$ with equality iff $p_X = p_{\\\\hat{X}}$.\\n\\n(2) (Chain rule) $D(p_{X,Y} \\\\|p_{\\\\hat{X},\\\\hat{Y}}) = D(p_{Y|X} \\\\| p_{\\\\hat{Y}|\\\\hat{X}} | p_X) + D(p_X \\\\|p_{\\\\hat{X}})$.\\n\\n(3) $D(p_{X,Y} \\\\|p_{\\\\hat{X},\\\\hat{Y}}) \\\\geq D(p_X \\\\|p_{\\\\hat{X}})$.\\n\\n(4) $D(p_{Y|X} \\\\|p_{\\\\hat{Y}|\\\\hat{X}} | p_X) = D(p_X p_{Y|X} \\\\|p_X p_{\\\\hat{Y}|\\\\hat{X}})$.\\n\\n(5) (Convexity) For pmfs $p_1, p_2, q_1, q_2$, we have $D(\\\\lambda p_1 + (1 - \\\\lambda)p_2\\\\|\\\\lambda q_1 + (1 - \\\\lambda)q_2) \\\\leq \\\\lambda D(p_1\\\\|q_1) + (1 - \\\\lambda)D(p_2\\\\|q_2)$ for $\\\\forall \\\\lambda \\\\in [0, 1]$.",
+        "proof": "Point (1) follows from Gibbs' inequality; Point (2) follows from\\n\\n$D(p_{X,Y} \\\\|p_{\\\\hat{X},\\\\hat{Y}}) = \\\\sum_{x\\\\in\\\\mathcal{X},y\\\\in\\\\mathcal{Y}} p_{X,Y}(x, y) \\\\log\\\\left(\\\\frac{p_{X,Y}(x, y)}{p_{\\\\hat{X},\\\\hat{Y}}(x, y)}\\\\right)$\\n\\n$= \\\\sum_{x\\\\in\\\\mathcal{X},y\\\\in\\\\mathcal{Y}} p_{X,Y}(x, y) \\\\log\\\\left(\\\\frac{p_X(x)p_{Y|X}(y|x)}{p_{\\\\hat{X}}(x)p_{\\\\hat{Y}|\\\\hat{X}}(y|x)}\\\\right)$\\n\\n$= \\\\sum_{x\\\\in\\\\mathcal{X},y\\\\in\\\\mathcal{Y}} p_{X,Y}(x, y) \\\\log\\\\left(\\\\frac{p_{Y|X}(y|x)}{p_{\\\\hat{Y}|\\\\hat{X}}(y|x)}\\\\right) + \\\\sum_{x\\\\in\\\\mathcal{X},y\\\\in\\\\mathcal{Y}} p_{X,Y}(x, y) \\\\log\\\\left(\\\\frac{p_X(x)}{p_{\\\\hat{X}}(x)}\\\\right)$\\n\\n$= \\\\sum_{x\\\\in\\\\mathcal{X}} p_X(x) \\\\sum_{y\\\\in\\\\mathcal{Y}} p_{Y|X}(y|x) \\\\log\\\\left(\\\\frac{p_{Y|X}(y|x)}{p_{\\\\hat{Y}|\\\\hat{X}}(y|x)}\\\\right) + D(p_X \\\\|p_{\\\\hat{X}})$\\n\\n$= \\\\sum_{x\\\\in\\\\mathcal{X}} p_X(x) D(p_{Y|X=x}\\\\|p_{\\\\hat{Y}|\\\\hat{X}=x}) + D(p_X \\\\|p_{\\\\hat{X}})$\\n\\n$= D(p_{Y|X} \\\\|p_{\\\\hat{Y}|\\\\hat{X}} |p_X) + D(p_X \\\\|p_{\\\\hat{X}})$.\\n\\nWith Point (2), and the fact $D(p_1\\\\|p_2|p) \\\\geq 0$ for any pmf's $p_1, p_2, q$, we have Point (3).\\n\\nPoint 4 follows since\\n\\n$D(p_{Y|X} \\\\|p_{\\\\hat{Y}|\\\\hat{X}} | p_X) = \\\\sum_{x\\\\in\\\\mathcal{X}} p_X(x) \\\\left(\\\\sum_{y\\\\in\\\\mathcal{Y}} p_{Y|X}(y|x) \\\\log\\\\left(\\\\frac{p_{Y|X}(y|x)}{p_{\\\\hat{Y}|\\\\hat{X}}(y|x)}\\\\right)\\\\right)$\\n\\n$= \\\\mathbb{E}\\\\left[\\\\log\\\\left(\\\\frac{p_{Y|X}(Y|X)}{p_{\\\\hat{Y}|\\\\hat{X}}(Y|X)}\\\\right)\\\\right]$\\n\\n$= \\\\mathbb{E}\\\\left[\\\\log\\\\left(\\\\frac{p_X(X)p_{Y|X}(Y|X)}{p_X(X)p_{\\\\hat{Y}|\\\\hat{X}}(Y|X)}\\\\right)\\\\right]$\\n\\n$= D(p_X p_{Y|X} \\\\| p_X p_{\\\\hat{Y}|\\\\hat{X}})$.\\n\\nFor Point (5), we just need to apply Lemma 1.13 to\\n\\n$(\\\\lambda p_1 + (1 - \\\\lambda)p_2) \\\\log\\\\left(\\\\frac{\\\\lambda p_1 + (1 - \\\\lambda)p_2}{\\\\lambda q_1 + (1 - \\\\lambda)q_2}\\\\right)$,\\n\\nand sum over $x \\\\in \\\\mathcal{X}$.",
+        "preconditions": [
+            "discrete random variable",
+            "divergence",
+            "conditional divergence",
+            "probability mass function",
+            "convex function"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 1.15",
+        "name": "Mutual Information properties",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [
+            "Theorem 1.14"
+        ],
+        "statement": "(1) $I(X; Y) \\\\geq 0$ with equality iff $X \\\\perp Y$ (i.e. $X$ and $Y$ are independent)\\n\\n(2) $I(X; Y) = I(Y; X) = H(X) - H(X|Y) = H(Y) - H(Y|X)$.\\n\\n(3) (Information chain rule)\\n\\n$I(X_1, \\\\cdot, X_n; Y) = \\\\sum_{i=1}^n I(X_i; Y | X_{i-1}, \\\\cdot \\\\cdot \\\\cdot, X_1)$.\\n\\n(4) (Data-processing inequality) If $(X \\\\perp Z) | Y$, then\\n\\n$I(X; Y) \\\\geq I(X; Z)$.\\n\\n(5) Let $f: \\\\mathcal{Y} \\\\mapsto \\\\mathcal{Z}$. Then $I(X; Y) \\\\geq I(X; f(Y))$.",
+        "proof": "Point (1) follows from $I(X; Y) = D(p_{X,Y} \\\\|p_X p_Y) \\\\geq 0$ by the information inequality in Theorem 1.14.\\n\\nThe first equality in Point (2) follows from the definition of mutual information. The others follow since\\n\\n$I(X; Y) = \\\\mathbb{E}\\\\left[\\\\log\\\\left(\\\\frac{p_{X,Y}(X, Y)}{p_X(X)p_Y(Y)}\\\\right)\\\\right] = H(X) + H(Y) - H(X, Y)$,\\n\\nand\\n\\n$H(X, Y) = -\\\\sum_{x\\\\in\\\\mathcal{X},y\\\\in\\\\mathcal{Y}} P(X = x, Y = y) \\\\log(P(Y = y, X = x))$\\n\\n$= -\\\\sum_{x\\\\in\\\\mathcal{X},y\\\\in\\\\mathcal{Y}} P(X = x, Y = y)[\\\\log(P(Y = y|X = x)) + \\\\log(P(X = x))]$\\n\\n$= H(Y|X) + H(X)$.\\n\\nNotice that the last equality can be easily extended to\\n\\n$H(X_1, \\\\cdot \\\\cdot \\\\cdot, X_n) = H(X_n|X_{n-1}, \\\\cdot \\\\cdot \\\\cdot, X_1) + H(X_{n-1}, \\\\cdot \\\\cdot \\\\cdot, X_1) = \\\\sum_{i=1}^n H(X_i|X_{i-1}, \\\\cdot \\\\cdot \\\\cdot, X_1)$.\\n\\nwith the notation $H(X_1|X_0) = H(X_1)$. Furthermore, we can have the conditional version\\n\\n$H(X_1, \\\\cdot \\\\cdot \\\\cdot, X_n | Y) = \\\\sum_{i=1}^n H(X_i|X_{i-1}, \\\\cdot \\\\cdot \\\\cdot, X_1, Y)$.\\n\\nPoint (3) follows from\\n\\n$I(X_1, \\\\cdot \\\\cdot \\\\cdot, X_n; Y) = H(X_1, \\\\cdot \\\\cdot \\\\cdot, X_n) - H(X_1, \\\\cdot \\\\cdot \\\\cdot X_n | Y)$\\n\\n$= \\\\sum_{i=1}^n \\\\{H(X_i|X_{i-1}, \\\\cdot \\\\cdot \\\\cdot, X_1) - H(X_i|X_{i-1}, \\\\cdot \\\\cdot \\\\cdot, X_1, Y)\\\\}$\\n\\n$= \\\\sum_{i=1}^n I(X_i; Y | X_{i-1} \\\\cdot \\\\cdot \\\\cdot, X_1)$,\\n\\nwhere the last line uses the definition of conditional entropy. For Point (4) we use the chain rule (3) to write $I(Y, Z; X) = I(Y; X) + I(Z; X|Y) = I(Y; X)$. On the other hand, $I(Y, Z; X) = I(Z, Y; X) = I(Z; X) + I(Y; X|Z) \\\\geq I(Z; X)$, so $I(X; Y) \\\\geq I(X; Z)$.\\n\\nFinally, Point (5) follows from the data-processing inequality in Point (4) by taking $Z = f(Y)$.",
+        "preconditions": [
+            "mutual information",
+            "entropy",
+            "conditional entropy"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 1.17",
+        "name": "Entropy Properties",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [],
+        "statement": "Let $X, Y$ be discrete random variables taking values in $\\\\mathcal{X}$. Write $|\\\\mathcal{X}|$ for the number of elements in $\\\\mathcal{X}$.\\n\\n(1) $0 \\\\leq H(X) \\\\leq \\\\log(|\\\\mathcal{X}|)$. The upper bound is attained iff $X$ is uniformly distributed on $\\\\mathcal{X}$, the lower bound is attained iff $X$ is constant with probability 1.\\n\\n(2) $0 \\\\leq H(X|Y) \\\\leq H(X)$ and $H(X|Y) = H(X)$ iff $X$ and $Y$ are independent, $H(X|Y) = 0$ iff $X = f(Y)$ for some function $f$.\\n\\n(3) (Chain rule) $H(X_1, \\\\cdot \\\\cdot \\\\cdot, X_n) = \\\\sum_{i=1}^n H(X_i|X_{i-1}, \\\\cdot \\\\cdot \\\\cdot, X_1) \\\\leq \\\\sum_{i=1}^n H(X_i)$ with equality iff the $X_i$ are independent.\\n\\n(4) For $f: \\\\mathcal{X} \\\\mapsto \\\\mathcal{Y}$, $H(f(X)) \\\\leq H(X)$ with equality iff $f$ is injective (or one-to-one).\\n\\n(5) Let $X$ and $Y$ be i.i.d., then $P(X = Y) \\\\geq 2^{-H(X)}$ with equality iff they are uniformly distributed.\\n\\n(6) $H(X)$ is concave in $p_X$.",
+        "proof": "For Point (1), the lower bound follows from the definition of entropy; for the upper bound, we apply Gibbs' inequality with $q(x) = |\\\\mathcal{X}|^{-1}$ to get\\n\\n$H(X) \\\\leq -\\\\sum_{x\\\\in\\\\mathcal{X}} p(x) \\\\log(q(x)) = \\\\log(|\\\\mathcal{X}|)$.\\n\\nSince equality holds in Gibbs' inequality iff $p_X = q$, it follows that $X$ must be uniformly distributed to attain the upper bound. Similarly, since each term in the sum is nonpositive (as $\\\\log p \\\\leq 0$) and is zero iff $p(x) = 0$ or $p(x) = 1$ and there can be just one $x$ with $p(x) = 1$, we see that $X$ must be constant to have zero entropy.\\n\\nFor Point (2), we use that $0 \\\\leq I(X; Y) = H(X) - H(X|Y)$ by Theorem 1.15 so both bounds follow. The upper bound is attained iff $X, Y$ are independent. For the lower bound, note that by definition\\n\\n$H(X|Y) = \\\\sum_{y\\\\in\\\\mathcal{Y}} p_Y(y)H(X|Y = y)$,\\n\\nwhere $H(X|Y = y) = -\\\\sum_{x\\\\in\\\\mathcal{X}} p_{X|Y}(x|y) \\\\log(p_{X|Y}(x|y))$. Hence, $H(X|Y) = 0$ iff $H(X|Y = y) = 0$ for all $y$ in the support of $Y$. But by Point(1) this only happens if $P(X = x|Y = y) = 1$ for some constant $x = f(y)$. This implies that $X = f(Y)$.\\n\\nPoint (3) follows as in the proof of the Point (3) in Theorem 1.15, and the fact that $H(X_i|X_{i-1}, \\\\cdot \\\\cdot \\\\cdot, X_1) = H(X_i)$ iff $X_i$ and $X_{i-1}, \\\\cdot \\\\cdot \\\\cdot, X_1$ are independent.\\n\\nPoint (4) follows since\\n\\n$H(X, f(X)) = H(X) + H(f(X)|X) = H(X)$\\n\\nand\\n\\n$H(X, f(X)) = H(f(X), X) = H(f(X)) + H(X|f(X)) \\\\geq H(f(X))$.\\n\\nSo $H(f(X)) \\\\leq H(X)$, and the equality holds iff $H(X|f(X)) = 0$, which is equivalent to stating that $f$ is injective.\\n\\nPoint (5) follows from Jensen's inequality,\\n\\n$2^{-H(X)} = 2^{E[\\\\log(p_X(X))]} \\\\leq E[2^{\\\\log(p_X(X))}] = E[p_X(X)] = \\\\sum_{x\\\\in\\\\mathcal{X}} p_X(x)p_X(x) = P(X = Y)$.\\n\\nPoint(6) follows from $g(x) = -x \\\\log x$ is a concave function over $x \\\\in (0, 1)$.",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "entropy",
+            "conditional entropy",
+            "i.i.d. sequence",
+            "injective function",
+            "concave function"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 1.19",
+        "name": "Fano's Inequality",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [
+            "Theorem 1.17"
+        ],
+        "statement": "Let $X, Y$ be discrete random variables taking values in $\\\\mathcal{X}$. Then\\n\\n$H(X|Y) \\\\leq H(1_{X\\\\neq Y}) + P(X \\\\neq Y) \\\\log(|\\\\mathcal{X}| - 1)$.",
+        "proof": "Set $Z = 1_{X\\\\neq Y}$ and note that $H(Z|X, Y) = 0$. Now\\n\\n$H(X|Y) = H(X|Y) + H(Z|X, Y)$\\n\\n$= H(X, Z|Y)$\\n\\n$= H(Z|Y) + H(X|Y, Z)$\\n\\n$\\\\leq H(Z) + H(X|Y, Z)$\\n\\n$= H(Z) + \\\\sum_{y\\\\in\\\\mathcal{X}} [P(Y = y, Z = 0)H(X|Y = y, Z = 0) + P(Y = y, Z = 1)H(X|Y = y, Z = 1)]$.\\n\\nNow $\\\\{Y = y, Z = 0\\\\}$ implies $\\\\{X = y\\\\}$, hence $H(X|Y = y, Z = 0) = 0$. On the other hand, $\\\\{Y = y, Z = 1\\\\}$ implies that $\\\\{X \\\\in \\\\mathcal{X} \\\\setminus\\\\{y\\\\}\\\\}$ which contains $|\\\\mathcal{X}| - 1$ elements. Therefore,\\n\\n$H(X|Y = y, Z = 1) \\\\leq \\\\log(|\\\\mathcal{X}| - 1)$.\\n\\nIt follows that\\n\\n$H(X|Y) \\\\leq H(Z) + \\\\sum_{y\\\\in\\\\mathcal{X}} P(Y = y, Z = 1)H(X|Y = y, Z = 1)$\\n\\n$\\\\leq H(Z) + P(Z = 1) \\\\log(|\\\\mathcal{X}| - 1)$.",
+        "preconditions": [
+            "discrete random variable",
+            "entropy",
+            "conditional entropy"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 1.20",
+        "name": "Fano's Bound",
+        "topic": "Entropy, Divergence, and Mutual Information",
+        "previous_results": [
+            "Theorem 1.19"
+        ],
+        "statement": "$H(X|Y) \\\\leq 1 + P(X \\\\neq Y) \\\\log(|\\\\mathcal{X}| - 1)$.",
+        "proof": "This follows directly from Theorem 1.19 by using the fact that $H(1_{X\\\\neq Y}) \\\\leq 1$, since $1_{X\\\\neq Y}$ is a binary random variable and the entropy of a binary random variable is at most 1.",
+        "preconditions": [
+            "conditional entropy",
+            "discrete random variable",
+            "probability mass function",
+            "finite set"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 2.1",
+        "name": "Symbol Code",
+        "topic": "Codes and sequences",
+        "previous_results": [],
+        "statement": "For a finite set $\\\\mathcal{X}$, denote by $\\\\mathcal{X}^*$ the set of finite sequences (also called strings) in $\\\\mathcal{X}$.\\n\\nFor $x = x_1 \\\\cdot \\\\cdot \\\\cdot x_n \\\\in \\\\mathcal{X}^*$ with $x_i \\\\in \\\\mathcal{X}$ for all $i = 1, \\\\cdot \\\\cdot \\\\cdot, n$, we call $|x| = n$ the length of the sequence $x \\\\in \\\\mathcal{X}^*$.\\n\\nGiven two finite sets $\\\\mathcal{X}$ and $\\\\mathcal{Y}$, we call a function $c: \\\\mathcal{X} \\\\rightarrow \\\\mathcal{Y}^*$ a symbol code, and call $c(x) \\\\in \\\\mathcal{Y}^*$ the codeword of $x \\\\in \\\\mathcal{X}$. In this context, $\\\\mathcal{Y}$ is called d-ary if $|\\\\mathcal{Y}| = d$.",
+        "proof": "",
+        "preconditions": [
+            "finite set",
+            "symbol code"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 2.2",
+        "name": "Binary Expansion Code",
+        "topic": "Codes and sequences",
+        "previous_results": [
+            "Definition 2.1"
+        ],
+        "statement": "Let $\\\\mathcal{X} = \\\\{1, \\\\cdot \\\\cdot \\\\cdot, 6\\\\}$ and $c(x)$ be the binary expansion, i.e. the source code is a binary code with codewords $\\\\{1, 10, 11, 100, 101, 110\\\\}$. In general, we can not recover the original sequence, e.g. $110$ might correspond to $x_1 = 6$ or $x_1x_2 = 12$.",
+        "proof": "",
+        "preconditions": [
+            "prefix code",
+            "uniquely decodable code",
+            "symbol code"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 2.3",
+        "name": "Symbol Code Types",
+        "topic": "Codes and sequences",
+        "previous_results": [],
+        "statement": "Let $c : X \\\\rightarrow Y^*$ be a symbol code. We denote with $c^* : X^* \\\\rightarrow Y^*$ the extension of $c$ to $X^*$ by $c^*(x_1 \\\\cdots x_n) = c(x_1) \\\\cdots c(x_n)$. We say that $c$ is\\n\\n(1) unambiguous (or nonsingular) if $c$ is injective, so every $x \\\\in X$ maps to a different element of $Y^*$,\\n\\n(2) uniquely decodable if $c^*$ is injective, so every sequence of characters in $X$ maps to a different element of $Y^*$ (without needing to separate characters!)\\n\\n(3) a prefix code (or instantaneous code), if no codeword of $c$ is the prefix of another codeword of $c$. That is, there does not exist $x_1 \\\\in X$, $x_2 \\\\in X$ such that $c(x_1)y = c(x_2)$ for some $y \\\\in Y^*$.\\n\\nClearly,\\n\\n$\\\\{\\\\text{prefix codes}\\\\} \\\\subset \\\\{\\\\text{uniquely decodable codes}\\\\} \\\\subset \\\\{\\\\text{unambigiuous codes}\\\\}$.\\n\\nIn general it is not easy to check if a given code is unique decodable; moreover, even if a code is uniquely decodable it can be very difficult/computationally expensive to decode.",
+        "proof": "",
+        "preconditions": [
+            "symbol code",
+            "uniquely decodable code",
+            "prefix code",
+            "injective function"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 2.4",
+        "name": "Uniquely Decodable Code",
+        "topic": "Codes and sequences",
+        "previous_results": [
+            "Definition 2.3"
+        ],
+        "statement": "Take $X = \\\\{A, B, C, D\\\\}$, $Y = \\\\{0, 1\\\\}$. Then $c(A) = 0$, $c(B) = 01$, $c(C) = 011$, $c(D) = 111$ is uniquely decodable although this not completely trivial to see. Note that describing a decoding algorithm is not easy either. For example, what leads to the string $011\\\\ 111\\\\ 01$? What about $011\\\\ 111\\\\ 11$?",
+        "proof": "",
+        "preconditions": [
+            "finite set",
+            "uniquely decodable code"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 2.5",
+        "name": "Kraft\u2013McMillan theorem",
+        "topic": "Codes and sequences",
+        "previous_results": [
+            "Definition 2.3"
+        ],
+        "statement": "(Kraft\u2013McMillan theorem (Kraft 1949, McMillan 1956)).\\n\\n(1) Let $c : X \\\\rightarrow Y^*$ be uniquely decodable and set $l_x = |c(x)|$. Then\\n\\n$\\\\sum_{x\\\\in X} |Y|^{-l_x} \\\\leq 1$.\\n\\n(2) Conversely, given $(l_x)_{x\\\\in X} \\\\subset \\\\mathbb{N}$ and a finite set $Y$ such that (2.1.1) holds, there exists a prefix code $c : X \\\\rightarrow Y^*$ such that $|c(x)| = l_x$ for $\\\\forall x \\\\in X$.",
+        "proof": "Set $d = |Y|$ and $l_{\\\\max} = \\\\max_{x\\\\in X} |c(x)|$. We consider the source strings of length $n$, and obtain\\n\\n$\\\\left(\\\\sum_{x\\\\in X} d^{-l_x}\\\\right)^n = \\\\sum_{x_1,x_2,...,x_n\\\\in X} d^{-l_{x_1}} d^{-l_{x_1}} \\\\cdots d^{-l_{x_n}} = \\\\sum_{x_1,x_2,...,x_n\\\\in X} d^{(-\\\\sum_{i=1}^n l_{x_i})}$.\\n\\nIf we collect together output strings of length $k = \\\\sum_{i=1}^n l_{x_i}$ for each $k$, and write $a(k)$ for the number of source sequences (of any length) mapping to codewords of length $k$, then we have\\n\\n$\\\\left(\\\\sum_{x\\\\in X} d^{-l_x}\\\\right)^n \\\\leq \\\\sum_{k=1}^{nl_{\\\\max}} a(k)d^{-k}$.\\n\\nAs there are $d^k$ strings in $Y^*$ of length $k$, unique decodability and the pigeonhole principle implies $a(k) \\\\leq d^k$, hence $\\\\sum_{x\\\\in X} d^{-l_x} \\\\leq (nl_{\\\\max})^{1/n}$. Letting $n \\\\rightarrow +\\\\infty$ shows the first result.\\n\\nTo show the converse, let $(l_x)_{x\\\\in X}$ be a set of integers that fulfils (2.1.1). By relabelling, identify $X$ as the set $\\\\{1, \\\\cdots, |X|\\\\} \\\\subset \\\\mathbb{N}$ and assume $l_1 \\\\leq l_2 \\\\leq \\\\cdots \\\\leq l_{|X|}$. Define $r_m := \\\\sum_{i=1}^{m-1} d^{-l_i}$ for any $m \\\\leq |X|$, which satisfies $r_m \\\\leq 1$ by assumption. Define $c(m)$ as the first $l_m$ digits in the $d$-ary expansion of the real number $r_m \\\\in [0, 1)$, that is $c(m) := y_1 \\\\cdots y_{l_m}$, where\\n\\n$r_m = \\\\sum_{i\\\\geq 1} y_i d^{-i}$.\\n\\nThis must be a prefix code: if not, there exists $m, n$ with $m < n$, and $c(m)$ a prefix of $c(n)$ and therefore the first $l_m$ digits of $r_m$ and $r_n$ in the $d$-ary expansion coincide, which in turn implies $r_n - r_m < d^{-l_m}$; on the other hand, by the very definition of $r_m$ and $r_n$ we have $r_n - r_m = \\\\sum_{i=m}^{n-1} d^{-l_i} \\\\geq d^{-l_m}$, which is a contradiction.",
+        "preconditions": [
+            "uniquely decodable code",
+            "prefix code",
+            "finite set"
+        ]
+    },
+    {
+        "type": "corollary",
+        "id": "Corollary 2.8",
+        "name": "Prefix Code Existence",
+        "topic": "Codes and sequences",
+        "previous_results": [
+            "Theorem 2.5"
+        ],
+        "statement": "For any uniquely decodable code there exists a prefix code with the same codeword lengths.",
+        "proof": "",
+        "preconditions": [
+            "uniquely decodable code",
+            "prefix code"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 2.10",
+        "name": "Weak AEP 1",
+        "topic": "Codes and sequences",
+        "previous_results": [],
+        "statement": "Let $X$ be a discrete random variable. Then\\n\\n$-\\\\frac{1}{n}\\\\log(p_{X_1,\\\\cdots X_n} (X_1, \\\\cdot \\\\cdot \\\\cdot X_n))\\\\xrightarrow{\\\\text{in prob.}} H(X)$ as $n \\\\to +\\\\infty$.",
+        "proof": "By independence, $-\\\\log(p_{X_1,\\\\cdots X_n} (X_1, \\\\cdot \\\\cdot \\\\cdot X_n)) = -\\\\sum_{i=1}^n \\\\log(p_X (X_i))$ and $E[-\\\\log(p_X (X_i))] = H(X)$. The result follows from the (weak) law of large numbers.",
+        "preconditions": [
+            "discrete random variable",
+            "entropy",
+            "i.i.d. sequence",
+            "probability mass function"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 2.11",
+        "name": "Typical Sequences",
+        "topic": "Codes and sequences",
+        "previous_results": [
+            "Theorem 2.10"
+        ],
+        "statement": "For any $n \\\\in \\\\mathbb{N}$, any $\\\\varepsilon > 0$, we call\\n\\n$T^\\\\varepsilon_n := \\\\left\\\\{(x_1, \\\\cdot \\\\cdot \\\\cdot, x_n) \\\\in \\\\mathcal{X}^n : \\\\left|\\\\frac{-1}{n}\\\\log(p_{X_1,\\\\cdots X_n} (x_1, \\\\cdot \\\\cdot \\\\cdot x_n)) - H(X)\\\\right| \\\\leq \\\\varepsilon \\\\right\\\\}$\\n\\nthe set of (weakly) typical sequences of length $n$ of the random variable $X$ (with error $\\\\varepsilon$).",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "entropy",
+            "typical sequences"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 2.12",
+        "name": "Weak AEP 2",
+        "topic": "Codes and sequences",
+        "previous_results": [
+            "Theorem 2.10",
+            "Definition 2.11"
+        ],
+        "statement": "For all $\\\\varepsilon > 0$, there exists an $n_0 \\\\in \\\\mathbb{N}$ such that for every $n > n_0$,\\n\\n(1) $p_{X_1,\\\\cdots X_n} (x_1, \\\\cdot \\\\cdot \\\\cdot x_n) \\\\in [2^{-n(H(X)+\\\\varepsilon)}, 2^{-n(H(X)-\\\\varepsilon)}]$ for any $(x_1, \\\\cdot \\\\cdot \\\\cdot, x_n) \\\\in T^\\\\varepsilon_n$;\\n\\n(2) $P((X_1, \\\\cdot \\\\cdot \\\\cdot, X_n) \\\\in T^\\\\varepsilon_n) \\\\geq 1 - \\\\varepsilon$;\\n\\n(3) $|T^\\\\varepsilon_n| \\\\in [(1 - \\\\varepsilon)2^{n(H(X)-\\\\varepsilon)}, 2^{n(H(X)+\\\\varepsilon)}]$.\\n\\nMoreover, for Point (1) one can take $n_0 = 0$.",
+        "proof": "Point (1) follows directly from Definition 2.11 for $n_0 = 0$. Point (2) follows by Theorem 2.10, since for every $\\\\varepsilon > 0$,\\n\\n$P((X_1, \\\\cdot \\\\cdot \\\\cdot, X_n) \\\\notin T^\\\\varepsilon_n) = P(|\\\\log p_{X_1,\\\\cdots,X_n}(X_1, \\\\cdot \\\\cdot \\\\cdot, X_n) - H(X)| > \\\\varepsilon)$,\\n\\nwhich converges to 0 as $n \\\\to +\\\\infty$.\\n\\nFor the upper bound in Point (3), observe that\\n\\n$1 = \\\\sum_{(x_1,\\\\cdots,x_n)\\\\in \\\\mathcal{X}^n} p_{X_1,\\\\cdots,X_n}(x_1, \\\\cdot \\\\cdot \\\\cdot, x_n) \\\\geq \\\\sum_{(x_1,\\\\cdots,x_n)\\\\in T^\\\\varepsilon_n} p_{X_1,\\\\cdots,X_n}(x_1, \\\\cdot \\\\cdot \\\\cdot, x_n) \\\\geq \\\\sum_{(x_1,\\\\cdots,x_n)\\\\in T^\\\\varepsilon_n} 2^{-n(H(X)+\\\\varepsilon)} = 2^{-n(H(X)+\\\\varepsilon)}|T^\\\\varepsilon_n|$.\\n\\nFor the lower bound, we know by Point (2) that the probability $P((X_1, \\\\cdot \\\\cdot \\\\cdot, X_n) \\\\in T^\\\\varepsilon_n)$ converges to 1, so for $n$ large enough,\\n\\n$1 - \\\\varepsilon \\\\leq P((X_1, \\\\cdot \\\\cdot \\\\cdot, X_n) \\\\in T^\\\\varepsilon_n) \\\\leq \\\\sum_{(x_1,\\\\cdots,x_n)\\\\in T^\\\\varepsilon_n} 2^{-n(H(X)-\\\\varepsilon)} = 2^{-n(H(X)-\\\\varepsilon)}|T^\\\\varepsilon_n|$,\\n\\nand then we get the lower bound.",
+        "preconditions": [
+            "discrete random variable",
+            "entropy",
+            "typical sequences"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 2.14",
+        "name": "Strong Typical Set",
+        "topic": "Codes and sequences",
+        "previous_results": [
+            "Theorem 2.12"
+        ],
+        "statement": "Denote with $S^\\\\varepsilon_n$ the smallest subset of $\\\\mathcal{X}^n$ such that\\n\\n$P((X_1, \\\\cdot \\\\cdot \\\\cdot, X_n) \\\\in S^\\\\varepsilon_n) \\\\geq 1 - \\\\varepsilon$.\\n\\nWe can construct this set by ordering sequences by their probability and adding them until the probability mass is greater or equal $1 - \\\\varepsilon$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "probability mass function"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 2.15",
+        "name": "Strong Typical Sequences",
+        "topic": "Codes and sequences",
+        "previous_results": [
+            "Theorem 2.12"
+        ],
+        "statement": "Let $(\\\\varepsilon_n)_n$ be a strictly positive sequence such that $\\\\lim_{n\\\\rightarrow+\\\\infty} \\\\varepsilon_n = 0$. Then\\n\\n$\\\\lim_{n\\\\rightarrow+\\\\infty} \\\\lim_{m\\\\rightarrow+\\\\infty} \\\\frac{1}{m} \\\\log \\\\left( \\\\frac{|S^{\\\\varepsilon_n}_m|}{|T^{\\\\varepsilon_n}_m|} \\\\right) = 0.$",
+        "proof": "Observe $|T^{\\\\varepsilon}_m|$ is larger than $|S^{\\\\varepsilon}_m \\\\cap T^{\\\\varepsilon}_m|$, with small error. Now show that $S^{\\\\varepsilon}_m$ and $T^{\\\\varepsilon}_m$ overlap apart from a set with probability $\\\\leq 2\\\\varepsilon$. The elements of $T^{\\\\varepsilon}_m$ have probabilities bounded above by $2^{-m(H-\\\\varepsilon)}$, so the probability of $S^{\\\\varepsilon}_m \\\\cap T^{\\\\varepsilon}_m$ is bounded above by $|S^{\\\\varepsilon}_m|2^{-m(H-\\\\varepsilon)}$. Therefore, by the weak AEP 2,\\n\\n$1 - 2\\\\varepsilon \\\\leq |S^{\\\\varepsilon}|2^{-m(H-\\\\varepsilon)} \\\\leq \\\\frac{|S^{\\\\varepsilon}|}{|T^{\\\\varepsilon}|} \\\\frac{1}{1 - \\\\varepsilon}.$\\n\\nRearranging shows the limit.",
+        "preconditions": [
+            "typical sequences",
+            "jointly typical sequences"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 3.1",
+        "name": "Optimal Symbol Code",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [],
+        "statement": "We call a symbol code $c : X \\\\rightarrow Y^*$ optimal for a random variable $X$ with pmf $p$ on $X$ and a finite set $Y$, if it minimises $E[|c'(X)|]$ among all uniquely decodable codes $c' : X \\\\rightarrow Y^*$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "probability mass function",
+            "uniquely decodable code",
+            "symbol code"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.2",
+        "name": "Source Coding Theorem",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [
+            "Theorem 1.14"
+        ],
+        "statement": "Let $X$ be a random variable taking values in a finite set $X$ and $c$ a uniquely decodable, $d$-ary source code. Then\\n\\n$H_d(X) \\\\leq E[|c(X)|]$,\\n\\nand the equality holds iff $|c(x)| = -\\\\log_d(P(X = x))$.",
+        "proof": "Set $l_x := c(x)$ and $q(x) = \\\\frac{d^{-l_x}}{\\\\sum_{x\\\\in X} d^{-l_x}}$, then\\n\\n\\\\begin{align}\\nE[|c(X)|] - H_d(X) &= \\\\sum_{x\\\\in X} p(x)l_x + \\\\sum_{x\\\\in X} p(x) \\\\log_d(p(x)) \\\\\\\\\\n&= -\\\\sum_{x\\\\in X} p(x) \\\\log_d(d^{-l_x}) + \\\\sum_{x\\\\in X} p(x) \\\\log_d(p(x)) \\\\\\\\\\n&= -\\\\sum_{x\\\\in X} p(x) \\\\log_d\\\\left(\\\\frac{d^{-l_x}}{p(x)}\\\\right) \\\\\\\\\\n&= -\\\\sum_{x\\\\in X} p(x) \\\\log_d\\\\left(\\\\frac{d^{-l_x}}{p(x)} \\\\cdot \\\\frac{\\\\sum_{x'\\\\in X} d^{-l_{x'}}}{\\\\sum_{x'\\\\in X} d^{-l_{x'}}}\\\\right) \\\\\\\\\\n&= -\\\\sum_{x\\\\in X} p(x) \\\\log_d\\\\left(\\\\frac{q(x)}{p(x)}\\\\right) - \\\\sum_{x\\\\in X} p(x) \\\\log_d\\\\left(\\\\sum_{x'\\\\in X} d^{-l_{x'}}\\\\right) \\\\\\\\\\n&= D_d(p\\\\|q) - \\\\log_d\\\\left(\\\\sum_{x'\\\\in X} d^{-l_{x'}}\\\\right) \\\\\\\\\\n&\\\\geq 0,\\n\\\\end{align}\\n\\nwhere we used that divergence is non-negative, and the Kraft\u2013McMillan inequality (2.1.1) to see $\\\\sum_{x'\\\\in X} d^{-l_{x'}} \\\\leq 1$. Equality holds iff $\\\\sum_{x'\\\\in X} d^{-l_{x'}} = 1$ and $D(p\\\\|q) = 0$. Since $D(p\\\\|q) = 0$ implies $p = q$, the result follows by definition of $q$.",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "uniquely decodable code"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 3.3",
+        "name": "Existence of Optimal Code",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [
+            "Theorem 2.5",
+            "Theorem 3.2"
+        ],
+        "statement": "Let $X$ be a random variable taking values in a finite set $X$, and $Y$ a $d$-ary set. There exists an optimal code $\\\\bar{c}$, which is prefix, for which\\n\\n$H_d(X) \\\\leq E[|\\\\bar{c}(X)|] < H_d(X) + 1$.",
+        "proof": "Set $l_x := \\\\lceil-\\\\log_d(p(x))\\\\rceil$ and note that $\\\\sum_{x\\\\in X} d^{-(- \\\\log_d(p(x)))} = \\\\sum_{x\\\\in X} p(x) = 1$. By Kraft\u2013McMillan (Theorem 2.5), there exists a (not necessarily optimal) prefix code $c$ with word lengths $(l_x)_{x\\\\in X}$. Now by definition\\n\\n$-\\\\log_d(p(x)) \\\\leq l_x < -\\\\log_d(p(x)) + 1$,\\n\\nso conclude by multiplying this inequality with $p(x)$ and summing over $x \\\\in X$ to get (3.1.2). This shows there is a prefix code with expected length less than $H_d(X) + 1$.\\n\\nAs $X$ is finite, we know $\\\\bar{p} := \\\\min_{x:p(x)>0} p(x) > 0$, and hence all codes with expected length less than $H_d(X) + 1$ must encode every symbol $x \\\\in X$ with $p(x) > 0$ using less than $(H_d(X) + 1)/\\\\bar{p}$ symbols. There are finitely many codes of this type (if we ignore the encoding of states with $p(x) = 0$), and we've seen there exists such a code, so we can sort them by expected length and take a code that achieves the minimum expected length. By Kraft\u2013McMillan we can assume this code is prefix. The lower bound is given by Theorem 3.2.",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "prefix code",
+            "entropy"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.4",
+        "name": "Shannon's First Theorem",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [
+            "Theorem 2.12"
+        ],
+        "statement": "Let $X_1, X_2, ...$ be an i.i.d. sequence of discrete random variables with state space $X$. For every $\\\\varepsilon > 0$, there exists an integer $n$, and a map\\n\\n$c : X^n \\\\rightarrow \\\\{0, 1\\\\}^*$\\n\\nsuch that\\n\\n(1) the induced map $\\\\cup_{k\\\\geq 0}X^{nk} \\\\rightarrow \\\\{0, 1\\\\}^*$ given by\\n\\n$(x_1, \\\\cdots, x_{nk}) \\\\mapsto c(x_1, ..., x_n)c(x_{n+1}, ..., x_{2n}) \\\\cdots c(x_{(k-1)n+1}, ..., x_{nk}) \\\\in \\\\{0, 1\\\\}^*$\\n\\nis injective;\\n\\n(2) $\\\\frac{1}{n} E[|c(X_1, \\\\cdots, X_n)|] \\\\leq H(X) + \\\\varepsilon$.",
+        "proof": "For some $\\\\varepsilon_0 > 0$, we split $X^n$ into the disjoint sets $T^{\\\\varepsilon_0}_n$ and $X^n\\\\setminus T^{\\\\varepsilon_0}_n$, and order the elements in $T^{\\\\varepsilon_0}_n$ (in some arbitrary order; e.g. lexicographic). By the AEP, there are at most $2^{n(H(X)+\\\\varepsilon_0)}$ elements in $T^{\\\\varepsilon_0}_n$, hence we can associate with every element of $T^{\\\\varepsilon_0}_n$ a string consisting of $l_1 := \\\\lceil n(H(X) + \\\\varepsilon_0)\\\\rceil$ bits; similarly we associate with every element of $X^n\\\\setminus T^{\\\\varepsilon_0}_n$ a unique string of $l_2 = \\\\lceil n \\\\log(|X|)\\\\rceil$ bits. Now define $c(x_1, \\\\cdots, x_n)$ as these strings with length $l_1$ resp. $l_2$ bits, prefixed by a 0 if $(x_1, \\\\cdots, x_n)$ is in $T^{\\\\varepsilon_0}_n$, and prefixed by 1 otherwise. Clearly, this is injective (hence a bijection on its image) and the prefix 0 or 1 indicates how many bits follow. This block code has expected length\\n\\n\\\\begin{align}\\nE[|c(X_1, \\\\cdots, X_n)|] &= \\\\sum_{x\\\\in T^{\\\\varepsilon_0}_n} p(x)(l_1 + 1) + \\\\sum_{x \\\\not\\\\in T^{\\\\varepsilon_0}_n} p(x)(l_2 + 1) \\\\\\\\\\n&\\\\leq \\\\sum_{x\\\\in T^{\\\\varepsilon_0}_n} p(x)(n(H(X) + \\\\varepsilon_0) + 2) + \\\\sum_{x \\\\not\\\\in T^{\\\\varepsilon_0}_n} p(x)(n \\\\log(|X|) + 2)) \\\\\\\\\\n&\\\\leq P((X_1, \\\\cdots, X_n) \\\\in T^{\\\\varepsilon_0}_n)(n(H(X) + \\\\epsilon_0) + 2) + P((X_1, \\\\cdots, X_n) \\\\not\\\\in T^{\\\\varepsilon_0}_n)(n \\\\log(|X|) + 2) \\\\\\\\\\n&\\\\leq n(H(X) + \\\\varepsilon_0) + 2 + \\\\varepsilon_0 n \\\\log(|X|) \\\\\\\\\\n&= n(H(X) + \\\\varepsilon_1)\\n\\\\end{align}\\n\\nwith $\\\\varepsilon_1 := \\\\varepsilon_0(1 + \\\\log(|X|)) + \\\\frac{2}{n}$. For a given $\\\\varepsilon > 0$, we first choose $\\\\varepsilon_0$ small enough such that $\\\\varepsilon_0(1 + \\\\log(|X|)) < \\\\varepsilon/2$, and then $n$ sufficiently large such that $\\\\frac{2}{n} \\\\leq \\\\varepsilon/2$.",
+        "preconditions": [
+            "discrete random variable",
+            "i.i.d. sequence",
+            "entropy",
+            "injective function"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.6",
+        "name": "Shannon\u2013McMillan\u2013Breiman Theorem",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [
+            "Theorem 2.12",
+            "Theorem 3.4"
+        ],
+        "statement": "Let $X_1, X_2, \\\\cdots$ be an ergodic and stationary sequence of random variables in a finite state space $\\\\mathcal{X}$. Then\\n\\n$-\\\\frac{1}{n}\\\\log(p_{X_1,\\\\cdots,X_n}(X_1, \\\\cdots, X_n))\\\\xrightarrow{\\\\text{in prob.}} \\\\bar{H}$, as $n \\\\rightarrow +\\\\infty$,\\n\\nwhere $\\\\bar{H} := \\\\lim_{n\\\\rightarrow+\\\\infty}\\\\frac{1}{n} H(X_1, \\\\cdots, X_n)$.",
+        "proof": "The proof involves modifying Theorem 2.12 (AEP) and adapting Shannon's block coding argument from Theorem 3.4. The full proof is not provided in the given text.",
+        "preconditions": [
+            "ergodic stochastic process",
+            "stationary stochastic process",
+            "finite set",
+            "entropy"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 3.7",
+        "name": "Shannon Code Bounds",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [],
+        "statement": "Let $p$ and $q$ be pmf's on $\\\\mathcal{X}$ and $X \\\\sim p$ and $Y$ a finite set of cardinality $|Y| = d$. If we denote with $c_q : \\\\mathcal{X} \\\\rightarrow Y^*$ a Shannon code for the distribution $q$, then\\n\\n$H_d(X) + D_d(p\\\\|q) \\\\leq E[|c_q(X)|] < H_d(X) + D_d(p\\\\|q) + 1$.",
+        "proof": "We have\\n\\n$E[|c_q(X)|] = \\\\sum_{x\\\\in\\\\mathcal{X}} p(x)\\\\lceil-\\\\log_d(q(x))\\\\rceil$\\n\\n$< \\\\sum_{x\\\\in\\\\mathcal{X}} p(x)(-\\\\log_d(q(x)) + 1)$\\n\\n$= \\\\sum_{x\\\\in\\\\mathcal{X}} p(x)\\\\log_d\\\\left(\\\\frac{p(x)}{q(x)}\\\\frac{1}{p(x)}\\\\right) + 1$\\n\\n$= \\\\sum_{x\\\\in\\\\mathcal{X}} p(x)\\\\log_d\\\\left(\\\\frac{p(x)}{q(x)}\\\\right) + \\\\sum_{x\\\\in\\\\mathcal{X}} p(x)\\\\log_d\\\\left(\\\\frac{1}{p(x)}\\\\right) + 1$\\n\\n$= D_d(p\\\\|q) + H_d(X) + 1$.\\n\\nSince the lower bound is attained iff $\\\\lceil-\\\\log_d(q(x))\\\\rceil = -\\\\log_d(q(x))$ the lower bound follows similarly.",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "probability mass function",
+            "Shannon code",
+            "entropy",
+            "divergence"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 3.8",
+        "name": "Undirected Graph",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [],
+        "statement": "A undirected graph $(V, E)$ is a tuple consisting of a set $V$ and a set of subsets of $E \\\\times E$. We call elements of $V$ vertices and elements of $E$ edges. For $v \\\\in V$ we denote with $\\\\deg(v)$ the number of edges that contain $v$ and call $\\\\deg(v)$ the degree of $v$. We call a graph $d$-ary if the maximal degree of its vertices is $d$.",
+        "proof": "",
+        "preconditions": [
+            "finite set"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 3.9",
+        "name": "Rooted Trees",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [
+            "Definition 3.8"
+        ],
+        "statement": "The set of rooted trees $T$ is a subset of all graphs and defined recursively as:\\n\\n(1) The graph $\\\\tau$ consisting of a single vertex $r$ is a rooted tree. We call $r$ the root and the leaf of $\\\\tau$.\\n\\n(2) If $\\\\tau_i \\\\in T$ for $i = 1, \\\\cdots, n$, then the graph $\\\\tau$ formed by starting with a new vertex $r$ and adding edges to each of the roots of $\\\\tau_1, \\\\cdots, \\\\tau_n$ is also a rooted tree. We call $r$ the root of $\\\\tau$ and we call the leaves of $\\\\tau_1, \\\\cdots, \\\\tau_n$ the leaves of $\\\\tau$.\\n\\nWe say a rooted tree is $d$-ary if each vertex has at most $d$ edges which are leading away from the root. We say a $d$-ary rooted tree is labelled if each of the edges is assigned a number from $\\\\{1, ..., d\\\\}$, such that no two edges from the same vertex leading away from the root have the same number.",
+        "proof": "",
+        "preconditions": [
+            "finite set"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 3.10",
+        "name": "Prefix Code Bijection",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [
+            "Definition 3.9"
+        ],
+        "statement": "There is a bijection from the set of $d$-ary prefix codes to the set of labelled $d$-ary rooted trees.",
+        "proof": "",
+        "preconditions": [
+            "prefix code",
+            "finite set"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 3.11",
+        "name": "Huffman Code Optimality",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [
+            "Lemma 3.12",
+            "Proposition 3.3"
+        ],
+        "statement": "Let $X$, $Y$ be finite sets and $p$ a pmf on $X$ with a random variable $X \\\\sim p$. The Huffman code $c : X \\\\rightarrow Y^*$ for $p$ is optimal, i.e. if $c'$ is another uniquely decodable code $c' : X \\\\rightarrow Y^*$ then $E[|c(X)|] \\\\leq E[|c'(X)|]$.",
+        "proof": "Fix a pmf $p$ with $p_1 \\\\geq \\\\cdots \\\\geq p_m$ on $m$ symbols. Denote with $p'$ the pmf on $m-1$ symbols given by merging the lowest probabilities, $p'_i = p_i$ for $i \\\\in \\\\{1, \\\\cdots, m - 2\\\\}$ and $p'_{m-1} = p_{m-1} + p_m$.\\n\\nLet $c_p$ be a canonical optimal code for $p$. Define $c_{p'}$ as the code for $p'$ given by merging the leaves for $p_{m-1}$ and $p_m$ in the rooted tree representing $c_p$ (by Lemma 3.12, $p_{m-1}$, $p_m$ are siblings so this is possible). Then the difference in expected lengths is\\n\\n$L(c_p) - L(c_{p'}) = p_{m-1}l + p_ml - p'_{m-1}(l - 1) = p_{m-1} + p_m$.\\n\\nwhere $l$ denotes the codeword lengths of symbols $m - 1$ and $m$ under $c_p$. On the other hand, let $e_{p'}$ be any optimal (prefix) code for $p'$. We again represent it as a rooted tree and define $e_p$ by replacing the leaf for $p'_{m-1}$ with a rooted tree consisting of two leaves $p_m$ and $p_{m-1}$. Then\\n\\n$L(e_p) - L(e_{p'}) = p_{m-1} + p_m$.\\n\\nSubstracting (3.6.1) from (3.6.3) yields\\n\\n$(L(e_p) - L(c_p)) + (L(c_{p'}) - L(e_{p'})) = 0$.\\n\\nBy assumption, $c_p$ and $e_{p'}$ are optimal, hence both terms are non-negative so both must equal 0. We conclude that $L(e_p) = L(c_p)$, hence $e_p$ is an optimal code for $p$. The above shows, that expanding any optimal code $e'$ for $p'$ leads to an optimal code $e_p$ for $p$. Now note that each stage of the Huffman code is constructed by such an expansion. Further, for $m = 2$ the Huffman code is clearly optimal, hence the result follows by induction on $m$.",
+        "preconditions": [
+            "finite set",
+            "probability mass function",
+            "discrete random variable",
+            "uniquely decodable code",
+            "Huffman code"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 3.12",
+        "name": "Canonical Code Properties",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [
+            "Proposition 3.3"
+        ],
+        "statement": "Let $p$ be a pmf on $X = \\\\{x_1, \\\\cdot \\\\cdot \\\\cdot, x_m\\\\}$ and assume wlog that $p_1 \\\\geq \\\\cdot \\\\cdot \\\\cdot \\\\geq p_m$ for $p_i := p(x_i)$. Then there is a prefix code which is optimal, and any optimal prefix code satisfies\\n\\n(1) $p_j > p_k$ implies $|c(x_j)| \\\\leq |c(x_k)|$,\\n\\n(2) there are at least two longest codewords (with the same length),\\n\\n(3) longest codewords come in pairs, which differ only in the last digit.\\n\\nWe call $c$ with these properties a canonical code for the pmf $p$.",
+        "proof": "The existence of an optimal (prefix) code is as in Proposition 3.3. For Point (1), fix an optimal prefix code $c$ and consider the code $c'$ given by interchanging the codewords of $c$ for $x_j$ and $x_k$ for some $j, k$ with $j < k$ resp. $p_k < p_j$. Then\\n\\n$0 \\\\leq \\\\sum_i p_i|c'(x_i)| - \\\\sum_i p_i|c(x_i)| = p_j|c(x_k)| + p_k|c(x_j)| - p_j|c(x_j)| - p_k|c(x_k)| = (p_j - p_k)(|c(x_k)| - |c(x_j)|)$.\\n\\nHence $|c(x_k)| \\\\geq |c(x_j)|$.\\n\\nFor Point (2), assume the contrary and remove the last digit from the longest codeword. This would still give a prefix code and this new prefix code would have strictly smaller expected length. Hence, there must be at least two longest codewords.\\n\\nFor Point (3), identify a prefix code with a rooted tree. A codeword of maximum length must have a sibling (a leaf connecting to same vertex; otherwise, we could remove the last digit and get a prefix code of shorter expected length).",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "probability mass function",
+            "prefix code"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.13",
+        "name": "Arithmetic Code Optimality",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [],
+        "statement": "Let $X_1, ..., X_n$ be iid random variables from an alphabet $X$, with pmf $p$. Then the arithmetic code based on length $n$ blocks has average codeword length bounded above by $H(X_1, ..., X_n) + 2$, and hence per-character average codeword length at most $H(X) + 2/n$.",
+        "proof": "A particular source block $x_1x_2...x_n$ will occur, due to independence, with probability $\\\\prod_{i\\\\leq n} p(x_i)$, which is (by construction), the length of the interval it is associated with. We encode the midpoint of this block using a string of length\\n\\n$l \\\\leq -\\\\log (\\\\prod_{i\\\\leq n} p(x_i)) + 2$.\\n\\nThe average block codeword length is then bounded by\\n\\n$-\\\\sum_{x_1,...,x_n} (\\\\prod_{i\\\\leq n} p(x_i)) \\\\log (\\\\prod_{i\\\\leq n} p(x_i)) + 2 = H(X_1, ..., X_n) + 2 = nH(X) + 2$\\n\\nand dividing by $n$ gives the per-character length.",
+        "preconditions": [
+            "discrete random variable",
+            "i.i.d. sequence",
+            "probability mass function",
+            "entropy",
+            "arithmetic code"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 3.14",
+        "name": "Tunstall Code Example",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [],
+        "statement": "Suppose $d = 3$ and $X = \\\\{a, b\\\\}$ with $P(X = a) = 0.7$. Then an example of Tunstall's iteration is\\n\\nStep\\n1\\n\\n2\\n\\n3\\n\\n4\\n\\n5\\n\\n6\\n\\n7\\n\\nSymbol\\nProb\\nSymbol\\nProb\\nSymbol\\nProb\\nSymbol\\nProb\\nSymbol\\nProb\\nSymbol\\nProb\\nSymbol\\nProb\\nEncoding\\n\\na\\n0.7\\naa\\n0.49\\naaa\\n0.343\\naaaa\\n0.2401\\naaaa\\n0.2401\\naaaaa\\n0.16807\\naaaaa\\n0.16807\\n000\\n\\nb\\n0.3\\nb\\n0.3\\nb\\n0.3\\nb\\n0.3\\nba\\n0.21\\nba\\n0.21\\nbaa\\n0.147\\n001\\n\\n-\\n-\\nab\\n0.21\\nab\\n0.21\\nab\\n0.21\\nab\\n0.21\\nab\\n0.21\\nab\\n0.21\\n010\\n\\n-\\n-\\n-\\n-\\naab\\n0.147\\naab\\n0.147\\naab\\n0.147\\naab\\n0.147\\naab\\n0.147\\n011\\n\\n-\\n-\\n-\\n-\\n-\\n-\\naaab\\n0.1029\\naaab\\n0.1029\\naaab\\n0.1029\\naaab\\n0.1029\\n100\\n\\n-\\n-\\n-\\n-\\n-\\n-\\n-\\n-\\nbb\\n0.09\\nbb\\n0.09\\nbb\\n0.09\\n101\\n\\n-\\n-\\n-\\n-\\n-\\n-\\n-\\n-\\n-\\n-\\naaaab\\n0.07203\\naaaab\\n0.07203\\n110\\n\\n-\\n-\\n-\\n-\\n-\\n\\n-\\n-\\n-\\n-\\n-\\n\\nbab\\n0.063\\n111\\n\\nThis achieves a compression of, on average, 3.2831 characters per length-3 block. Using this, the sequence aaababaaaaa would be encoded as 100 010 000. As with block codes, we may need to 'pad' the input message in order to get a valid input.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "probability mass function",
+            "prefix code",
+            "Tunstall code"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 3.15",
+        "name": "Tunstall Code Optimality",
+        "topic": "Optimal Codes and Shannon's first theorem",
+        "previous_results": [],
+        "statement": "Suppose we have an i.i.d. sequence $X_1, ...,$ of inputs in $X$. Among variable-to-fixed codes, Tunstall's code is optimal, in the sense that it maximizes the expected length of the input string which is encoded in a single output in $Y^d$, among all complete and proper codes.",
+        "proof": "(Sketch) We generalize from the case where there are $2^d$ output messages, by allowing a generic (integer) number of outputs. Any complete and proper variable-to-fixed code must correspond to a $m$-ary tree for inputs (analogously to what we saw for Huffman's code).\\n\\nWe know that every $m$-ary tree has $k(m - 1) + m$ leaves, for some integer $k$ (the number of non-root internal nodes in the tree). Let $K(T)$ be the set of non-root internal nodes in a tree $T$. We then see that the expected message length of a proper code is $1 + \\\\sum_{n\\\\in K(T)} P(n)$, where $P(n)$ is the probability of the node.\\n\\nTo select an optimal code, we then need to maximize the values of $P(n)$. We view $T$ as a subtree of the infinite $m$-ary tree $T_\\\\infty$, which is built by selecting $|K|$ internal nodes. These nodes need to build a tree, but if we ignore that fact, we can just ask about arbitrarily selecting $|K|$ nodes.\\n\\nAs the descendents of any node will always have smaller probability than the parent, we can see that Tunstall's code is precisely selecting the maximal probability nodes. This tells us that Tunstall's code is optimal (and that the maximal probability nodes always form a complete code).",
+        "preconditions": [
+            "i.i.d. sequence",
+            "Tunstall code"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.1",
+        "name": "Discrete Memoryless Channel",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [],
+        "statement": "A discrete memoryless channel (DMC) is a triple $(\\\\mathcal{X}, M, \\\\mathcal{Y})$ consisting of\\n\\n$\\\\bullet$ a finite set $\\\\mathcal{X}$, called the input alphabet,\\n\\n$\\\\bullet$ a finite set $\\\\mathcal{Y}$, called the output alphabet,\\n\\n$\\\\bullet$ a stochastic $|\\\\mathcal{X}| \\\\times |\\\\mathcal{Y}|$-matrix $M$, called the emission matrix.\\n\\nWe say that a pair of random variables $X, Y$ defined on some probability space $(\\\\Omega, F, P)$ realises the DMC, if the conditional distribution of $Y$ given $X$ equals $M$, i.e. $M = (p_{Y|X}(y|x))_{x\\\\in\\\\mathcal{X},y\\\\in\\\\mathcal{Y}}$.",
+        "proof": "",
+        "preconditions": [
+            "discrete memoryless channel",
+            "finite set",
+            "stochastic matrix"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.2",
+        "name": "Lossless Channel",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Theorem 1.17"
+        ],
+        "statement": "$\\\\mathcal{X} = \\\\{0, 1\\\\}$, $\\\\mathcal{Y} = \\\\{a, b, c, d, e\\\\}$ and $M = \\\\begin{pmatrix} 0.2 & 0 & 0.5 & 0 & 0.3 \\\\\\\\ 0 & 0.2 & 0 & 0.8 & 0 \\\\end{pmatrix}$.\\n\\nAbove is an example of a lossless channel: knowing the output $Y$ allows us to uniquely identify the input $X$ (e.g. output is $b$ or $d$ iff the input is $1$). More generally, we call $(\\\\mathcal{X}, M, \\\\mathcal{Y})$ a lossless channel if we can divide $\\\\mathcal{Y}$ into disjoint sets $\\\\mathcal{Y}_1, \\\\cdot \\\\cdot \\\\cdot, \\\\mathcal{Y}_{|\\\\mathcal{X}|}$ such that\\n\\n$P(Y \\\\in \\\\mathcal{Y}_i|X = x_i) = 1$ for $\\\\forall 1 \\\\leq i \\\\leq |\\\\mathcal{X}|$.\\n\\nFor a lossless channel $(\\\\mathcal{X}, M, \\\\mathcal{Y})$, similar to Point (2) in Theorem 1.17, we have $H(X|Y) = 0$ (since $X = f(Y)$ for $f(y) = x_i1_{y\\\\in\\\\mathcal{Y}_i}$, i.e., $X$ is a deterministic function of $Y$).\\n\\nAnother extreme is a channel that is completely useless for transmitting information, i.e. the output $Y$ contains no information about the input $X$. This means $X$ and $Y$ are independent, which is (again by Point (2) in Theorem 1.17) equivalent to $H(X|Y) = H(X)$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "stochastic matrix",
+            "conditional entropy",
+            "mutual information"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.3",
+        "name": "Common DMCs",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [],
+        "statement": "Let $q \\\\in [0, 1]$.\\n\\n(1) Binary symmetric channel: $\\\\mathcal{X} = \\\\mathcal{Y} = \\\\{0, 1\\\\}$ and the stochastic matrix is given as\\n\\n\\\\begin{array}{c|cc}\\nX \\\\backslash Y & 0 & 1 \\\\\\\\\\n\\\\hline\\n0 & 1-q & q \\\\\\\\\\n1 & q & 1-q\\n\\\\end{array}\\n\\n(2) Binary erasure channel: $\\\\mathcal{X} = \\\\{0, 1\\\\}$, $\\\\mathcal{Y} = \\\\{0, 1, ?\\\\}$ and the stochastic matrix is given as\\n\\n\\\\begin{array}{c|ccc}\\nX \\\\backslash Y & 0 & ? & 1 \\\\\\\\\\n\\\\hline\\n0 & 1-q & q & 0 \\\\\\\\\\n1 & 0 & q & 1-q\\n\\\\end{array}\\n\\n(3) Noisy typewriter: $\\\\mathcal{X} = \\\\mathcal{Y} = \\\\{A, \\\\cdot \\\\cdot \\\\cdot, Z\\\\}$ and the stochastic matrix is given as\\n\\n\\\\begin{array}{c|cccccc}\\nX \\\\backslash Y & A & B & C & D \\\\cdot \\\\cdot \\\\cdot & Y & Z \\\\\\\\\\n\\\\hline\\nA & 1/3 & 1/3 & 0 & \\\\cdot \\\\cdot \\\\cdot & 0 & 1/3 \\\\\\\\\\nB & 1/3 & 1/3 & 1/3 & \\\\cdot \\\\cdot \\\\cdot & 0 & 0 \\\\\\\\\\n\\\\vdots & & \\\\ddots & & \\\\ddots & & \\\\vdots \\\\\\\\\\nY & 0 & 0 & 0 & \\\\cdot \\\\cdot \\\\cdot & 1/3 & 1/3 \\\\\\\\\\nZ & 1/3 & 0 & 0 & \\\\cdot \\\\cdot \\\\cdot & 1/3 & 1/3\\n\\\\end{array}",
+        "proof": "",
+        "preconditions": [
+            "discrete memoryless channel",
+            "binary symmetric channel",
+            "binary erasure channel",
+            "noisy typewriter",
+            "stochastic matrix"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.4",
+        "name": "Channel Capacity",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [],
+        "statement": "Let $(\\\\mathcal{X}, M, \\\\mathcal{Y})$ be a DMC. We call $C := \\\\sup I(X; Y)$ the channel capacity of DMC $(\\\\mathcal{X}, M, \\\\mathcal{Y})$, where the supremum is taken over all input distributions $p_X$.\\n\\nFrom $I(X; Y) = H(X) - H(X|Y) = H(Y) - H(Y|X)$, it follows that\\n\\n$0 \\\\leq C \\\\leq \\\\min\\\\{\\\\log(|\\\\mathcal{X}|), \\\\log(|\\\\mathcal{Y}|)\\\\}$.\\n\\nThese upper bounds are measuring 'how many bits of information are in a single input/output character', which is an intuitive bound on how much information a channel can transmit.",
+        "proof": "",
+        "preconditions": [
+            "discrete memoryless channel",
+            "channel capacity",
+            "mutual information",
+            "entropy",
+            "conditional entropy"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 4.5",
+        "name": "Mutual Information Properties",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Theorem 1.14"
+        ],
+        "statement": "For fixed $p_{Y|X}$, the map $p_X \\\\to I(X; Y)$ is concave. Conversely, for fixed $p_X$, the map $p_{Y|X} \\\\to I(X; Y)$ is convex.",
+        "proof": "For the first statement, recall $I(X; Y) = H(Y) - H(Y|X)$. Given $p_{Y|X}$, we know $p_Y$ and $H(Y|X)$ are linear functions of $p_X$. We also know $H(Y)$ is concave in $p_Y$, so $H(Y)$ is concave in $p_X$, and $I(X; Y)$ is concave in $p_X$.\\n\\nFor the second statement, recall $I(X; Y) = D(p_{X,Y} \\\\| p_X p_Y)$. Given $p_X$, we know $p_{X,Y}$ is linear in $p_{Y|X}$. Taking the marginal distribution of $Y$ shows $p_X p_Y$ is also linear in $p_X$. By Point (5) in Theorem 1.14, we know $D(p\\\\|q)$ is convex in $(p, q)$. So $I(X; Y)$ is convex in $p_{Y|X}$ for any fixed $p_X$.",
+        "preconditions": [
+            "mutual information",
+            "convex function",
+            "concave function"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.7",
+        "name": "Binary Symmetric Channel",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Example 4.3"
+        ],
+        "statement": "For the binary symmetric channel specified in Example 4.3(1), we have a transmission error with probability $q$. To calculate its capacity, we need to estimate $I(X; Y)$.\\n\\n$I(X; Y) = H(Y) - H(Y|X)$\\n\\n$= H(Y) - \\\\sum_{x\\\\in X} p(x)H(Y|X = x)$\\n\\n$= H(Y) - \\\\sum_{x\\\\in X} p(x)H(q)$\\n\\nwhere $H(q) = -q \\\\log(q) - (1 - q) \\\\log(1 - q)$ is the entropy of the pmf $(q, 1 - q)$ (Bernouli distribution). We could optimize this directly with respect to $p$ (which implicitly appears in both terms, as it affects $Y$), but a clever estimate gives\\n\\n$I(X; Y) \\\\leq 1 - H(q)$\\n\\nand we note that if $Y$ is uniform, $P(Y = 0) = P(Y = 1) = 1/2$, then $H(Y) = 1$ and this is an equality. Since\\n\\n$p_Y(0) = (1 - q)p_X(0) + qp_X(1)$,\\n\\n$p_Y(1) = qp_X(0) + (1 - q)p_X(1)$,\\n\\nwe know that $P(Y = 0) = 1/2$ is equivalent to $P(X = 0) = 1/2$ by the symmetry between the roles of $X$ and $Y$. Hence the maximum is $C = 1 - H(q)$, which is attained iff $P(X = 0) = 1/2$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "binary symmetric channel",
+            "channel capacity",
+            "entropy",
+            "mutual information",
+            "conditional entropy",
+            "probability mass function"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.8",
+        "name": "Binary Erasure Channel",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Example 4.3",
+            "Example 4.7"
+        ],
+        "statement": "In Example 4.3(2), a binary erasure channel is specified by $X = \\\\{0, 1\\\\}$ and $Y = \\\\{0, ?, 1\\\\}$, where $e$ can be interpreted as an error occurred in the transmission, and the stochastic matrix $M$ given as\\n\\n$\\\\begin{array}{c|ccc}\\nX \\\\backslash Y & 0 & ? & 1 \\\\\\\\\\n\\\\hline\\n0 & 1-q & q & 0 \\\\\\\\\\n1 & 0 & q & 1-q\\n\\\\end{array}$\\n\\nThe binary channel erases a fraction of $q$ bits that are transmitted and the receiver knows if which bits have been erased. Hence, we can only hope to recover $1 - q$ bits in proportion. Now as before $I(X; Y) = H(Y) - H(Y|X) = H(Y) - H(q)$ with $H(q)$ the same as in the previous example. Set $\\\\pi = P(X = 1)$, then $p_Y(0) = (1 - \\\\pi)(1 - q)$, $p_Y(e) = (1 - \\\\pi)q + \\\\pi q = q$, $p_Y(1) = \\\\pi(1 - q)$, so\\n\\n$H(Y) = -(1 - \\\\pi)(1 - q) \\\\log((1 - \\\\pi)(1 - q)) - q \\\\log(q) - \\\\pi(1 - q) \\\\log(\\\\pi(1 - q))$\\n\\n$= -(1 - \\\\pi)(1 - q) \\\\log(1 - \\\\pi) - (1 - \\\\pi)(1 - q) \\\\log(1 - q) - q \\\\log(q)$\\n\\n$-\\\\pi(1 - q) \\\\log(\\\\pi) - \\\\pi(1 - q) \\\\log(1 - q)$\\n\\n$= H(q) + (1 - q)H(\\\\pi)$.\\n\\nNow\\n\\n$I(X; Y) = H(q) + (1 - q)H(\\\\pi) - H(q) = (1 - q)H(\\\\pi)$\\n\\nand therefore the capacity is $C = 1 - q$ achieved with $\\\\pi = P(X = 1) = 1/2$.",
+        "proof": "",
+        "preconditions": [
+            "binary erasure channel",
+            "discrete random variable",
+            "probability mass function",
+            "channel capacity",
+            "entropy",
+            "mutual information",
+            "conditional entropy"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.9",
+        "name": "Channel Code",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [],
+        "statement": "Fix $m, n \\\\geq 1$. A $(m, n)$-channel code for a DMC $(X, M, Y)$ is a tuple $(c, d)$ consisting of\\n\\n\u2022 a map $c : \\\\{1, \\\\cdot \\\\cdot \\\\cdot, m\\\\} \\\\rightarrow X^n$, called the encoder,\\n\\n\u2022 a map $d : Y^n \\\\rightarrow \\\\{1, \\\\cdot \\\\cdot \\\\cdot, m\\\\}$, called the decoder.\\n\\nWe call $\\\\{1, \\\\cdot \\\\cdot \\\\cdot, m\\\\}$ the message set, $c(i)$ the codeword for message $i \\\\in \\\\{1, \\\\cdot \\\\cdot \\\\cdot, m\\\\}$ and the collection $\\\\{c(i) : i = 1, \\\\cdot \\\\cdot \\\\cdot, m\\\\}$ the codebook.",
+        "proof": "",
+        "preconditions": [
+            "discrete memoryless channel",
+            "channel code"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.10",
+        "name": "Channel Code Rate",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Definition 4.9"
+        ],
+        "statement": "Let $(X, M, Y)$ be a DMC. We call $\\\\rho(c, d) := \\\\frac{1}{n} \\\\log(m)$ the (binary) rate of the $(m, n)$-code $(c, d)$.",
+        "proof": "",
+        "preconditions": [
+            "discrete memoryless channel",
+            "channel code"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.12",
+        "name": "Channel Code Error",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Definition 4.9",
+            "Definition 4.10"
+        ],
+        "statement": "Let $(c, d)$ be a $(m, n)$-channel code for a DMC $(X, M, Y)$. Set\\n\\n$\\\\varepsilon_i = P(d(\\\\mathbf{Y}) \\\\neq i | c(i) = \\\\mathbf{X})$ for $i = 1, \\\\cdot \\\\cdot \\\\cdot, m$,\\n\\nwhere $\\\\mathbf{X} = (X_1, \\\\cdot \\\\cdot \\\\cdot, X_n)$ and $\\\\mathbf{Y} = (Y_1, \\\\cdot \\\\cdot \\\\cdot, Y_n)$ with $\\\\{(X_i, Y_i)\\\\}_{i=1,\\\\cdot\\\\cdot\\\\cdot,n}$ consisting of i.i.d. copies of random variables $(X, Y)$ that realise the DMC. We say that the channel code has\\n\\n(1) a maximal probability of error $\\\\varepsilon_{\\\\max} := \\\\max_{i\\\\in\\\\{1,\\\\cdot\\\\cdot\\\\cdot,m\\\\}} \\\\varepsilon_i$,\\n\\n(2) an arithmetic error $\\\\bar{\\\\varepsilon} := \\\\frac{1}{m}\\\\sum_{i=1}^{m} \\\\varepsilon_i$.",
+        "proof": "",
+        "preconditions": [
+            "discrete memoryless channel",
+            "channel code",
+            "i.i.d. sequence"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.14",
+        "name": "Achievable Rate",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [],
+        "statement": "A rate $R > 0$ is achievable for a DMC $(X, M, Y)$ if, for any $\\\\varepsilon > 0$, there exists sufficiently large $m, n$ and an $(m, n)$-channel code $(c, d)$ with\\n\\n$\\\\rho(c, d) > R - \\\\varepsilon$ and $\\\\varepsilon_{\\\\max} < \\\\varepsilon$,\\n\\nwhere $\\\\varepsilon_{\\\\max}$ denotes the maximal error of $(c, d)$.",
+        "proof": "",
+        "preconditions": [
+            "discrete memoryless channel",
+            "channel code"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 4.15",
+        "name": "Shannon's Second Theorem",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Definition 4.14",
+            "Theorem 4.17"
+        ],
+        "statement": "(Shannon's second theorem: noisy channel coding). Let $(X, M, Y)$ be a DMC with capacity $C$. Then a rate $R > 0$ is achievable iff $R \\\\leq C$.",
+        "proof": "The proof consists of two parts: showing that any rate $R \\\\leq C$ is achievable, and showing that no rate $R > C$ is achievable.\\n\\n(Step 1: Rate is achievable.) We want to find a code with rate close to $C = \\\\sup_{p_X} I(X; Y)$. We fix $p = p_X$ to be a maximizer of $I(X; Y)$, some $\\\\varepsilon \\\\in (0, 3C/2)$, and choose $m, n$ to be integers which are sufficiently large.\\n\\n(Step 1a: Defining a random code.) Let $J^{(n)}_{\\\\varepsilon}$ be the jointly typical set of $p_{X,Y} = p_{Y|X} p_X$. We generate a random $(2m, n)$-channel code as follows:\\n\\n(1) Generate $2m$ random codewords in $X^n$, by sampling independently from $\\\\Pi^n_{i=1}p_X(x_i)$;\\n\\n(2) For each message $i \\\\in \\\\{1, \\\\cdots, 2m\\\\}$, define its encoding as the corresponding random codeword;\\n\\n(3) Define the decoder as a typical-set decoder: upon receiving $Y$, check if there exists a unique element $X$ in the set of random codewords such that $(X, Y) \\\\in J^{(n)}_{\\\\varepsilon/6}$. In this case, decode as the message that was in step (2) associated with the codeword $X$. If this is not the case (there does not exist such a codeword or it is not unique) the decoder outputs $2m$.\\n\\nDenote this random $(2m, n)$-channel code by $(C, D)$.\\n\\n(Step 1b: Calculating the conditional probability of error) We calculate the probability of error when we follow the sequence:\\n\\n(1) Sample from the channel code $(C, D)$;\\n\\n(2) Sample a message $W$ uniformly from $\\\\{1, \\\\cdots, m\\\\}$;\\n\\n(3) Send the sequence $X = C(W)$ through the channel;\\n\\n(4) Decode the channel output using $D$, denote the decoded message with $\\\\hat{W}$.\\n\\nDenote by $E_i$ the event that the random codeword for $i$ and the channel output are jointly typical (i.e. in $J^{(n)}_{\\\\varepsilon/6}$). By construction of the random code, $\\\\varepsilon_i$ is the same for all messages $i < 2m$, and is lower if $i = 2m$ (as this was the default output case). Therefore, $\\\\varepsilon_{\\\\max} = \\\\varepsilon_1$ for our random code.\\n\\nWe wish to calculate\\n\\n$\\\\varepsilon_{\\\\max} = \\\\varepsilon_1 = P(\\\\hat{W} \\\\neq 1|W = 1)$\\n\\nAn error can occur either because we are in $E^c_1$ (so we have output not jointly typical with our input message codeword) or are in $E_i$ for some $i \\\\neq 1$ (so we have output jointly typical with another codeword). By the union bound for probabilities\\n\\n$P(\\\\hat{W} \\\\neq 1|W = 1) = P(E^c_1 \\\\cup (\\\\cup^{2m}_{i=2}E_i) | W = 1) \\\\leq P(E^c_1 | W = 1) + \\\\sum^{2m}_{i=2} P(E_i|W = 1).$\\n\\nBy joint typicality, $P(E^c_1|W = 1) < \\\\frac{\\\\varepsilon}{6}$. When $W = 1$, we can think of $E_i$ (for $i \\\\neq 1$) as the event that we have independently chosen $X$ and $Y$ and just happened to find a jointly typical sequence \u2013 hence $P(E_i|W = 1) \\\\leq 2^{-n(I(X;Y)-3\\\\varepsilon/6)} = 2^{-n(I(X;Y)-\\\\varepsilon/2)}$ for $i \\\\neq 1$, provided $n$ is sufficiently large. Combining these,\\n\\n$\\\\varepsilon_{\\\\max} \\\\leq \\\\frac{\\\\varepsilon}{6} + \\\\sum^{m}_{i=2} 2^{-n(I(X;Y)-\\\\varepsilon/2)} \\\\leq \\\\frac{\\\\varepsilon}{6} + (2m - 1)2^{-n(I(X;Y)-\\\\varepsilon/2)} < \\\\frac{\\\\varepsilon}{6} + m2^{-n(I(X;Y)-\\\\varepsilon/2)+1}$\\n\\nWe now choose $n$ sufficiently large that these bounds hold, and also\\n\\n$n > \\\\max\\\\left\\\\{\\\\frac{1}{C - 2\\\\varepsilon/3}, \\\\frac{6}{\\\\varepsilon \\\\log(\\\\varepsilon/3)}\\\\right\\\\}$\\n\\nand\\n\\n$m = \\\\lfloor 2^{n(C-2\\\\varepsilon/3)}\\\\rfloor$.\\n\\nIt follows that $m > 2^{n(C-2\\\\varepsilon/3)-1}$, so the random $(2m, n)$-channel code $(C, D)$ has rate\\n\\n$\\\\frac{1}{n}\\\\log(2m) \\\\geq \\\\frac{1}{n}n(C - 2\\\\varepsilon/3) = C - \\\\frac{2\\\\varepsilon}{3}$.\\n\\nWe also know $m \\\\leq 2^{n(C-2\\\\varepsilon/3)}$ and $2^{1-n\\\\varepsilon/6} \\\\leq \\\\varepsilon/3$, and that $I(X; Y) = C$, therefore\\n\\n$\\\\varepsilon_{\\\\max} = P(W \\\\neq \\\\hat{W}) \\\\leq \\\\frac{\\\\varepsilon}{6} + 2^{n(C-2\\\\varepsilon/3)}2^{-n(I(X;Y)-\\\\varepsilon/2)+1} = \\\\frac{\\\\varepsilon}{6} + 2^{1-n\\\\varepsilon/6} \\\\leq \\\\frac{\\\\varepsilon}{2}$.\\n\\n(Step 1c: Finding a deterministic code) By conditioning, we see that our random code satisfies\\n\\n$P(W \\\\neq \\\\hat{W}) = \\\\sum_{(c,d)} P(W \\\\neq \\\\hat{W}|(C, D) = (c, d))P((C, D) = (c, d)) < \\\\frac{\\\\varepsilon}{2}$.\\n\\nIt follows that there must exist at least one channel code $(c^*, d^*)$ such that\\n\\n$P(W \\\\neq \\\\hat{W}|(C, D) = (c^*, d^*)) < \\\\frac{\\\\varepsilon}{2}$.\\n\\nRecall that $W$ was sampled uniformly and the arithmetic error is the expected error over all messages if the input is uniformly distributed. Hence, above inequality can be restated as $\\\\bar{\\\\varepsilon} < \\\\frac{\\\\varepsilon}{2}$, where $\\\\bar{\\\\varepsilon}$ denotes the arithmetic error of $(c^*, d^*)$. Thus we have shown the existence of a $(2m, n)$-channel code with rate at least $C - \\\\frac{2\\\\varepsilon}{3}$ and arithmetic error $\\\\bar{\\\\varepsilon} < \\\\frac{\\\\varepsilon}{2}$. Further,\\n\\n$\\\\bar{\\\\varepsilon} = \\\\frac{1}{2m}\\\\sum^{2m}_{i=1} \\\\varepsilon_i < \\\\frac{\\\\varepsilon}{2}$,\\n\\nor equivalently, $\\\\sum^{2m}_{i=1} \\\\varepsilon_i < m\\\\varepsilon$ (here $\\\\varepsilon_i$ denotes the probability of an error in decoding message $i$ using channel code $(c^*, d^*)$). Now sort the codewords by their error probabilities $\\\\varepsilon_i$. Each of the probabilities in the better half of the $2m$ codewords must be less than $\\\\varepsilon$ since otherwise the sum over the other half would be at least $\\\\frac{\\\\varepsilon}{2} \\\\cdot m$ which contradicts $\\\\sum^{m}_{i=1} \\\\varepsilon_i < m\\\\varepsilon$. Therefore, throwing away the worse half of the codewords modifies $(c^*, d^*)$ into into a $(m, n)$-channel code with rate at least $\\\\rho(c^*, d^*) = C - \\\\frac{2\\\\varepsilon}{3} - \\\\frac{1}{n}$ and $\\\\varepsilon_{\\\\max} < \\\\varepsilon$, as required. Taking $n$ sufficiently large, and $\\\\varepsilon$ sufficiently small, we can approach any desired rate $R \\\\leq C$.\\n\\n(Step 2: Rate is optimal) Fix $\\\\varepsilon > 0$ and assume for sufficiently large $n$ there exists a $(m, n)$ channel code with\\n\\n$\\\\frac{\\\\log(m)}{n} > R - \\\\varepsilon$ and $\\\\varepsilon_{\\\\max} < \\\\varepsilon$.\\n\\nLet $W$ be a random variable that is uniformly distributed on the messages $\\\\{1, \\\\cdots, m\\\\}$ and as above, denote by $\\\\hat{W}$ the decoded message. Then\\n\\n$\\\\log(m) = H(W) = H(W | \\\\hat{W}) + I(W; \\\\hat{W}) \\\\leq H(W | \\\\hat{W}) + I(X; Y) \\\\leq H(W | \\\\hat{W}) + \\\\sum^{n}_{i=1} I(X_i; Y_i) \\\\leq H(W | \\\\hat{W}) + nC < 1 + \\\\bar{\\\\varepsilon} \\\\log(m) + nC$.\\n\\nWhere we used the data processing inequality, the information chain rule, the definition of $C$, and Fano's inequality. Using $\\\\bar{\\\\varepsilon} \\\\leq \\\\varepsilon_{\\\\max} < \\\\varepsilon$ and rearranging above inequality gives\\n\\n$\\\\frac{\\\\log(m)}{n} < \\\\frac{C + 1/n}{1 - \\\\varepsilon}$.\\n\\nUsing our assumption, this implies $R - \\\\varepsilon < \\\\frac{C+1/n}{1-\\\\varepsilon}$. Sending $n \\\\to +\\\\infty$ and $\\\\varepsilon \\\\to 0$ we conclude $R \\\\leq C$.",
+        "preconditions": [
+            "discrete memoryless channel",
+            "channel capacity"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.16",
+        "name": "Jointly Typical Sequences",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [],
+        "statement": "Let $(X, Y)$ be a $X \\\\times Y$-valued random variable with pmf $p_{X,Y}$. For $n \\\\in \\\\mathbb{N}$ and $\\\\varepsilon > 0$, set $X = (X_1, \\\\cdots, X_n)$, $Y = (Y_1, \\\\cdots, Y_n)$ with entries i.i.d. copies of $X, Y$, and\\n\\n$J^{(n)}_\\\\varepsilon = \\\\left\\\\{(x, y) \\\\in X^n \\\\times Y^n : \\\\max\\\\left(\\\\left|\\\\frac{-\\\\log(p_{X,Y}(x, y))}{n} - H(X, Y)\\\\right|, \\\\left|\\\\frac{-\\\\log(p_X(x))}{n} - H(X)\\\\right|, \\\\left|\\\\frac{-\\\\log(p_Y(y))}{n} - H(Y)\\\\right|\\\\right) < \\\\varepsilon\\\\right\\\\}$.\\n\\nWe call $J^{(n)}_\\\\varepsilon$ the set of jointly typical sequences of length $n$ and tolerance $\\\\varepsilon$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "probability mass function",
+            "entropy",
+            "jointly typical sequences",
+            "i.i.d. sequence"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 4.17",
+        "name": "Joint AEP",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [],
+        "statement": "(Joint AEP). Consider a sequence of pairs of random variables $(X_i, Y_i)$ with $i = 1, ..., n$. We assume that $(X_i, Y_i)$ and $(X_j, Y_j)$ are i.i.d. for $i \\\\neq j$ (but $X_i$ and $Y_i$ are generally not independent). We write $X = (X_1, \\\\cdots, X_n)$ and $Y = (Y_1, \\\\cdots, Y_n)$. Similarly, consider a sequence $(X'_i, Y'_i)$ for $i = 1, ..., n$ which are i.i.d. in $i$, where $X'_i$ and $Y'_i$ have the same marginal distributions as $X_i, Y_i$, but $X'_i$ and $Y'_i$ are independent for all $i$. Write $X'$ and $Y'$ accordingly. Then\\n\\n(1) $\\\\lim_{n\\\\to+\\\\infty} P((X, Y) \\\\in J^{(n)}_\\\\varepsilon) = 1$;\\n\\n(2) $|J^{(n)}_\\\\varepsilon| \\\\leq 2^{n(H(X,Y)+\\\\varepsilon)}$;\\n\\n(3) $\\\\exists n_0$ such that $\\\\forall n \\\\geq n_0$, we have,\\n\\n$(1 - \\\\varepsilon)2^{-n(I(X;Y)+3\\\\varepsilon)} \\\\leq P\\\\left((X', Y') \\\\in J^{(n)}_\\\\varepsilon\\\\right) \\\\leq 2^{-n(I(X;Y)-3\\\\varepsilon)}$,\\n\\nwhere the upper bound holds for all $n \\\\geq 1$.",
+        "proof": "Point (1) follows by independence and weak law of large numbers: $\\\\frac{\\\\log(p(X_1,\\\\cdots,X_n))}{n} = \\\\frac{\\\\sum^n_{i=1}\\\\log(p(X_i))}{n} \\\\to H(X)$, hence, for any $\\\\epsilon' > 0$,\\n\\n$P\\\\left(\\\\left|\\\\frac{-\\\\log(p_X(X_1, \\\\cdots, X_n))}{n} - H(X)\\\\right| \\\\geq \\\\varepsilon\\\\right) < \\\\frac{\\\\varepsilon'}{3}$ for all $n \\\\geq n_1$\\n\\nfor some integer $n_1$, and similarly\\n\\n$P\\\\left(\\\\left|\\\\frac{-\\\\log(p_Y(Y_1, \\\\cdots, Y_n))}{n} - H(Y)\\\\right| \\\\geq \\\\varepsilon\\\\right) < \\\\frac{\\\\varepsilon'}{3}$ for all $n \\\\geq n_2$,\\n\\n$P\\\\left(\\\\left|\\\\frac{-\\\\log(p_{X,Y}(X_1, \\\\cdots, X_n, Y_1, \\\\cdots, Y_n))}{n} - H(X, Y)\\\\right| \\\\geq \\\\varepsilon\\\\right) < \\\\frac{\\\\varepsilon'}{3}$ for all $n \\\\geq n_3$.\\n\\nfor some integers $n_2, n_3$. Taking $n \\\\geq \\\\max(n_1, n_2, n_3)$ then $\\\\epsilon' \\\\to 0$ shows the result.\\n\\nPoint (2) follows since\\n\\n$1 = \\\\sum_{X^n\\\\times Y^n} p_{X,Y}(x, y) \\\\geq \\\\sum_{J^{(n)}_\\\\varepsilon} p_{X,Y}(x, y) \\\\geq |J^{(n)}_\\\\varepsilon|2^{-n(H(X,Y)+\\\\varepsilon)}$,\\n\\nand therefore $|J^{(n)}_\\\\varepsilon| \\\\leq 2^{n(H(X,Y)+\\\\varepsilon)}$.\\n\\nPoint (3): for the upper bound,\\n\\n$P\\\\left((X', Y') \\\\in J^{(n)}_\\\\varepsilon\\\\right) = \\\\sum_{J^{(n)}_\\\\varepsilon} p_X(x)p_Y(y) \\\\leq 2^{n(H(X,Y)+\\\\varepsilon)}2^{-n(H(X)-\\\\varepsilon)}2^{-n(H(Y)-\\\\varepsilon)} = 2^{-n(I(X;Y)-3\\\\varepsilon)}$.\\n\\nFor the lower bound, for large enough $n$ we know that $P\\\\left((X, Y) \\\\in J^{(n)}_\\\\varepsilon\\\\right) \\\\geq 1 - \\\\varepsilon$, hence\\n\\n$1 - \\\\varepsilon \\\\leq \\\\sum_{J^{(n)}_\\\\varepsilon} p_{X,Y}(x, y) \\\\leq |J^{(n)}_\\\\varepsilon| 2^{-n(H(X,Y)-\\\\varepsilon)}$,\\n\\nand we get\\n\\n$|J^{(n)}_\\\\varepsilon| \\\\geq (1 - \\\\varepsilon)2^{n(H(X,Y)-\\\\varepsilon)}$. Using this, we get similar to above,\\n\\n$P\\\\left((X', Y') \\\\in J^{(n)}_\\\\varepsilon\\\\right) = \\\\sum_{J^{(n)}_\\\\varepsilon} p_X(x)p_Y(y) \\\\geq (1 - \\\\varepsilon)2^{n(H(X,Y)-\\\\varepsilon)}2^{-n(H(X)+\\\\varepsilon)}2^{-n(H(Y)+\\\\varepsilon)} = (1 - \\\\varepsilon)2^{-n(I(X,Y)+3\\\\varepsilon)}$.",
+        "preconditions": [
+            "i.i.d. sequence",
+            "jointly typical sequences",
+            "entropy",
+            "mutual information"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.21",
+        "name": "Hamming Distance",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [],
+        "statement": "(Hamming distance) For two length $n$ vectors $x, y$, the Hamming distance between $x$ and $y$ is the number of entries in which $x$ and $y$ differ. In $\\\\mathbb{F}^n_2$, we can see that this is equal to $\\\\sum_i |x_i - y_i| = \\\\sum_i |x_i - y_i|^2$, so the Hamming distance (formally) agrees with the $\\\\ell^1$/Manhattan distance and the Euclidean distance (but we should be careful, as we're not working over $\\\\mathbb{R}$ or $\\\\mathbb{C}$!). We call the corresponding norm the Hamming weight of the vector.",
+        "proof": "",
+        "preconditions": [
+            "Hamming distance"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.22",
+        "name": "Error Correcting Code",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [],
+        "statement": "We say an error correcting code satisfying the description above is a $[n, k, d]_2$ code.",
+        "proof": "",
+        "preconditions": [
+            "block code",
+            "linear code"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 4.23",
+        "name": "Singleton-Joshi-Komamiya bound",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Definition 4.22"
+        ],
+        "statement": "(Singleton\u2013Joshi\u2013Komamiya bound; Komamiya (1953), Joshi (1958)) For any $[n, k, d]_2$ code, we have $d \\\\leq n - k + 1$.",
+        "proof": "By construction, there are are at most $2^k$ codewords in our space. However, given the minimal distance between codewords is $d$, we can remove the first $d - 1$ entries of each codeword, and still have all codewords distinct. The resulting codes are of length $n - d + 1$, from which it follows that $2^k \\\\leq 2^{n-d+1}$. Rearrangment gives the result.\\n\\nWe say a $(n - k) \\\\times n$ matrix $H$ is a (parity) check matrix for $G$ if the kernel of $H$ is $C$. In other words, $wH^\\\\top = 0$ for all codewords $w$, or equivalently $GH^\\\\top$ is a zero matrix. If $G$ is in standard form, the matrix $H = [P^\\\\top|I_{n-k}]$ is a parity check matrix for $G$. By the rank-nullity theorem, if $H$ has rank $n - k$, we can easily check that a vector in $\\\\mathbb{F}_2^n$ is a codeword if and only if $wH^\\\\top = 0$.",
+        "preconditions": [
+            "linear code",
+            "block code"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.24",
+        "name": "Simple Parity Code",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Proposition 4.23"
+        ],
+        "statement": "Take $n = 3$, $k = 2$, with $G = \\\\begin{pmatrix} 1 & 0 & 1 \\\\\\\\ 0 & 1 & 1 \\\\end{pmatrix}$ and $H = [1, 1, 1]$. Then we see that every codeword satisfies $wH^\\\\top = w_1 + w_2 + w_3 = 0$. The final element of the codeword has the interpretation of being a check of the parity of the sum of the previous elements.",
+        "proof": "By linearity, we can now compute the minimal distance $d$ between codewords:\\n\\n$d = \\\\min_{w,w'\\\\in C} |w - w'| = \\\\min_{s,s'\\\\in \\\\mathbb{F}_2^k} |sG - s'G| = \\\\min_{\\\\hat{s}=s-s'\\\\in \\\\mathbb{F}_2^k} |\\\\hat{s}G| = \\\\min_{\\\\hat{w}\\\\in C} |\\\\hat{w}|$.\\n\\nIn other words, the minimal distance is the same as the minimal weight of all codewords.",
+        "preconditions": [
+            "linear code",
+            "block code"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 4.25",
+        "name": "Minimal Distance Characterization",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Example 4.24"
+        ],
+        "statement": "The minimal distance between codewords is equal to the minimum number of linearly dependent columns in a check matrix $H$.",
+        "proof": "We know that $Hw^\\\\top = 0$ for all codewords. Writing $Hw^\\\\top = \\\\sum_i w_i h_i$, for $h_i$ the columns of $H$, we see that the minimal codeword weight is at least the number of linearly dependent columns in $H$.\\n\\nConversely, take a check matrix, and write $\\\\{h_i\\\\}$ for the columns of $H$. If a subset of $m$ columns is linearly dependent, there exists $c \\\\in \\\\mathbb{F}_2^n$ such that $0 = \\\\sum_i c_i h_i$, and $|(c_1, ..., c_n)| = m$. This $c$ is then a codeword with weight $m$. Hence the minimal codeword weight is at most the number of linearly dependent columns in $H$.",
+        "preconditions": [
+            "linear code",
+            "block code",
+            "Hamming distance"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 4.26",
+        "name": "Hamming Code",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Proposition 4.25"
+        ],
+        "statement": "For $n = 2^m - 1$, $k = n - m$ and $d = 3$, let $H$ be the matrix with columns given by all pairwise linearly independent vectors in $\\\\mathbb{F}_2^k$. This gives the 'Hamming code'.",
+        "proof": "",
+        "preconditions": [
+            "linear code",
+            "block code",
+            "Hamming distance"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.27",
+        "name": "Hamming Code",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Definition 4.26"
+        ],
+        "statement": "For $m = 3$, we get Hamming's $[7, 4, 3]_2$ code (which can correct a single error), with\\n\\n$G = \\\\begin{pmatrix} 1 & 0 & 0 & 0 & 1 & 1 & 0 \\\\\\\\ 0 & 1 & 0 & 0 & 1 & 0 & 1 \\\\\\\\ 0 & 0 & 1 & 0 & 0 & 1 & 1 \\\\\\\\ 0 & 0 & 0 & 1 & 1 & 1 & 1 \\\\end{pmatrix}$,\\n\\n$H = \\\\begin{pmatrix} 1 & 1 & 0 & 1 & 1 & 0 & 0 \\\\\\\\ 1 & 0 & 1 & 1 & 0 & 1 & 0 \\\\\\\\ 0 & 1 & 1 & 1 & 0 & 0 & 1 \\\\end{pmatrix}$\\n\\nThe Hamming code is used extensively, for example it is the basis of error correction within many RAM circuits.",
+        "proof": "",
+        "preconditions": [
+            "linear code",
+            "block code",
+            "Hamming distance"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.28",
+        "name": "Extended Hamming Code",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Example 4.27"
+        ],
+        "statement": "Adding an additional parity bit (a column of 1's to $H$) defines the extended Hamming code (which has the additional property it can detect but not correct two errors). A corresponding $G$ can be found by solving $GH^\\\\top = 0$. With $m = 3$, this is a $[8, 4, 4]$ code. By applying row operations to $H$ and $G$, these can be shown to have the equivalent standard form $G = [I_4|1 - I_4]$ and $H = [1 - I_4|I_4]$, where $1$ denotes a matrix of 1s.",
+        "proof": "",
+        "preconditions": [
+            "linear code",
+            "block code",
+            "Hamming distance"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.29",
+        "name": "Walsh-Hadamard Code",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Example 4.28"
+        ],
+        "statement": "If $H$ is the parity check matrix of a code, we obtain the dual code by taking the (non-standard) generator $\\\\tilde{G} = H$. Taking the dual of the extended Hamming code defines the (augmented) Walsh\u2013Hadamard code, which is a $[2k, k + 1, 2^{k-1}]_2$ code. Alternative constructions, based on Hadamard matrices, are typically preferred. These codes are used in CDMA (code-division multi access) standards, such as 3G, to allow multiple users to communicate over the same channel, as the codewords are orthogonal, so each user can send their codeword without interfering with others.",
+        "proof": "",
+        "preconditions": [
+            "linear code",
+            "block code",
+            "Hamming distance"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.30",
+        "name": "Hsiao Code",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [
+            "Example 4.27"
+        ],
+        "statement": "Hsiao (1970) gives a variation on the Hamming construction, which forces the check matrix $H$ to have only odd numbers of entries in each column. For larger codes, this can be shown to improve computational efficiency.",
+        "proof": "",
+        "preconditions": [
+            "linear code",
+            "block code",
+            "Hamming distance"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 4.31",
+        "name": "Polar Codes",
+        "topic": "Channel Coding: Shannon's second theorem",
+        "previous_results": [],
+        "statement": "Polar codes, and the closely related Reed\u2013Muller codes (which are $[2^m, \\\\sum_{i\\\\leq r} \\\\binom{m}{i}, 2^{m-r}]_2$ codes constructed using polynomials in finite fields), are the basis for error correction in the 5G mobile standard.",
+        "proof": "",
+        "preconditions": [
+            "linear code",
+            "block code"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 5.1",
+        "name": "Stationary Stochastic Process",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [],
+        "statement": "A discrete stochastic process is a sequence $X = (X_i)_{i\\\\geq 1}$ of discrete random variables. We say that a stochastic process is stationary if\\n\\n$P(X_1 = x_1, \\\\cdot \\\\cdot \\\\cdot, X_n = x_n) = P(X_{1+j} = x_1, \\\\cdot \\\\cdot \\\\cdot, X_{n+j} = x_n)$\\n\\nfor all integers $n$, $j$ and $x_1, \\\\cdot \\\\cdot \\\\cdot, x_n \\\\in X$.\\n\\nA special case is a stochastic process with $X_i$ i.i.d., but much more complicated statistical dependencies can occur between the $X_i$.",
+        "proof": "",
+        "preconditions": [
+            "discrete random variable",
+            "stochastic process",
+            "stationary stochastic process",
+            "i.i.d. sequence"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 5.2",
+        "name": "Entropy Rate",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [],
+        "statement": "The entropy rate of a stochastic process $X = (X_i)_i$ is defined as\\n\\n$H(X) = \\\\lim_{n\\\\rightarrow+\\\\infty} \\\\frac{1}{n} H(X_1, \\\\cdot \\\\cdot \\\\cdot, X_n),$\\n\\nwhenever this limit exists.\\n\\nObviously, if $X_i$ are i.i.d., then the entropy rate exists and $H(X) = \\\\lim_{n\\\\rightarrow+\\\\infty} \\\\frac{1}{n} (H(X_1) + \\\\cdot \\\\cdot \\\\cdot + H(X_n)) = H(X_1)$. However, for the case when $X_i$ are independent but not identically distributed the above limit does not necessarily exists. For example, the binary variables $X_i$ with\\n\\n$P(X_i = 1) = 0.5$ for $\\\\log(\\\\log(i)) \\\\in (2k, 2k + 1]$\\n\\nand $P(X_i = 1) = 0$ for $\\\\log(\\\\log(i)) \\\\in (2k + 1, 2k + 2]$\\n\\nwhere $k$ can be any number in $\\\\{0, 1, 2, \\\\cdot \\\\cdot \\\\cdot \\\\}$. This construction gives long stretches with $H(X_i) = 1$ followed by exponentially longer stretches of $H(X_i) = 0$, hence the running average will oscillate between $0$ and $1$.",
+        "proof": "",
+        "preconditions": [
+            "stochastic process",
+            "entropy",
+            "i.i.d. sequence"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.3",
+        "name": "Entropy Rate Existence",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [
+            "Lemma 5.4",
+            "Lemma 5.5"
+        ],
+        "statement": "For a stationary stochastic processes $X$, the entropy rate exists and\\n\\n$H(X) = \\\\lim_{n\\\\rightarrow+\\\\infty} H(X_n|X_{n-1}, \\\\cdot \\\\cdot \\\\cdot, X_1).$",
+        "proof": "By the chain rule for conditional entropy,\\n\\n$\\\\frac{H(X_1, \\\\cdot \\\\cdot \\\\cdot, X_n)}{n} = \\\\frac{1}{n} \\\\sum_{i=1}^{n} H(X_i|X_{n-1}, \\\\cdot \\\\cdot \\\\cdot, X_1).$\\n\\nBy Lemma 5.4 the conditional entropies converge. Using Ces\u00e0ro means as in Lemma 5.5, the above running average of conditional entropies converges to $\\\\lim_{n\\\\rightarrow+\\\\infty} H(X_n|X_{n-1}, \\\\cdot \\\\cdot \\\\cdot, X_1)$.",
+        "preconditions": [
+            "stationary stochastic process",
+            "entropy"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 5.4",
+        "name": "Conditional Entropy Convergence",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [],
+        "statement": "For a stationary stochastic process $X$, $n \\\\mapsto H(X_n|X_{n-1}, \\\\cdot \\\\cdot \\\\cdot, X_1)$ is non-increasing and $\\\\lim_{n\\\\rightarrow+\\\\infty} H(X_n|X_{n-1}, \\\\cdot \\\\cdot \\\\cdot, X_1)$ exists.",
+        "proof": "For any integer $n$,\\n\\n$H(X_{n+1}|X_n, \\\\cdot \\\\cdot \\\\cdot, X_1) \\\\leq H(X_{n+1}|X_n, \\\\cdot \\\\cdot \\\\cdot, X_2) = H(X_n|X_{n-1}, \\\\cdot \\\\cdot \\\\cdot, X_1),$\\n\\nwhere we used that conditioning reduces entropy for the inequality, and the equality is due to the stationarity of the process $X$. Since $H(X_n|X_{n-1}, \\\\cdot \\\\cdot \\\\cdot, X_1) \\\\geq 0$, the limit exists.",
+        "preconditions": [
+            "stationary stochastic process",
+            "entropy",
+            "conditional entropy"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 5.5",
+        "name": "Ces\u00e0ro Mean",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [],
+        "statement": "If $\\\\lim_{n\\\\rightarrow+\\\\infty} a_n = a$, then $\\\\lim_{n\\\\rightarrow+\\\\infty}\\\\frac{1}{n}\\\\sum_{i=1}^{n} a_i = a$.",
+        "proof": "For any $\\\\varepsilon > 0$, there exists a $n_0$ such that for all $n \\\\geq n_0$, $|a_n - a| < \\\\varepsilon$. Hence\\n\\n$\\\\left|\\\\frac{1}{n}\\\\sum_{i=1}^{n} a_i - a\\\\right| \\\\leq \\\\frac{1}{n}\\\\sum_{i=1}^{n} |a_i - a| \\\\leq \\\\frac{1}{n}\\\\sum_{i=1}^{n_0} |a_i - a| + \\\\frac{n - n_0}{n}\\\\varepsilon \\\\leq \\\\frac{1}{n}\\\\sum_{i=1}^{n_0} |a_i - a_0| + \\\\varepsilon.$\\n\\nSending $n \\\\rightarrow +\\\\infty$ makes the first term vanish and then result follows.",
+        "preconditions": [
+            "continuous function"
+        ]
+    },
+    {
+        "type": "definition",
+        "id": "Definition 5.6",
+        "name": "Markov Chain",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [],
+        "statement": "A discrete stochastic process $X = (X_i)_{i\\\\geq 1}$ is a Markov chain if\\n\\n$P(X_{n+1} = x_{n+1} | X_n = x_n, \\\\cdots, X_1 = x_1) = P(X_{n+1} = x_{n+1} | X_n = x_n)$\\n\\nfor all $n$ and all $x_1, \\\\cdots, x_n \\\\in \\\\mathcal{X}$.\\n\\nA Markov chain is time-invariant (or time-homogenous) if\\n\\n$P(X_{n+1} = b|X_n = a) = P(X_2 = b | X_1 = a)$\\n\\nfor all $n$ and all $a, b \\\\in \\\\mathcal{X}$.\\n\\nA time-invariant Markov chain with state space $\\\\mathcal{X} = \\\\{x_1, \\\\cdots, x_m\\\\}$ is characterised by its initial state $X_1$ and its probability transition matrix\\n\\n$P = (P_{i,j})_{m\\\\times m}$ where $P_{i,j} := P(X_2 = x_j | X_1 = x_i)$.\\n\\nIn this case, the pmf of $X_{n+1}$ is given as $p_{X_{n+1}}(x_j) = \\\\sum_i p_{X_n}(x_i)P_{i,j}$.\\nGiven a time-invariant Markov process $X$, the distribution $p_{X_n}$ on $\\\\mathcal{X}$ is called stationary distribution of $X$ if $p_{X_{n+1}} = p_{X_n}$. Hence, a pmf $\\\\mu$ on $\\\\mathcal{X}$ is a stationary distribution, if $\\\\mu_j = \\\\sum_i \\\\mu_i P_{i,j}$ for all $j$, where $\\\\mu_i = \\\\mu(x_i)$, or in matrix notation (with $\\\\mu = (\\\\mu_1, \\\\cdots, \\\\mu_m)$)\\n\\n$\\\\mu = \\\\mu P$.",
+        "proof": "",
+        "preconditions": [
+            "stochastic process",
+            "Markov chain",
+            "time-invariant Markov chain",
+            "probability mass function",
+            "stationary stochastic process",
+            "stochastic matrix"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 5.8",
+        "name": "Two-State Markov Chain",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [
+            "Definition 5.6"
+        ],
+        "statement": "Let $X = (X_i)$ be Markov chain with two states $\\\\mathcal{X} = \\\\{a, b\\\\}$ and $P(X_2 = b|X_1 = a) = \\\\alpha$, $P(X_2 = a|X_1 = b) = \\\\beta$, that is\\n\\n$P = \\\\begin{pmatrix} 1 - \\\\alpha & \\\\alpha \\\\\\\\ \\\\beta & 1 - \\\\beta \\\\end{pmatrix}$.\\n\\nThen the stationary distribution is $\\\\mu(a) = \\\\frac{\\\\beta}{\\\\alpha+\\\\beta}$, $\\\\mu(b) = 1 - \\\\mu(\\\\alpha)$. If $X_1 \\\\sim \\\\mu$, then\\n\\n$H(X) = \\\\frac{\\\\beta}{\\\\alpha + \\\\beta} H(\\\\alpha) + \\\\frac{\\\\alpha}{\\\\alpha + \\\\beta} H(\\\\beta)$,\\n\\nwhere $H(\\\\alpha)$ denotes the entropy of a Bernoulli random variable with probability $\\\\alpha$ (and similarly $H(\\\\beta)$).",
+        "proof": "",
+        "preconditions": [
+            "Markov chain",
+            "stochastic matrix",
+            "stationary stochastic process",
+            "entropy",
+            "discrete random variable",
+            "probability mass function"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 5.9",
+        "name": "Graph-Based Markov Chain",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [
+            "Definition 5.6"
+        ],
+        "statement": "Consider a connected graph $(V, E)$ with vertices $V = \\\\{1, \\\\cdots, m\\\\}$ and without self-connection. Associate with the edge connecting node $i$ and $j$ a weight $w_{i,j} = w_{j,i} \\\\geq 0$ (if there's no edge, set $w_{i,j} = 0$). Define a Markov chain on the set of vertices $V$ by\\n\\n$P_{i,j} = P(X_{n+1} = j | X_n = i) = \\\\frac{w_{i,j}}{\\\\sum_{k=1}^m w_{i,k}}$.\\n\\n(Choose the next vertex at random from the neighbouring vertices, with probabilities proportional to the weight of the connecting edge). We can guess the stationary distribution: the probability of being at vertex $i$ should be proportional to the total weight of the edges emanating from this vertex. That is, if we denote the total weight of edges connecting to vertex $i$ by $w_i = \\\\sum_j w_{j,i}$, and the sum of weight of all edges by $w = \\\\sum_i \\\\sum_{j>i} w_{i,j}$. Then $\\\\sum_i w_i = 2w$ and we expect that $\\\\mu_i = \\\\frac{w_i}{2w}$. Indeed, we can directly verify $\\\\mu P = \\\\mu$:\\n\\n$\\\\sum_i \\\\mu_i P_{i,j} = \\\\sum_i \\\\frac{w_i}{2w} \\\\frac{w_{i,j}}{w_i} = \\\\frac{1}{2} \\\\sum_i \\\\frac{w_{i,j}}{2} = \\\\frac{w_j}{2w} = \\\\mu_j$.\\n\\nIt is interesting to note that $\\\\mu_i$ does not change if the edge weights connecting to vertex $i$ stay the same, but the other weights are changed subject to having the same total weight. To calculate the entropy rate\\n\\n$H(X) = H(X_2|X_1) = -\\\\sum_i \\\\mu_i \\\\sum_j P_{i,j} \\\\log(P_{i,j})$\\n$= -\\\\sum_i \\\\sum_j \\\\frac{w_i}{2w} \\\\frac{w_{i,j}}{w_i} \\\\log\\\\left(\\\\frac{w_{i,j}}{w_i}\\\\right)$\\n$= -\\\\sum_{i,j} \\\\frac{w_{i,j}}{2w} \\\\log\\\\left(\\\\frac{w_{i,j}}{w_i}\\\\right)$\\n$= -\\\\sum_{i,j} \\\\frac{w_{i,j}}{2w} \\\\log\\\\left(\\\\frac{w_{i,j}}{2w} \\\\frac{2w}{w_i}\\\\right)$\\n$= -\\\\sum_{i,j} \\\\frac{w_{i,j}}{2w} \\\\log\\\\left(\\\\frac{w_{i,j}}{2w}\\\\right) - \\\\sum_{i,j} \\\\frac{w_{i,j}}{2w} \\\\log\\\\left(\\\\frac{2w}{w_i}\\\\right)$\\n$= -\\\\sum_{i,j} \\\\frac{w_{i,j}}{2w} \\\\log\\\\left(\\\\frac{w_{i,j}}{2w}\\\\right) + \\\\sum_{i,j} \\\\frac{w_{i,j}}{2w} \\\\log\\\\left(\\\\frac{w_i}{2w}\\\\right)$\\n$= -\\\\sum_{i,j} \\\\frac{w_{i,j}}{2w} \\\\log\\\\left(\\\\frac{w_{i,j}}{2w}\\\\right) + \\\\sum_i \\\\frac{w_i}{2w} \\\\log\\\\left(\\\\frac{w_i}{2w}\\\\right)$\\n\\nThis final quantity can be expressed in terms of the entropies of the distribution (on $i, j$) with probabilities $\\\\frac{w_{i,j}}{2w}$, and the distribution (on $i$) with probabilities $\\\\frac{w_i}{2w}$.",
+        "proof": "",
+        "preconditions": [
+            "Markov chain",
+            "stationary stochastic process",
+            "entropy",
+            "conditional entropy"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 5.10",
+        "name": "Language Model Markov Chain",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [
+            "Definition 5.6"
+        ],
+        "statement": "Consider English-language text, with alphabet $|A| = 27$. We can define a Markov chain model for the sequence of letters by estimating $\\\\{P(L_t = a|L_{t-1} = b)\\\\}_{a,b\\\\in A}$ from data, where $L_t$ is the $t$th observed letter. More generally, we can take $X_{t-1} = [L_{t-1}, L_{t-2}, ..., L_{t-k}]$ for a model with $\\\\mathcal{X} = A^k$ where the next letter depends on the preceeding $k$ letters, and estimate $\\\\{P(L_t = a|L_{t-1} = b_1, ..., L_{t-k} = b_k)\\\\}_{a,b_1,...,b_k\\\\in A}$. In practice, $k \\\\geq 5$ is needed to reasonably resemble English text.\\n\\nA similar setting is used by large language models (e.g. ChatGPT, Bard, Sydney), where the previous $k$ words are used, and a predictive model is learned for the next word. As there are a large number of possible words, this requires a very large model, but is conceptually in the same class.\\n\\nIn practice, one is often not directly interested in the Markov chain $X = (X_i)$ but in understanding a process $Y$ defined by a function of $X$, i.e., $Y_i = \\\\phi(X_i)$. For example, think of $X$ as a complicated system that evolves over time but we only observe the current state of the system partially. A basic question is to determine the entropy rate of the stochastic process $Y$. This is a complicated question since in general $Y$ itself is not a Markov chain so we can't directly apply the results of the previous section. However, we know that $H(Y)$ is well-defined since $Y$ is stationary.\\n\\nA first approach is to simply estimate $H(Y)$ by the first $n$ observations as $H(Y_n | Y_{n-1}, \\\\cdots, Y_1)$. However, the convergence $H(Y) = \\\\lim_n H(Y_n|Y_{n-1}, \\\\cdots, Y_1)$ can be very slow so we have no means to decide whether this estimate is good for a given $n$! The theorem below shows that the difference $H(Y_n | Y_{n-1}, \\\\cdots, Y_1) - H(Y_n|Y_{n-1}, \\\\cdots, Y_1, X_1)$ gives guarantees for this estimate.",
+        "proof": "",
+        "preconditions": [
+            "stochastic process",
+            "stationary stochastic process",
+            "Markov chain",
+            "entropy",
+            "conditional entropy"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.11",
+        "name": "Function of Markov Chain",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [
+            "Definition 5.6"
+        ],
+        "statement": "Let $X = (X_i)_{i\\\\in Z}$ be a stationary Markov chain and $\\\\phi : \\\\mathcal{X} \\\\to \\\\mathcal{Y}$. Let $Y = (Y_i)_{i\\\\in Z}$ with $Y_i := \\\\phi(X_i)$. Then\\n\\n$H(Y_n|Y_{n-1}, \\\\cdots, Y_1, X_1) \\\\leq H(Y) \\\\leq H(Y_n|Y_{n-1}, \\\\cdots, Y_1)$\\n\\nand $H(Y) = \\\\lim_{n\\\\to+\\\\infty} H(Y_n|Y_{n-1}, \\\\cdots, Y_1, X_1) = \\\\lim_{n\\\\to+\\\\infty} H(Y_n|Y_{n-1}, \\\\cdots, Y_1)$.",
+        "proof": "Since $H(Y_n|Y_{n-1}, \\\\cdots, Y_1)$ converges monotonically from above to $H(Y)$, the theorem follows by combining the following two lemmas: (1) $H(Y_n|Y_{n-1}, \\\\cdots, Y_1, X_1) \\\\leq H(Y)$ and (2) $H(Y_n|Y_{n-1}, \\\\cdots, Y_1) - H(Y_n|Y_{n-1}, \\\\cdots, Y_1, X_1) \\\\to 0$ as $n \\\\to +\\\\infty$.",
+        "preconditions": [
+            "stationary stochastic process",
+            "Markov chain",
+            "entropy",
+            "conditional entropy"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 5.12",
+        "name": "Entropy Rate Bound",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [],
+        "statement": "Let $X = (X_i)_{i\\\\in\\\\mathbb{Z}}$ be a stationary Markov chain and $\\\\phi : X \\\\to Y$. Let $Y = (Y_i)_{i\\\\in\\\\mathbb{Z}}$ with $Y_i := \\\\phi(X_i)$. Then $H(Y_n|Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_2, X_1) \\\\leq H(Y)$.",
+        "proof": "Using that $Y_1 = \\\\phi(X_1)$, the Markovianity of $X$, that $Y_i = \\\\phi(X_i)$ we get for any integer $k$ that\\n\\n$H(Y_n|Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_2, X_1) = H(Y_n|Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_2, Y_1, X_1)$\\n\\n$= H(Y_n|Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_2, Y_1, X_1, X_0, X_{-1}, \\\\cdot \\\\cdot \\\\cdot, X_{-k})$\\n\\n$= H(Y_n|Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_2, Y_1, X_1, X_0, X_{-1}, \\\\cdot \\\\cdot \\\\cdot, X_{-k}, Y_0, \\\\cdot \\\\cdot \\\\cdot, Y_{-k})$\\n\\n$\\\\leq H(Y_n|Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1, Y_0, \\\\cdot \\\\cdot \\\\cdot, Y_{-k})$\\n\\n$= H(Y_{n+k+1}|Y_{n+k}, \\\\cdot \\\\cdot \\\\cdot, Y_1)$,\\n\\nwhere the inequality is because the conditioning reduces entropy. So, by the data processing inequality,\\n\\n$H(Y_n|Y_n, ..., Y_2, X_1) \\\\leq H(Y_n|Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_2, Y_1) \\\\leq \\\\lim_{k} H(Y_{n+k+1}|Y_{n+k}, \\\\cdot \\\\cdot \\\\cdot, Y_1) = H(Y)$.",
+        "preconditions": [
+            "stationary stochastic process",
+            "Markov chain",
+            "entropy",
+            "conditional entropy"
+        ]
+    },
+    {
+        "type": "lemma",
+        "id": "Lemma 5.13",
+        "name": "Entropy Difference Convergence",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [],
+        "statement": "Let $X = (X_i)_{i\\\\in\\\\mathbb{Z}}$ be a stationary Markov chain and $\\\\phi : X \\\\to Y$. Let $Y = (Y_i)_{i\\\\in\\\\mathbb{Z}}$ with $Y_i := \\\\phi(X_i)$. Then $H(Y_n|Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1) - H(Y_n|Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1, X_1) \\\\to 0$ as $n \\\\to +\\\\infty$.",
+        "proof": "$I(X_1; Y_n | Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1) = H(Y_n | Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1) - H(Y_n | Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1, X_1)$.\\nSince $I(X_1; Y_n, Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1) \\\\leq H(X_1)$ and $n \\\\mapsto I(X_1; Y_n, Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1)$ is increasing, the limit\\n\\n$\\\\lim_{n} I(X_1; Y_n, Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1) \\\\leq H(X_1)$\\n\\nexists. By the chain rule,\\n\\n$I(X_1; Y_n, Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1) = \\\\sum_{i=1}^{n} I(X_1; Y_i | Y_{i-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1)$,\\n\\nso combining with the above we get\\n\\n$\\\\sum_{i=1}^{+\\\\infty} I(X_1; Y_i | Y_{i-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1) \\\\leq H(X_1) < \\\\infty$,\\n\\nthus $\\\\lim_{n\\\\to+\\\\infty} I(X_1; Y_n | Y_{n-1}, \\\\cdot \\\\cdot \\\\cdot, Y_1) = 0$.",
+        "preconditions": [
+            "stationary stochastic process",
+            "Markov chain",
+            "entropy",
+            "conditional entropy"
+        ]
+    },
+    {
+        "type": "theorem",
+        "id": "Theorem 5.14",
+        "name": "Source-Channel Separation",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [],
+        "statement": "Let $(X, M, Y)$ be a DMC with channel capacity $C$. Let $V = (V_i)_{i\\\\geq 1}$ be a discrete stochastic process in a finite state space $V$. If $V$ satisfies the AEP and\\n\\n$H(V) < C$,\\n\\nthen for every $\\\\varepsilon > 0$ there exists an $n \\\\geq 1$, a map $c: V^n \\\\to X^n$, and a map $d: Y^n \\\\to V$ such that $P(V^n \\\\neq \\\\hat{V}^n) < \\\\varepsilon$. Conversely, for any stationary stochastic process $V$, if $H(V) > C$, there exists a constant $\\\\delta > 0$ such that $P(V^n \\\\neq \\\\hat{V}^n) > \\\\delta$ for any coder-decoder pair, for any $n \\\\geq 1$.",
+        "proof": "Sketch of Proof. There exists a typical set $T^{(n)}_{\\\\varepsilon}$ of size $|T^{(n)}_{\\\\varepsilon}| \\\\leq 2^{n(H(V)+\\\\varepsilon)}$ such that and $P(V^n \\\\in T^{(n)}_{\\\\varepsilon}) \\\\geq 1 - \\\\varepsilon$. Now consider a coder that only encodes elements in $T^{(n)}_{\\\\varepsilon}$ and elements in $V^n\\\\setminus T^{(n)}_{\\\\varepsilon}$ are all encoded randomly to the rest of codewords not used for those in $T^{(n)}_{\\\\varepsilon}$. We need at most\\n\\n$n(H(V) + \\\\varepsilon)$\\n\\nbits to index elements in $T^{(n)}_{\\\\varepsilon}$. Using channel coding we can transmit such an index with probability of error less than $\\\\varepsilon$ given the fact\\n\\n$H(V) + \\\\varepsilon = R < C$.\\n\\nThe decoder reconstructs $V^n$ by enumerating the typical set $T^{(n)}_{\\\\varepsilon}$ and decoding the received index $Y^n = (Y_1, \\\\cdot \\\\cdot \\\\cdot, Y_n)$ to get $\\\\hat{V}^n$. Then for a large enough $n$,\\n\\n$P(V^n \\\\neq \\\\hat{V}^n) \\\\leq P(V^n \\\\notin T^{(n)}_{\\\\varepsilon}) + P(d(Y^n) \\\\neq V^n | V^n \\\\in T^{(n)}_{\\\\varepsilon}) \\\\leq \\\\varepsilon + \\\\varepsilon$.\\n\\nThis shows the first part of the theorem (achievability). For the second part (optimality) we need to show that\\n\\n$P(V^n \\\\neq \\\\hat{V}^n) \\\\to 0$\\n\\nimplies $H(V) \\\\leq C$ for any sequenced $(c_n, d_n)$ of channel codes. By Fano's inequality,\\n\\n$H(V^n| \\\\hat{V}^n) \\\\leq 1 + P( \\\\hat{V}^n \\\\neq V ) \\\\log(|V^n|)$\\n$= 1 + P( \\\\hat{V}^n \\\\neq V )n \\\\log(|V|)$.\\n\\nNow\\n\\n$H(V) \\\\leq \\\\frac{H(V_1, \\\\cdot \\\\cdot \\\\cdot, V_n)}{n}$\\n\\n$= \\\\frac{1}{n} H(V_1, \\\\cdot \\\\cdot \\\\cdot, V_n | \\\\hat{V}_1, \\\\cdot \\\\cdot \\\\cdot, \\\\hat{V}_n) + \\\\frac{1}{n} I(V^n; \\\\hat{V}^n)$\\n\\n$\\\\leq \\\\frac{1}{n} [1 + P(V^n \\\\neq \\\\hat{V}^n)n \\\\log(|V|)] + \\\\frac{1}{n} I(V^n; \\\\hat{V}^n)$\\n\\n$\\\\leq \\\\frac{1}{n} + P(V^n \\\\neq \\\\hat{V}^n) \\\\log(|V|) + \\\\frac{1}{n} I(X_1, \\\\cdot \\\\cdot \\\\cdot, X_n; Y_1, \\\\cdot \\\\cdot \\\\cdot, Y_n)$\\n\\n$\\\\leq \\\\frac{1}{n} + P(V^n \\\\neq \\\\hat{V}^n) \\\\log(|V|) + C$,\\n\\nwhere we used: the definition of entropy rate, the definition of mutual information, Fano's inequality, the data processing inequality, and finally, the definition of capacity of a DMC. Letting $n \\\\to +\\\\infty$ finishes the proof since\\n\\n$H(V) \\\\leq \\\\log(|V|) \\\\lim_{n\\\\to+\\\\infty} P(V^n \\\\neq \\\\hat{V}^n) + C = C$.",
+        "preconditions": [
+            "discrete random variable",
+            "finite set",
+            "channel capacity",
+            "entropy",
+            "stochastic process",
+            "discrete memoryless channel",
+            "stationary stochastic process"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 5.15",
+        "name": "Wonham filter",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [],
+        "statement": "For a Markov chain with $X_0 \\\\sim \\\\mu_0$, the conditional probability vector $\\\\mu_t = E[X_t|\\\\{Y_s = y_s\\\\}_{s\\\\leq t}]$ satisfies\\n\\n$\\\\mu_t \\\\propto \\\\mu_{t-1}P \\\\text{diag}(M y_t)$",
+        "proof": "As described above, we know\\n\\n$\\\\mu_t = E[X_t|\\\\{Y_s = y_s\\\\}_{s\\\\leq t}]$\\n\\n$= \\\\sum_{\\\\tilde{x}} P(X_{t-1} = \\\\tilde{x}|\\\\{Y_s = y_s\\\\}_{s\\\\leq t-1})E[X_t|X_{t-1} = \\\\tilde{x}, Y_t = y_t, \\\\{Y_s = y_s\\\\}_{s\\\\leq t-1}]$\\n\\n$= \\\\sum_{\\\\tilde{x}} (\\\\mu_{t-1} \\\\tilde{x}^\\\\top)E[X_t|X_{t-1} = \\\\tilde{x}, Y_t = y_t]$\\n\\n$\\\\propto \\\\sum_{\\\\tilde{x}} (\\\\mu_{t-1} \\\\tilde{x}^\\\\top)\\\\tilde{x}(P \\\\text{diag}(M y_t))$\\n\\n$= \\\\mu_{t-1} \\\\left( \\\\sum_{\\\\tilde{x}} \\\\text{diag}(\\\\tilde{x}) \\\\right) (P \\\\text{diag}(M y_t)) = \\\\mu_{t-1}(P \\\\text{diag}(M y_t))$.\\n\\nThis gives a straightforward algorithm to estimate $X_t$ from observations of $\\\\{Y_s\\\\}_{s\\\\leq t}$, we simply apply the above recursion, and renormalize at each step (or whenever is needed for stability).",
+        "preconditions": [
+            "Markov chain",
+            "stochastic matrix",
+            "stochastic process"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 5.16",
+        "name": "Wonham Filter Application",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [
+            "Proposition 5.15"
+        ],
+        "statement": "Suppose\\n\\n$P = \\\\begin{pmatrix} 0.7 & 0.3 \\\\\\\\ 0.4 & 0.6 \\\\end{pmatrix}$ and $M = \\\\begin{pmatrix} 0.9 & 0.1 \\\\\\\\ 0.2 & 0.8 \\\\end{pmatrix}$.\\n\\nAssume we know $X_0 = x_1$ and observe the sequence $Y = (1, 2, 2, 1)$. We compute\\n\\n$P \\\\text{diag}(Me_1) = \\\\begin{pmatrix} 0.63 & 0.06 \\\\\\\\ 0.36 & 0.12 \\\\end{pmatrix}$,\\n\\n$P \\\\text{diag}(Me_2) = \\\\begin{pmatrix} 0.07 & 0.24 \\\\\\\\ 0.04 & 0.48 \\\\end{pmatrix}$\\n\\nOur sequence of estimated states are then given by multiplying and renormalizing",
+        "proof": "Using the Wonham filter recursion from Proposition 5.15, we compute the sequence of probability vectors:\\n\\n$\\\\begin{array}{c|cc|cc}\\n\\\\text{Time} & \\\\multicolumn{2}{c|}{\\\\text{Unnormalized prob}} & \\\\multicolumn{2}{c}{\\\\text{Normalized prob}} \\\\\\\\\\n\\\\hline\\n0 & 1 & 0 & 1 & 0 \\\\\\\\\\n1 & 0.63 & 0.06 & 0.91 & 0.09 \\\\\\\\\\n2 & 0.046 & 0.18 & 0.21 & 0.79 \\\\\\\\\\n3 & 0.01 & 0.098 & 0.10 & 0.90 \\\\\\\\\\n4 & 0.042 & 0.012 & 0.77 & 0.23\\n\\\\end{array}$",
+        "preconditions": [
+            "stochastic matrix",
+            "Markov chain",
+            "Wonham filter"
+        ]
+    },
+    {
+        "type": "proposition",
+        "id": "Proposition 5.17",
+        "name": "Viterbi Path Recursion",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [],
+        "statement": "Consider paths for $X$ ending in $x$. The highest posterior probability for such paths is $\\\\pi^x_t = \\\\max_{\\\\{x_s\\\\}_{s<t}} P(\\\\{X_s = x_s\\\\}_{s<t}, X_t = x | \\\\{Y_s = y_s\\\\}_{s\\\\leq t})$, and this is achieved by a path denoted $\\\\chi^x_t = \\\\{x_0, ..., x_{t-1}, x\\\\} \\\\in X^t$. The quantities $\\\\chi^x_t$ and $\\\\pi^x_t$ have initial values $\\\\chi^x_0 = \\\\{x\\\\}$ and $\\\\pi^x_0 = \\\\mu_0 x^\\\\top$, and satisfy the recursion $\\\\chi^x_t = (\\\\chi^{\\\\tilde{x}}_{t-1}, x)$, $\\\\pi^x_t \\\\propto (\\\\tilde{x}P \\\\text{diag}(M y_t)x^\\\\top)\\\\pi^{\\\\tilde{x}}_{t-1}$, where $\\\\tilde{x} = \\\\arg\\\\max_{z\\\\in X} \\\\{(zP \\\\text{diag}(M y_t)x^\\\\top)\\\\pi^z_{t-1}\\\\}$, and the constant of proportionality for $\\\\pi_t(x)$ is independent of $\\\\{x_s\\\\}_{s\\\\leq t}$.",
+        "proof": "Clearly, at time $t = 0$, before any observations have been made, we know $\\\\chi^x_1 = \\\\{x\\\\}$ and $\\\\pi_0 = \\\\mu_0$. At each $t$, we know from (5.3.1) that $\\\\chi^x_t$ should be obtained by extending a path $\\\\chi^{\\\\tilde{x}}_{t-1}$, as the change in probability depends only on $y$, $x_t$, $x_{t-1}$, and all coefficients are positive. The result follows from our earlier calculations.",
+        "preconditions": [
+            "stochastic matrix",
+            "stochastic process",
+            "Markov chain",
+            "Viterbi algorithm"
+        ]
+    },
+    {
+        "type": "example",
+        "id": "Example 5.18",
+        "name": "Viterbi Algorithm Application",
+        "topic": "Noisy Channels with non-iid input",
+        "previous_results": [
+            "Proposition 5.17"
+        ],
+        "statement": "Using the same setup as the previous example, at time 1 we have $\\\\pi^1_1 = \\\\min\\\\{0.63 \\\\times 1, 0.36 \\\\times 0\\\\} = 0.63$, $\\\\pi^2_1 = \\\\min\\\\{0.06 \\\\times 1, 0.12 \\\\times 0\\\\} = 0.06$, $\\\\chi^1_1 = [1, 1]$, $\\\\chi^2_1 = [1, 2]$. At time $t = 2$, we have $\\\\pi^1_1 = \\\\min\\\\{0.07 \\\\times 0.63, 0.04 \\\\times 0.06\\\\} = \\\\min\\\\{0.0441, 0.0024\\\\} = 0.0441$, $\\\\pi^2_1 = \\\\min\\\\{0.24 \\\\times 0.63, 0.48 \\\\times 0.06\\\\} = \\\\min\\\\{0.1512, 0.0288\\\\} = 0.1512$, $\\\\chi^1_1 = [1, 1, 1]$, $\\\\chi^2_1 = [1, 1, 2]$. Repeating this, we get a table of values for times 0 through 4, showing that the most likely path for $X$ up to time 4 does not end with the most likely state at time 4.",
+        "proof": "",
+        "preconditions": [
+            "stochastic matrix",
+            "Markov chain",
+            "Viterbi algorithm"
+        ]
+    }
+]
