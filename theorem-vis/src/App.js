@@ -17,6 +17,8 @@ function App() {
   const [newNodeStatement, setNewNodeStatement] = useState("");
   const [newNodeProof, setNewNodeProof] = useState("");
   const [topics, setTopics] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [error, setError] = useState(null);
   // For edge editing mode (graph view)
 
   // New state for display mode: "graph" or "list"
@@ -32,37 +34,90 @@ function App() {
       document.body.style.overflow = "auto";
     }
   }, [displayMode]);
+
   const handleUpload = async (file, saved_file_path) => {
     setLoading(true);
     setResult(null);
+    setError(null);
+    setUploadProgress(0);
+
     const formData = new FormData();
     formData.append("pdf_file", file);
     formData.append("saved_file_path", saved_file_path);
-    const response = await fetch("https://proofmapapi.onrender.com/upload", {
-      method: "POST",
-      body: formData,
-    });
-    const result = await response.json();
-    result.theorem_list = result.theorem_list.map((d) => {
-      d.statement = d.statement
-        .replaceAll("\\\\", "\\")
-        .replaceAll("\\n", "\n");
-      d.proof = d.proof.replaceAll("\\\\", "\\").replaceAll("\\n", "\n");
-      return d;
-    });
-    result.graph.nodes = result.graph.nodes.map((d) => {
-      d.statement = d.statement
-        .replaceAll("\\\\", "\\")
-        .replaceAll("\\n", "\n");
-      d.proof = d.proof.replaceAll("\\\\", "\\").replaceAll("\\n", "\n");
-      return d;
-    });
-    const uniqueTopics = Array.from(
-      new Set(result.graph.nodes.map((d) => d.topic))
-    );
-    setTopics(uniqueTopics);
-    setResult(result);
-    setLoading(false);
+
+    try {
+      const response = await fetch("https://proofmapapi.onrender.com/upload", {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.body) {
+        throw new Error("Streaming not supported by this browser");
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        // accumulate chunk
+        buffer += decoder.decode(value, { stream: true });
+        // split on the SSE delimiter
+        const events = buffer.split("\n\n");
+        buffer = events.pop(); // last piece may be partial
+
+        for (const ev of events) {
+          const lines = ev.split("\n");
+          const eventType = lines[0]?.replace("event: ", "").trim();
+          const dataLine = lines[1]?.replace("data: ", "").trim();
+          if (!eventType || !dataLine) continue;
+
+          const payload = JSON.parse(dataLine);
+
+          if (eventType === "progress") {
+            setUploadProgress(payload.progress);
+          } else if (eventType === "error") {
+            setError(payload.message);
+            setLoading(false);
+            reader.cancel();
+            return;
+          } else if (eventType === "done") {
+            // Clean up the theorems & graph exactly as before
+            const cleanedTheorems = payload.theorem_list.map((d) => ({
+              ...d,
+              statement: d.statement
+                .replaceAll("\\\\", "\\")
+                .replaceAll("\\n", "\n"),
+              proof: d.proof.replaceAll("\\\\", "\\").replaceAll("\\n", "\n"),
+            }));
+            const cleanedNodes = payload.graph.nodes.map((d) => ({
+              ...d,
+              statement: d.statement
+                .replaceAll("\\\\", "\\")
+                .replaceAll("\\n", "\n"),
+              proof: d.proof.replaceAll("\\\\", "\\").replaceAll("\\n", "\n"),
+            }));
+            const uniqueTopics = Array.from(
+              new Set(cleanedNodes.map((d) => d.topic))
+            );
+
+            setTopics(uniqueTopics);
+            setResult({
+              theorem_list: cleanedTheorems,
+              graph: { ...payload.graph, nodes: cleanedNodes },
+            });
+            setLoading(false);
+            reader.cancel();
+            return;
+          }
+        }
+      }
+    } catch (e) {
+      setError(e.message);
+      setLoading(false);
+    }
   };
 
   const addNode = () => {
@@ -365,12 +420,86 @@ function App() {
         {loading && (
           <div
             style={{
-              marginTop: "20px",
+              marginTop: 20,
               display: "flex",
-              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "12px",
+              width: "100%",
+              maxWidth: 400,
+              marginLeft: "auto",
+              marginRight: "auto",
             }}
           >
-            <div className="spinner"></div>
+            {/* Progress Bar */}
+            <div
+              style={{
+                width: "100%",
+                background: "#f3f4f6",
+                borderRadius: 8,
+                overflow: "hidden",
+                height: 12,
+                boxShadow: "inset 0 1px 3px rgba(0,0,0,0.1)",
+              }}
+            >
+              <div
+                style={{
+                  width: `${uploadProgress}%`,
+                  height: "100%",
+                  background: "linear-gradient(90deg, #4ade80, #22c55e)",
+                  transition: "width 0.3s ease",
+                }}
+              />
+            </div>
+            {/* Percentage Text */}
+            <span
+              style={{
+                color: "#374151",
+                fontSize: 14,
+                fontWeight: 500,
+              }}
+            >
+              Processing... {uploadProgress}%
+            </span>
+          </div>
+        )}
+
+        {error && (
+          <div
+            style={{
+              marginTop: 20,
+              padding: "12px 16px",
+              background: "#fef2f2",
+              border: "1px solid #fecaca",
+              borderRadius: 8,
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              maxWidth: 400,
+              marginLeft: "auto",
+              marginRight: "auto",
+              color: "#9b1c1c",
+              fontSize: 14,
+              fontWeight: 500,
+            }}
+          >
+            {/* Error Icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="#9b1c1c"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4m0 4h.01M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
+              />
+            </svg>
+            <span>{error}</span>
           </div>
         )}
       </div>
