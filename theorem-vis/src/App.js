@@ -26,16 +26,7 @@ function App() {
   const [displayMode, setDisplayMode] = useState("graph");
   // State for filtering list view by topic; "All" means no filter.
   const [filterTopic, setFilterTopic] = useState("All");
-  useEffect(() => {
-    if (displayMode === "graph") {
-      // Disable scrolling on the body
-      document.body.style.overflow = "hidden";
-    } else {
-      // Re-enable scrolling when leaving graph view
-      document.body.style.overflow = "auto";
-    }
-  }, [displayMode]);
-
+  
   const getExistingFile = async (saved_file_path) => {
     setLoading(true);
     setResult(null);
@@ -311,6 +302,7 @@ function App() {
           <div
             style={{
               display: displayMode === "graph" ? "block" : "none",
+              overflow: "hidden", // or "auto" if needed
             }}
           >
             <GraphView
@@ -370,7 +362,7 @@ function App() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          padding: "30px",
+          // padding: "30px",
         }}
       >
         <img
@@ -478,6 +470,7 @@ function App() {
           <div
             style={{
               marginTop: 20,
+              marginBottom: 20,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
