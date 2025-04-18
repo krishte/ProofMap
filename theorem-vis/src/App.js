@@ -19,6 +19,7 @@ function App() {
   const [topics, setTopics] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [error, setError] = useState(null);
+  const [uploadText, setUploadText] = useState("");
   // For edge editing mode (graph view)
 
   // New state for display mode: "graph" or "list"
@@ -35,7 +36,51 @@ function App() {
     }
   }, [displayMode]);
 
-  const handleUpload = async (file, saved_file_path) => {
+  const getExistingFile = async (saved_file_path) => {
+    setLoading(true);
+    setResult(null);
+    setError(null);
+    setUploadProgress(0);
+    setUploadText("Processing");
+
+    const resultRes = await fetch(
+      `https://proofmapapi.onrender.com/get_existing_json/${saved_file_path}`
+    );
+    if (!resultRes.ok) {
+      const errPayload = await resultRes.json();
+      setError(errPayload.message || "Processing failed");
+      setLoading(false);
+      return;
+    }
+    const payload = await resultRes.json();
+    if (!payload.success) {
+      setError(payload.message);
+      setLoading(false);
+      return;
+    }
+
+    // Clean up the theorems & graph
+    const cleanedTheorems = payload.theorem_list.map((d) => ({
+      ...d,
+      statement: d.statement.replaceAll("\\\\", "\\").replaceAll("\\n", "\n"),
+      proof: d.proof.replaceAll("\\\\", "\\").replaceAll("\\n", "\n"),
+    }));
+    const cleanedNodes = payload.graph.nodes.map((d) => ({
+      ...d,
+      statement: d.statement.replaceAll("\\\\", "\\").replaceAll("\\n", "\n"),
+      proof: d.proof.replaceAll("\\\\", "\\").replaceAll("\\n", "\n"),
+    }));
+    const uniqueTopics = Array.from(new Set(cleanedNodes.map((d) => d.topic)));
+
+    setTopics(uniqueTopics);
+    setResult({
+      theorem_list: cleanedTheorems,
+      graph: { ...payload.graph, nodes: cleanedNodes },
+    });
+    setLoading(false);
+  };
+
+  const handleUpload = async (file) => {
     setLoading(true);
     setResult(null);
     setError(null);
@@ -43,81 +88,93 @@ function App() {
 
     const formData = new FormData();
     formData.append("pdf_file", file);
-    formData.append("saved_file_path", saved_file_path);
 
+    let reqId;
     try {
-      const response = await fetch("https://proofmapapi.onrender.com/upload", {
+      const res = await fetch("https://proofmapapi.onrender.com/upload", {
         method: "POST",
         body: formData,
       });
-      if (!response.body) {
-        throw new Error("Streaming not supported by this browser");
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-
-        // accumulate chunk
-        buffer += decoder.decode(value, { stream: true });
-        // split on the SSE delimiter
-        const events = buffer.split("\n\n");
-        buffer = events.pop(); // last piece may be partial
-
-        for (const ev of events) {
-          const lines = ev.split("\n");
-          const eventType = lines[0]?.replace("event: ", "").trim();
-          const dataLine = lines[1]?.replace("data: ", "").trim();
-          if (!eventType || !dataLine) continue;
-
-          const payload = JSON.parse(dataLine);
-
-          if (eventType === "progress") {
-            setUploadProgress(payload.progress);
-          } else if (eventType === "error") {
-            setError(payload.message);
-            setLoading(false);
-            reader.cancel();
-            return;
-          } else if (eventType === "done") {
-            // Clean up the theorems & graph exactly as before
-            const cleanedTheorems = payload.theorem_list.map((d) => ({
-              ...d,
-              statement: d.statement
-                .replaceAll("\\\\", "\\")
-                .replaceAll("\\n", "\n"),
-              proof: d.proof.replaceAll("\\\\", "\\").replaceAll("\\n", "\n"),
-            }));
-            const cleanedNodes = payload.graph.nodes.map((d) => ({
-              ...d,
-              statement: d.statement
-                .replaceAll("\\\\", "\\")
-                .replaceAll("\\n", "\n"),
-              proof: d.proof.replaceAll("\\\\", "\\").replaceAll("\\n", "\n"),
-            }));
-            const uniqueTopics = Array.from(
-              new Set(cleanedNodes.map((d) => d.topic))
-            );
-
-            setTopics(uniqueTopics);
-            setResult({
-              theorem_list: cleanedTheorems,
-              graph: { ...payload.graph, nodes: cleanedNodes },
-            });
-            setLoading(false);
-            reader.cancel();
-            return;
-          }
-        }
-      }
+      if (!res.ok) throw new Error(`Upload failed: ${res.status}`);
+      const { req_id } = await res.json();
+      reqId = req_id;
     } catch (e) {
       setError(e.message);
       setLoading(false);
+      return;
     }
+    const interval = setInterval(async () => {
+      try {
+        const statusRes = await fetch(
+          `https://proofmapapi.onrender.com/progress/${reqId}`
+        );
+        if (!statusRes.ok) throw new Error("Unknown job ID");
+        const { progress, text } = await statusRes.json();
+
+        // Check for error in the progress text
+        if (text && text.toLowerCase().includes("error")) {
+          clearInterval(interval);
+          setError(text);
+          setLoading(false);
+          return;
+        }
+
+        setUploadProgress(progress);
+        setUploadText(text);
+
+        // 3) When done, fetch the result
+        if (progress >= 100 && text === "Done") {
+          clearInterval(interval);
+
+          const resultRes = await fetch(
+            `https://proofmapapi.onrender.com/result/${reqId}`
+          );
+          if (!resultRes.ok) {
+            const errPayload = await resultRes.json();
+            setError(errPayload.message || "Processing failed");
+            setLoading(false);
+            return;
+          }
+          const payload = await resultRes.json();
+
+          if (!payload.success) {
+            setError(payload.message);
+            setLoading(false);
+            return;
+          }
+
+          // Clean up the theorems & graph
+          const cleanedTheorems = payload.theorem_list.map((d) => ({
+            ...d,
+            statement: d.statement
+              .replaceAll("\\\\", "\\")
+              .replaceAll("\\n", "\n"),
+            proof: d.proof.replaceAll("\\\\", "\\").replaceAll("\\n", "\n"),
+          }));
+          const cleanedNodes = payload.graph.nodes.map((d) => ({
+            ...d,
+            statement: d.statement
+              .replaceAll("\\\\", "\\")
+              .replaceAll("\\n", "\n"),
+            proof: d.proof.replaceAll("\\\\", "\\").replaceAll("\\n", "\n"),
+          }));
+          const uniqueTopics = Array.from(
+            new Set(cleanedNodes.map((d) => d.topic))
+          );
+
+          setTopics(uniqueTopics);
+          setResult({
+            theorem_list: cleanedTheorems,
+            graph: { ...payload.graph, nodes: cleanedNodes },
+          });
+          setLoading(false);
+        }
+      } catch (e) {
+        clearInterval(interval);
+        setError(e.message);
+        setLoading(false);
+      }
+    }, 1000);
   };
 
   const addNode = () => {
@@ -356,7 +413,7 @@ function App() {
               <FileDropdown
                 onFileSelect={(filePath) => {
                   // Here, you might want to automatically load the file.
-                  handleUpload("", filePath);
+                  getExistingFile(filePath);
                 }}
               />
             </div>
@@ -459,7 +516,7 @@ function App() {
                 fontWeight: 500,
               }}
             >
-              Processing... {uploadProgress}%
+              {uploadText}... {uploadProgress}%
             </span>
           </div>
         )}
