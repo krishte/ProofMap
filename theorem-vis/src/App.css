@@ -66,3 +66,36 @@
   opacity: 0;
   transition: max-height 300ms ease-out, opacity 300ms ease-out;
 }
+
+.tooltip {
+  position: relative;
+  display: inline-flex;      /* switch to inline-flex */
+  align-items: center;       /* vertically center the icon */
+  margin-left: 8px;          /* space from heading */
+  cursor: pointer;
+}
+
+/* hidden by default */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 240px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 100%;        /* show above the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+/* on hover, reveal it */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

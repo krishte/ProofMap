@@ -1,11 +1,12 @@
 import logo from "./logo.webp";
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "katex/dist/katex.min.css";
 import TopControls from "./components/TopControls";
 import GraphView from "./components/GraphView";
 import ListView from "./components/ListView";
 import FileDropdown from "./components/FileDropdown";
+import { FaInfoCircle } from "react-icons/fa";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,7 @@ function App() {
   const [displayMode, setDisplayMode] = useState("graph");
   // State for filtering list view by topic; "All" means no filter.
   const [filterTopic, setFilterTopic] = useState("All");
-  
+
   const getExistingFile = async (saved_file_path) => {
     setLoading(true);
     setResult(null);
@@ -375,6 +376,27 @@ function App() {
             border: "1px solid #ccc",
           }}
         />
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "30px",
+            fontFamily: "Helvetica, sans-serif",
+            color: "#374151",
+          }}
+        >
+          <h2 style={{ margin: 0 }}>What is ProofMap?</h2>
+          <div className="tooltip">
+            <FaInfoCircle size={18} />
+            <span className="tooltiptext">
+              ProofMap ingests a PDF of lecture notes and builds an interactive
+              graph and list of theorems so you can see exactly how each result
+              depends on the others. No more hunting through 100‑page PDFs—
+              ProofMap makes proof structure instantly clear.
+            </span>
+          </div>
+        </div>
 
         <div
           style={{
