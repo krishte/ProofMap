@@ -180,22 +180,29 @@ function App() {
   const downloadGraph = () => {
     if (!result) return;
 
-    // Convert each node into a "term-tab-definition" pair
-    const rows = result.theorem_list.map((s) => {
-      const term = `${s.id} - ${s.name}`;
-      let proofTxt = s.proof || ""
-      const answer = `Statement: ${s.statement} \t Proof:${proofTxt}`
-      return `Definition: ${term}\t Answer: ${answer}`;
+    // CSV header
+    const rows = [["name", "statement", "proof"]];
+
+    // Populate rows
+    result.theorem_list.forEach((s) => {
+      const name = `${s.id}: ${s.name}`;
+      const statement = s.statement?.replace(/"/g, '""') || "";
+      const proof = s.proof?.replace(/"/g, '""') || "";
+      rows.push([name, statement, proof]);
     });
 
-    const blob = new Blob([rows.join("\n")], {
-      type: "text/tab-separated-values",
-    });
+    // Convert to CSV format (handle commas/quotes)
+    const csvContent = rows
+      .map((row) => row.map((cell) => `"${cell}"`).join(","))
+      .join("\n");
+
+    // Create blob and download
+    const blob = new Blob([csvContent], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = "graph-export.txt";
+    a.download = "proofmap-export.csv";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
