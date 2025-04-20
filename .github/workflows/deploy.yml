@@ -25,6 +25,8 @@ jobs:
 
       - name: 🛠️ Build & Deploy
         working-directory: theorem-vis
+        env:
+          CI: false
         run: npm run deploy
 
       - name: 🚀 Publish to GitHub Pages
