@@ -1,6 +1,6 @@
 {
   "name": "theorem-vis",
-  "homepage": "https://krishte.github.io/ProofMap",
+  "homepage": "https://proofmap.info",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
