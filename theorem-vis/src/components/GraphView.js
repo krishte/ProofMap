@@ -702,7 +702,9 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
             cursor: "pointer",
           }}
           onClick={() => {
-            setAddingEdgeMode(true);
+            setAddingEdgeMode((x) => {
+              return !x;
+            });
             selectedEdgeNodesRef.current = [];
           }}
         >
