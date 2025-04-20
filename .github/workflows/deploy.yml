@@ -29,6 +29,11 @@ jobs:
           CI: false
         run: npm run build
 
+      - name: ⚙️ Configure Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: 🚀 Publish to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
