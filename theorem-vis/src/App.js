@@ -87,7 +87,11 @@ function App() {
         method: "POST",
         body: formData,
       });
-      if (!res.ok) throw new Error(`Upload failed: ${res.status}`);
+      if (!res.ok) {
+        setError(`Upload failed: ${res.status}`);
+        setLoading(false);
+        return;
+      }
       const { req_id } = await res.json();
       reqId = req_id;
     } catch (e) {
@@ -100,7 +104,11 @@ function App() {
         const statusRes = await fetch(
           `https://proofmapapi.onrender.com/progress/${reqId}`
         );
-        if (!statusRes.ok) throw new Error("Unknown job ID");
+        if (!statusRes.ok) {
+          setError(`Error job id unknown: ${statusRes.status}`);
+          setLoading(false);
+          return;
+        }
         const { progress, text } = await statusRes.json();
 
         // Check for error in the progress text
