@@ -684,7 +684,7 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
       <div
         style={{
           position: "fixed",
-          bottom: "60px",
+          bottom: "110px",
           right: "20px",
           zIndex: 1000,
           display: "flex",

@@ -177,6 +177,31 @@ function App() {
     }, 1000);
   };
 
+  const downloadGraph = () => {
+    if (!result) return;
+
+    // Convert each node into a "term-tab-definition" pair
+    const rows = result.theorem_list.map((s) => {
+      const term = `${s.id} - ${s.name}`;
+      let proofTxt = s.proof || ""
+      const answer = `Statement: ${s.statement} \t Proof:${proofTxt}`
+      return `Definition: ${term}\t Answer: ${answer}`;
+    });
+
+    const blob = new Blob([rows.join("\n")], {
+      type: "text/tab-separated-values",
+    });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "graph-export.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   const addNode = () => {
     if (!newNodeId || !newNodeName) {
       alert("Please provide both theorem id and name.");
@@ -355,6 +380,19 @@ function App() {
             onClick={() => setShowAddNodePopup(true)}
           >
             Add Node
+          </button>
+          <button
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#007bff",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              cursor: "pointer",
+            }}
+            onClick={downloadGraph}
+          >
+            Export to file
           </button>
         </div>
       </div>
