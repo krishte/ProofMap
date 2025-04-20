@@ -27,7 +27,7 @@ jobs:
         working-directory: theorem-vis
         env:
           CI: false
-        run: npm run deploy
+        run: npm run build
 
       - name: 🚀 Publish to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
