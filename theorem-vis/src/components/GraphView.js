@@ -5,13 +5,52 @@ import TheoremDetails from "./TheoremDetails";
 
 function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
   const containerRef = useRef(null);
+  const simulationRef = useRef(null);
+
   const [addingEdgeMode, setAddingEdgeMode] = useState(false);
   const [renderedGraph, setRenderedGraph] = useState(null);
   const [collapsedTopics, setCollapsedTopics] = useState(new Set());
   const [hiddenTopics, setHiddenTopics] = useState(new Set());
+
   const addingEdgeModeRef = useRef(addingEdgeMode);
   const selectedEdgeNodesRef = useRef([]);
   const currentTransformRef = useRef(d3.zoomIdentity);
+
+  const handleShrinkStart = () => {
+    simulationRef.current.alpha(0.6).restart();
+    simulationRef.current.force("charge", d3.forceManyBody().strength(1));
+    simulationRef.current.force(
+      "x",
+      d3.forceX(window.innerWidth / 2).strength(0.005)
+    );
+    simulationRef.current.force(
+      "y",
+      d3.forceY(window.innerHeight / 2).strength(0.005)
+    );
+    simulationRef.current
+      .force("charge")
+      .initialize(simulationRef.current.nodes());
+    simulationRef.current.force("x").initialize(simulationRef.current.nodes());
+    simulationRef.current.force("y").initialize(simulationRef.current.nodes());
+  };
+
+  const handleZoomStart = () => {
+    simulationRef.current.alpha(0.6).restart();
+    simulationRef.current.force("charge", d3.forceManyBody().strength(-1));
+    simulationRef.current.force(
+      "x",
+      d3.forceX(window.innerWidth / 2).strength(-0.005)
+    );
+    simulationRef.current.force(
+      "y",
+      d3.forceY(window.innerHeight / 2).strength(-0.005)
+    );
+    simulationRef.current
+      .force("charge")
+      .initialize(simulationRef.current.nodes());
+    simulationRef.current.force("x").initialize(simulationRef.current.nodes());
+    simulationRef.current.force("y").initialize(simulationRef.current.nodes());
+  };
 
   // Helper function to compute intersection points for links
   function getIntersectionPoints(source, target, nodeWidth, nodeHeight) {
@@ -57,6 +96,7 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
       }
     }
   }, [addingEdgeMode, result]);
+
   const createTopicNode = (topic, nodes) => {
     const filteredNodes = nodes.filter((node) => node.topic === topic);
     const totalX = filteredNodes.reduce((sum, node) => sum + node.x, 0);
@@ -75,6 +115,7 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
       y: totalY / filteredNodes.length,
     };
   };
+
   const updateCoordinates = (resultCopy) => {
     if (renderedGraph === null) return;
     const nodeIdToNode = {};
@@ -88,6 +129,7 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
       }
     });
   };
+
   const updateTopicNodeCoordinates = (topicToTopicNode) => {
     if (renderedGraph === null) return;
     renderedGraph.nodes.forEach((node) => {
@@ -104,6 +146,7 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
   ) => {
     // If no topic is collapsed, use the original graph.
     const resultCopy = JSON.parse(JSON.stringify(result.graph));
+    // Updates coordinates based on current node positions (i.e. from renderedGraph)
     updateCoordinates(resultCopy);
 
     // Build a mapping of topic -> aggregated node.
@@ -164,6 +207,7 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
     );
 
     setRenderedGraph(resultCopy);
+    return resultCopy;
   };
 
   useEffect(() => {
@@ -239,7 +283,11 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
             .distance(300)
         )
         .force("charge", d3.forceManyBody().strength(-50))
-        .force("center", d3.forceCenter(width / 2, height / 2));
+        .force("x", d3.forceX(width / 2).strength(0.005))
+        .force("y", d3.forceY(height / 2).strength(0.005));
+
+      simulationRef.current = simulation;
+
       simulation.force("link", null);
 
       // LEFT LEGEND for topics
@@ -681,6 +729,45 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
           height: window.innerHeight,
         }}
       ></div>
+
+      {/* Shrink / Zoom Buttons */}
+      <div
+        style={{
+          position: "fixed",
+          top: 20,
+          right: 20,
+          zIndex: 2000,
+          display: "flex",
+          gap: "8px",
+        }}
+      >
+        <button
+          onMouseDown={handleShrinkStart}
+          style={{
+            padding: "6px 10px",
+            background: "#f0ad4e",
+            color: "#fff",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+          }}
+        >
+          Condense
+        </button>
+        <button
+          onMouseDown={handleZoomStart}
+          style={{
+            padding: "6px 10px",
+            background: "#5bc0de",
+            color: "#fff",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+          }}
+        >
+          Expand
+        </button>
+      </div>
       <div
         style={{
           position: "fixed",
