@@ -12,6 +12,7 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
   const [collapsedTopics, setCollapsedTopics] = useState(new Set());
   const [hiddenTopics, setHiddenTopics] = useState(new Set());
   const [graphViewMode, setGraphViewMode] = useState("normal");
+  const [linkForceEnabled, setLinkForceEnabled] = useState(false);
 
   const addingEdgeModeRef = useRef(addingEdgeMode);
   const selectedEdgeNodesRef = useRef([]);
@@ -101,6 +102,7 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
   const setConcentricByDegreeViewMode = () => {
     setCollapsedTopics(new Set());
     setHiddenTopics(new Set());
+    setLinkForceEnabled(false);
     // 1. Clone the current graph
     const baseGraph = JSON.parse(JSON.stringify(result.graph));
 
@@ -228,6 +230,8 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
   const setConcentricCircleViewModeTopic = () => {
     setCollapsedTopics(new Set());
     setHiddenTopics(new Set());
+    setLinkForceEnabled(false);
+
     const resultCopy = JSON.parse(JSON.stringify(result.graph));
 
     const width = window.innerWidth;
@@ -398,6 +402,27 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
 
     setRenderedGraph(resultCopy);
     return resultCopy;
+  };
+
+  const updateLinkForce = (enabled) => {
+    simulationRef.current.alpha(0.1).restart();
+    const graphData = renderedGraph == null ? result.graph : renderedGraph;
+
+    console.log(enabled);
+    if (enabled) {
+      simulationRef.current.force(
+        "link",
+        d3
+          .forceLink(graphData.links)
+          .id((d) => d.id)
+          .distance(300)
+      );
+      simulationRef.current
+        .force("link")
+        .initialize(simulationRef.current.nodes());
+    } else {
+      simulationRef.current.force("link", null);
+    }
   };
 
   useEffect(() => {
@@ -940,9 +965,22 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
           gap: "8px",
         }}
       >
+        <label style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <input
+            type="checkbox"
+            checked={linkForceEnabled}
+            onChange={() => {
+              // flip state
+              setLinkForceEnabled(!linkForceEnabled);
+              updateLinkForce(!linkForceEnabled);
+            }}
+          />
+          Enable Link Force
+        </label>
         <button
           onClick={() => {
             setGraphViewMode("normal");
+            setLinkForceEnabled(false);
             updateGraphWithCollapsedTopics(collapsedTopics, hiddenTopics, null);
           }}
           style={{
@@ -1028,21 +1066,6 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
           }}
         >
           Expand
-        </button>
-        <button
-          style={{
-            padding: "6px 10px",
-            background: "#f0ad4e",
-            color: "#fff",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer",
-          }}
-          onClick={() => {
-            setConcentricByDegreeViewMode();
-          }}
-        >
-          View
         </button>
       </div>
 
