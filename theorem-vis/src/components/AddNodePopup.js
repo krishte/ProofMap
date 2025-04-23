@@ -1,4 +1,3 @@
-// FileDropdown.js
 import React, { useState } from "react";
 
 function AddNodePopup({ result, setResult, setShowAddNodePopup }) {
