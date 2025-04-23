@@ -12,8 +12,6 @@ function App() {
   const [showAddNodePopup, setShowAddNodePopup] = useState(false);
   const [topics, setTopics] = useState([]);
 
-  // For edge editing mode (graph view)
-
   // New state for display mode: "graph" or "list"
   const [displayMode, setDisplayMode] = useState("graph");
   // State for filtering list view by topic; "All" means no filter.
@@ -88,7 +86,7 @@ function App() {
             setShowAddNodePopup={setShowAddNodePopup}
           />
         )}
-        {/* Add a button to add a new node */}
+        {/* Buttons to add node and export graph*/}
         <div
           style={{
             position: "fixed",
