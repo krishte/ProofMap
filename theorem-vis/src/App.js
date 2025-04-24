@@ -17,32 +17,20 @@ function App() {
   // State for filtering list view by topic; "All" means no filter.
   const [filterTopic, setFilterTopic] = useState("All");
 
-  const downloadGraph = () => {
+  const downloadResultAsJSON = () => {
     if (!result) return;
 
-    // CSV header
-    const rows = [["name", "statement", "proof"]];
+    // Serialize the result object with pretty-printing
+    const jsonContent = JSON.stringify(result, null, 2);
 
-    // Populate rows
-    result.theorem_list.forEach((s) => {
-      const name = `${s.id}: ${s.name}`;
-      const statement = s.statement?.replace(/"/g, '""') || "";
-      const proof = s.proof?.replace(/"/g, '""') || "";
-      rows.push([name, statement, proof]);
-    });
-
-    // Convert to CSV format (handle commas/quotes)
-    const csvContent = rows
-      .map((row) => row.map((cell) => `"${cell}"`).join(","))
-      .join("\n");
-
-    // Create blob and download
-    const blob = new Blob([csvContent], { type: "text/csv" });
+    // Create a Blob and generate a URL
+    const blob = new Blob([jsonContent], { type: "application/json" });
     const url = URL.createObjectURL(blob);
 
+    // Create an anchor element and trigger download
     const a = document.createElement("a");
     a.href = url;
-    a.download = "proofmap-export.csv";
+    a.download = "proofmap-result.json";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -120,7 +108,7 @@ function App() {
               borderRadius: "4px",
               cursor: "pointer",
             }}
-            onClick={downloadGraph}
+            onClick={downloadResultAsJSON}
           >
             Export to file
           </button>
