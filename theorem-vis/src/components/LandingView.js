@@ -156,6 +156,50 @@ function LandingView({ setResult, setTopics }) {
       }
     }, 1000);
   };
+
+  /* Function to parse an uploaded JSON file into the `result` variable */
+  const handleJSONUpload = (file) => {
+    setLoading(true);
+    setResult(null);
+    setError(null);
+    setUploadProgress(0);
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const uploaded = JSON.parse(e.target.result);
+        setUploadProgress(100);
+
+        const uniqueTopics = Array.from(
+          new Set(uploaded.graph.nodes.map((d) => d.topic))
+        );
+
+        setTopics(uniqueTopics);
+        const nodeIdToNode = {};
+        Array.from(uploaded.graph.nodes).forEach((node) => {
+          nodeIdToNode[node.id] = node;
+        });
+        uploaded.graph.links = uploaded.graph.links.map((link) => {
+          // Reassign link source+target nodes to correct references
+
+          link.source = nodeIdToNode[link.source.id];
+
+          link.target = nodeIdToNode[link.target.id];
+
+          //   link.source.descendants.push(link.target.id);
+          //   link.target.ancestors.push(link.source.id);
+          return link;
+        });
+
+        setResult(uploaded);
+      } catch (err) {
+        setLoading(false);
+        setError("Failed to parse JSON:", err);
+        alert("Invalid JSON file. Please upload a valid ProofMap export.");
+      }
+    };
+    reader.readAsText(file);
+  };
   return (
     <div
       style={{
@@ -234,6 +278,58 @@ function LandingView({ setResult, setTopics }) {
               }}
             />
           </div>
+
+          {/* Dashed line separator */}
+          <hr
+            style={{
+              borderTop: "2px dashed #ccc",
+              marginTop: "30px",
+              marginBottom: "20px",
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "15px",
+            }}
+          >
+            <h2 style={{}}>Import from JSON</h2>
+            <div className="tooltip">
+              <FaInfoCircle size={18} />
+              <span className="tooltiptext">
+                Once ProofMap has built a graph for your lectures notes, you can
+                export the graph to a file. Upload that file here.
+              </span>
+            </div>
+          </div>
+          <input
+            type="file"
+            accept=".json"
+            style={{ display: "none" }}
+            id="jsonUpload"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                handleJSONUpload(file);
+              }
+            }}
+          />
+          <label
+            htmlFor="jsonUpload"
+            style={{
+              cursor: "pointer",
+              backgroundColor: "#007bff",
+              color: "#fff",
+              padding: "10px 20px",
+              borderRadius: "4px",
+              marginTop: "5px",
+              display: "inline-block",
+            }}
+          >
+            Choose JSON
+          </label>
         </div>
 
         {/* Option 2: Upload a New File */}
@@ -285,7 +381,7 @@ function LandingView({ setResult, setTopics }) {
                 display: "inline-block",
               }}
             >
-              Choose File
+              Choose PDF
             </label>
           </div>
         </div>
