@@ -29,19 +29,6 @@ export const createGraph = (containerRef, width, height) => {
   return [svg, g];
 };
 
-export const cancelAddingEdgeModeOnBackgroundClick = (
-  svg,
-  addingEdgeMode,
-  selectedEdgeNodesRef
-) => {
-  svg.on("click", (event) => {
-    if (addingEdgeMode && event.target.tagName === "svg") {
-      selectedEdgeNodesRef.current = [];
-      svg.selectAll(".node").select("div").style("border", "1px solid #ccc");
-    }
-  });
-};
-
 export const createLegend = (svg, g, link, topics, topicColor) => {
   // LEFT LEGEND for topics
   const legend = svg
@@ -351,15 +338,17 @@ export const handleZoom = (g, svg, currentTransformRef) => {
 export const nodeClickLogic = (
   node,
   addingEdgeModeRef,
+  setAddingEdgeMode,
   selectedEdgeNodesRef,
   result,
   setResult,
   g,
-  svg
+  svg,
+  setRenderedGraph
 ) => {
   node.on("click", function (event, d) {
     if (addingEdgeModeRef.current) {
-      d3.select(this).select("div").style("border", "5px solid red");
+      d3.select(this).select("div").style("border", "10px solid red");
       selectedEdgeNodesRef.current.push(d);
       if (selectedEdgeNodesRef.current.length === 2) {
         const [source, target] = selectedEdgeNodesRef.current;
@@ -368,7 +357,9 @@ export const nodeClickLogic = (
         const updatedGraph = { ...result.graph, links: updatedLinks };
         setResult({ ...result, graph: updatedGraph });
         selectedEdgeNodesRef.current = [];
+        setAddingEdgeMode(false);
         g.selectAll(".node").select("div").style("border", "1px solid #ccc");
+        setRenderedGraph(null);
       }
       event.stopPropagation();
       return;

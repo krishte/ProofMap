@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import * as d3 from "d3";
 import {
-  cancelAddingEdgeModeOnBackgroundClick,
   createCollapseToggle,
   createGraph,
   createLegend,
@@ -214,21 +213,17 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
       nodeClickLogic(
         node,
         addingEdgeModeRef,
+        setAddingEdgeMode,
         selectedEdgeNodesRef,
         result,
         setResult,
         g,
-        svg
+        svg,
+        setRenderedGraph
       );
       nodeHoverLogic(node, link, g);
 
       simulationTickLogic(simulation, svg, node, link);
-
-      cancelAddingEdgeModeOnBackgroundClick(
-        svg,
-        addingEdgeMode,
-        selectedEdgeNodesRef
-      );
     }
   }, [result, renderedGraph]);
 
@@ -247,20 +242,22 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
       <button
         style={{
           padding: "10px 20px",
-          backgroundColor: "#28a745",
+          backgroundColor: addingEdgeMode ? "red" : "#28a745",
           color: "white",
           border: "none",
           borderRadius: "4px",
           cursor: "pointer",
         }}
         onClick={() => {
-          setAddingEdgeMode((x) => {
-            return !x;
-          });
+          const svgElement = d3.select(containerRef.current).select("svg");
+          if (!svgElement.empty()) {
+            currentTransformRef.current = d3.zoomTransform(svgElement.node());
+          }
+          setAddingEdgeMode(!addingEdgeMode);
           selectedEdgeNodesRef.current = [];
         }}
       >
-        Add Edge
+        {addingEdgeMode ? "Cancel" : "Add Edge"}
       </button>
     </div>
   );
