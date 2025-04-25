@@ -72,6 +72,7 @@ function App() {
             result={result}
             setResult={setResult}
             setShowAddNodePopup={setShowAddNodePopup}
+            topics={topics}
           />
         )}
         {/* Buttons to add node and export graph*/}

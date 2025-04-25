@@ -352,7 +352,7 @@ export const nodeClickLogic = (
       selectedEdgeNodesRef.current.push(d);
       if (selectedEdgeNodesRef.current.length === 2) {
         const [source, target] = selectedEdgeNodesRef.current;
-        const newLink = { source: source, target: target };
+        const newLink = { source: source.id, target: target.id };
         const updatedLinks = [...result.graph.links, newLink];
         const updatedGraph = { ...result.graph, links: updatedLinks };
         setResult({ ...result, graph: updatedGraph });
