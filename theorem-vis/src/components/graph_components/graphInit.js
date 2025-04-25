@@ -383,6 +383,7 @@ export const nodeClickLogic = (
       .style("border-radius", "8px")
       .style("padding", "15px")
       .style("box-shadow", "0 4px 8px rgba(0, 0, 0, 0.4)")
+      .style("min-width", "700px")
       .style("max-width", "700px")
       .style("font-family", "Arial, sans-serif")
       .style("color", "#333")

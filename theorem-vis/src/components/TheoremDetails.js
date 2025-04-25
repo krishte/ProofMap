@@ -37,9 +37,13 @@ function TheoremDetails({ d }) {
         </p>
         <textarea
           id={`edit-statement`}
-          rows="4"
-          cols="40"
-          style={{ fontFamily: "monospace", padding: "5px" }}
+          rows="6"
+          // cols="70"
+          style={{
+            fontFamily: "monospace",
+            padding: "5px",
+            width: "100%",
+          }}
           defaultValue={d.statement}
         />
         <p style={{ margin: "5px 0" }}>
@@ -47,9 +51,13 @@ function TheoremDetails({ d }) {
         </p>
         <textarea
           id={`edit-proof`}
-          rows="4"
-          cols="40"
-          style={{ fontFamily: "monospace", padding: "5px" }}
+          rows="8"
+          // cols="40"
+          style={{
+            fontFamily: "monospace",
+            padding: "5px",
+            width: "100%",
+          }}
           defaultValue={d.proof}
         />
       </div>
