@@ -352,7 +352,7 @@ export const nodeClickLogic = (
       selectedEdgeNodesRef.current.push(d);
       if (selectedEdgeNodesRef.current.length === 2) {
         const [source, target] = selectedEdgeNodesRef.current;
-        const newLink = { source: source, target: target };
+        const newLink = { source: source.id, target: target.id };
         const updatedLinks = [...result.graph.links, newLink];
         const updatedGraph = { ...result.graph, links: updatedLinks };
         setResult({ ...result, graph: updatedGraph });
@@ -383,6 +383,7 @@ export const nodeClickLogic = (
       .style("border-radius", "8px")
       .style("padding", "15px")
       .style("box-shadow", "0 4px 8px rgba(0, 0, 0, 0.4)")
+      .style("min-width", "700px")
       .style("max-width", "700px")
       .style("font-family", "Arial, sans-serif")
       .style("color", "#333")

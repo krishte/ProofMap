@@ -99,3 +99,31 @@
   visibility: visible;
   opacity: 1;
 }
+
+input::placeholder,
+textarea::placeholder {
+  color: #aaa;
+}
+.btn-cancel {
+  background: #e53e3e;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.btn-cancel:hover {
+  opacity: 0.9;
+}
+.btn-add {
+  background: #38a169;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-add:hover {
+  opacity: 0.9;
+}
