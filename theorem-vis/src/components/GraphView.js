@@ -34,16 +34,14 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
     if (result && containerRef.current) {
       const svg = d3.select(containerRef.current).select("svg");
       if (!svg.empty()) {
-        svg
-          .selectAll(".node")
-          .select("div")
-          .classed("pulsing", addingEdgeModeRef.current)
-          .style(
-            "border",
-            addingEdgeModeRef.current
-              ? "2px solid transparent"
-              : "1px solid #ccc"
-          );
+        const nodes = svg.selectAll(".node");
+
+        nodes.select("div").classed("pulsing", addingEdgeModeRef.current);
+
+        nodes.style(
+          "border",
+          addingEdgeModeRef.current ? "2px solid transparent" : "1px solid #ccc"
+        );
       }
     }
   }, [addingEdgeMode, result]);
@@ -219,7 +217,9 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
         setResult,
         g,
         svg,
-        setRenderedGraph
+        setRenderedGraph,
+        setCollapsedTopics,
+        setHiddenTopics
       );
       nodeHoverLogic(node, link, g);
 
