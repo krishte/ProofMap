@@ -344,14 +344,18 @@ export const nodeClickLogic = (
   setResult,
   g,
   svg,
-  setRenderedGraph
+  setRenderedGraph,
+  setCollapsedTopics,
+  setHiddenTopics
 ) => {
   node.on("click", function (event, d) {
     if (addingEdgeModeRef.current) {
-      d3.select(this).select("div").style("border", "10px solid red");
+      d3.select(this).style("border", "10px solid black");
       selectedEdgeNodesRef.current.push(d);
       if (selectedEdgeNodesRef.current.length === 2) {
         const [source, target] = selectedEdgeNodesRef.current;
+        source.descendants.push(target.id);
+        target.ancestors.push(source.id);
         const newLink = { source: source.id, target: target.id };
         const updatedLinks = [...result.graph.links, newLink];
         const updatedGraph = { ...result.graph, links: updatedLinks };
@@ -359,6 +363,8 @@ export const nodeClickLogic = (
         selectedEdgeNodesRef.current = [];
         setAddingEdgeMode(false);
         g.selectAll(".node").select("div").style("border", "1px solid #ccc");
+        setCollapsedTopics(new Set());
+        setHiddenTopics(new Set());
         setRenderedGraph(null);
       }
       event.stopPropagation();
