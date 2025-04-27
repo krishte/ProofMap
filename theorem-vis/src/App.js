@@ -117,7 +117,7 @@ function App() {
       </div>
     );
   } else {
-    // File upload area
+    // Initial page with file upload area, existing lecture notes selection, and import json button
     mainContent = <LandingView setResult={setResult} setTopics={setTopics} />;
   }
   return <div>{mainContent}</div>;
