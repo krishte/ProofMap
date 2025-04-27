@@ -39,5 +39,5 @@ jobs:
         with:
           branch: gh-pages
           folder: theorem-vis/build
-          cname: proofmap.info
+          cname: www.proofmap.info
           token: ${{ secrets.GITHUB_TOKEN }}
