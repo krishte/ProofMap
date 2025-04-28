@@ -18,9 +18,18 @@ const TheoremListItem = ({ d, isExpanded, onToggle, topicColor }) => {
         cursor: "pointer",
       }}
     >
-      <h3 style={{ margin: 0 }}>
-        {d.id}: {d.name}
-      </h3>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h3 style={{ margin: 0 }}>
+          {d.id}: {d.name}
+        </h3>
+        <span>{d.topic}</span>
+      </div>
       <CSSTransition
         in={isExpanded}
         timeout={300}

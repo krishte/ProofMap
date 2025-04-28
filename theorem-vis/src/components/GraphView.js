@@ -39,7 +39,7 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
         nodes.select("div").classed("pulsing", addingEdgeModeRef.current);
 
         nodes.style(
-          "border",
+          "outline",
           addingEdgeModeRef.current ? "2px solid transparent" : "1px solid #ccc"
         );
       }
@@ -286,7 +286,10 @@ function GraphView({ result, setResult, topics, setShowAddNodePopup }) {
         renderedGraph={renderedGraph}
       />
 
-      <ExpandCondenseButtons simulationRef={simulationRef} />
+      <ExpandCondenseButtons
+        simulationRef={simulationRef}
+        containerRef={containerRef}
+      />
 
       {addEdgeButton}
     </div>
