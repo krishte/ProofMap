@@ -108,8 +108,6 @@ export const createCollapseToggle = (
     .attr("transform", "translate(370, 10)")
     .style("cursor", "pointer")
     .on("click", function (event, d) {
-      // Prevent triggering the overall legend click.
-      event.stopPropagation();
       // Save zoom level
       const svgElement = d3.select(containerRef.current).select("svg");
       if (!svgElement.empty()) {
@@ -169,7 +167,6 @@ export const createVisibleToggle = (
     .attr("transform", "translate(390, 0)") // positioned to the right of collapse toggle
     .style("cursor", "pointer")
     .on("click", function (event, d) {
-      event.stopPropagation();
       // Save zoom level
       const svgElement = d3.select(containerRef.current).select("svg");
       if (!svgElement.empty()) {
@@ -350,7 +347,7 @@ export const nodeClickLogic = (
 ) => {
   node.on("click", function (event, d) {
     if (addingEdgeModeRef.current) {
-      d3.select(this).style("border", "10px solid black");
+      d3.select(this).style("outline", "10px solid black");
       selectedEdgeNodesRef.current.push(d);
       if (selectedEdgeNodesRef.current.length === 2) {
         const [source, target] = selectedEdgeNodesRef.current;
@@ -362,12 +359,12 @@ export const nodeClickLogic = (
         setResult({ ...result, graph: updatedGraph });
         selectedEdgeNodesRef.current = [];
         setAddingEdgeMode(false);
-        g.selectAll(".node").select("div").style("border", "1px solid #ccc");
+        g.selectAll(".node").select("div").style("outline", "1px solid #ccc");
         setCollapsedTopics(new Set());
         setHiddenTopics(new Set());
         setRenderedGraph(null);
       }
-      event.stopPropagation();
+      // event.stopPropagation();
       return;
     }
     d3.select("#popup").remove();
@@ -407,7 +404,7 @@ export const nodeClickLogic = (
         `
       )
       .on("click", function (e) {
-        e.stopPropagation();
+        // e.stopPropagation();
       });
 
     popup.select("#edit-btn").on("click", function () {
